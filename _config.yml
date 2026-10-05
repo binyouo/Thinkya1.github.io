@@ -92,3 +92,9 @@ updated_option: 'date'
 
 # 主题
 theme: volantis
+
+# Atom 订阅，供博客目录聚合文章使用
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
