@@ -94,3 +94,12 @@ plugins:
     enable: false
   darkmode:
     enable: true
+
+# 页面卡片不使用阴影及悬停浮起效果
+custom_css:
+  navbar:
+    effect: [blur]
+  sidebar:
+    effect: [blur]
+  body:
+    effect: [blur]
