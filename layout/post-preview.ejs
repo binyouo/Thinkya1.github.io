@@ -1,0 +1,20 @@
+<%
+const title = post.title || post.seo_title || date(post.date, config.date_format);
+const summary = truncate(strip_html(post.description || post.excerpt || post.content || '')
+  .replace(/\s+/g, ' ').trim(), {length: 150, omission: '…'});
+const categories = post.categories ? post.categories.toArray() : [];
+const category = categories[categories.length - 1];
+%>
+<article class="post post-v3 reading-preview" itemscope itemtype="https://schema.org/BlogPosting">
+  <h2 class="article-title" itemprop="headline">
+    <a href="<%- url_for(post.link || post.path) %>" itemprop="url"><%= title %></a>
+  </h2>
+  <div class="reading-preview-meta">
+    <time datetime="<%- moment(post.date).format() %>" itemprop="datePublished"><%= date(post.date, config.date_format) %></time>
+    <% if (category) { %>
+      <a href="<%- url_for(category.path) %>"><%= category.name %></a>
+    <% } %>
+    <% if (post.pin) { %><span>置顶</span><% } %>
+  </div>
+  <% if (summary) { %><p class="article-desc" itemprop="description"><%= summary %></p><% } %>
+</article>
