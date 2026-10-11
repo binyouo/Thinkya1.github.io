@@ -199,3 +199,8 @@ ul.list-v { border: 1px solid var(--reading-rule); box-shadow: none; }
 #post-body :not(pre) > code { word-break: normal; }
 /* These SVGs have their own dark palette and should not be dimmed again. */
 #post-body img[src*="/images/biny-tool-system/"] { filter: none !important; }
+/* Keep personal links readable even when an icon font is unavailable. */
+#l_side .blogger .social-wrapper { display: flex; justify-content: center; gap: 20px; }
+#l_side .blogger .social-wrapper .social { width: auto; font: inherit; font-size: 14px; }
+#l_side .blogger .social[href*="github.com"]::before { content: 'GitHub'; }
+#l_side .blogger .social[href^="mailto:"]::before { content: '邮箱'; }
