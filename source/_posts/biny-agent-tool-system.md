@@ -259,5 +259,3 @@ Biny 对超过预算的结果采用归档与受限预览：可归档的完整结
 - [执行协调器与 Code Mode 子调用](https://github.com/binyouo/Biny-Agent/blob/52576e4a4dbba3f5753837066ac79b6ac59fb48c/src/agent/toolExecutionCoordinator.ts)
 - [Edit](https://github.com/binyouo/Biny-Agent/blob/52576e4a4dbba3f5753837066ac79b6ac59fb48c/src/tools/file/editFile.ts) · [Hashline](https://github.com/binyouo/Biny-Agent/blob/52576e4a4dbba3f5753837066ac79b6ac59fb48c/src/tools/file/hashline.ts) · [安全文件提交](https://github.com/binyouo/Biny-Agent/blob/52576e4a4dbba3f5753837066ac79b6ac59fb48c/src/tools/file/safeFileIo.ts)
 - [工具结果归档](https://github.com/binyouo/Biny-Agent/blob/52576e4a4dbba3f5753837066ac79b6ac59fb48c/src/session/toolResultArchive.ts)
-
-本文实现核对于 2026 年 10 月 12 日，依据 Biny Agent 提交 `52576e4a`。图示为帮助理解的概念归纳，不表示完整调用栈。
