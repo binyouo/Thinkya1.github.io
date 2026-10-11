@@ -31,12 +31,12 @@ cover:
     archive: false
     others: false
 
-# 列表页专注文章，阅读页保留目录
+# 列表页保留博主个人信息，阅读页保留目录
 sidebar:
   position: right
   for:
-    home: []
-    index_blog: []
+    home: [blogger]
+    index_blog: [blogger]
     index_wiki: []
     notebooks: []
     notes: []
@@ -48,7 +48,7 @@ sidebar:
 # 文章页顶部的作者信息
 article:
   body:
-    top_meta: [date, category]
+    top_meta: [author, date, category]
     bottom_meta: [updated, tags]
     meta_library:
       author:
