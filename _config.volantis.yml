@@ -6,23 +6,28 @@ debug: false
 
 # 顶部导航：只保留核心页面
 navbar:
-  visiable: always
+  visiable: auto
   logo:
     img:
     icon: fa-solid fa-feather
     title: 彬子的Blog
   menu:
     - name: 博客
+      icon: fa-solid fa-rss
       url: /
     - name: 分类
+      icon: fa-solid fa-folder-open
       url: categories/
     - name: 标签
+      icon: fa-solid fa-tags
       url: tags/
     - name: 归档
+      icon: fa-solid fa-archive
       url: archives/
     - name: 关于
+      icon: fa-solid fa-info-circle
       url: about/
-  search: 搜索文章
+  search: 搜索...
 
 # 关闭大封面（首页直接显示文章列表，朴素风格）
 cover:
@@ -31,11 +36,11 @@ cover:
     archive: false
     others: false
 
-# 列表页保留博主个人信息，阅读页保留目录
+# 侧边栏：首页放博主卡片和分类，文章页只放目录
 sidebar:
   position: right
   for:
-    home: [blogger]
+    home: [blogger, category, tagcloud]
     index_blog: [blogger]
     index_wiki: []
     notebooks: []
@@ -48,8 +53,6 @@ sidebar:
 # 文章页顶部的作者信息
 article:
   body:
-    top_meta: [author, date, category]
-    bottom_meta: [updated, tags]
     meta_library:
       author:
         avatar: /img/qq.jpg
@@ -76,32 +79,6 @@ color_scheme:
     hover: '#4a8bfd'
     inner: '#fff'
     selection: 'alpha(#4a8bfd, 0.2)'
-  light:
-    site_bg: '#fff'
-    card: '#fff'
-    text: '#25282c'
-    p: '#25282c'
-    list: '#41464d'
-    meta: '#626971'
-    block: '#f4f5f6'
-    codeblock: '#f4f5f6'
-    inlinecode: '#343a41'
-  dark:
-    site_bd: '#191b1e'
-    site_bg: '#191b1e'
-    card: '#191b1e'
-    text: '#e2e4e7'
-    p: '#e2e4e7'
-    list: '#c5c9ce'
-    meta: '#a6adb6'
-    h1: '#f0f1f3'
-    h2: '#f0f1f3'
-    h3: '#f0f1f3'
-    h4: '#e2e4e7'
-    block: '#24272b'
-    codeblock: '#24272b'
-    inlinecode: '#e2e4e7'
-    brightness: 100%
 
 # 插件：关掉用不到的
 plugins:
@@ -117,34 +94,12 @@ plugins:
     enable: false
   darkmode:
     enable: true
-  scrollreveal:
-    enable: false
-  lazyload:
-    enable: false
 
-# 系统字体避免中文正文混入等宽西文；等宽字体仅用于代码
+# 页面卡片不使用阴影及悬停浮起效果
 custom_css:
-  max_width: 1080px
   navbar:
-    effect: []
+    effect: [blur]
   sidebar:
-    effect: []
+    effect: [blur]
   body:
-    effect: []
-    text_align:
-      p: left
-  gap:
-    line_height: 1.85
-    h2: 48px
-    h3: 32px
-  fontfamily:
-    bodyfont:
-      fontfamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
-      name:
-      url:
-    logofont:
-      fontfamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif'
-      name:
-      url:
-    codefont:
-      fontfamily: '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'
+    effect: [blur]
