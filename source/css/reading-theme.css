@@ -1,0 +1,308 @@
+/* ============================================================
+   Reading theme for Volantis — dark & light, warm-gold accent.
+
+   Ported from innei.in / Yohaku. Values sampled from the live page:
+     dark  page #1c1c1e · accent #ac9753 (oklch(0.6802 0.0915 92.66))
+     ramp  #141414 #242424 #404040 #5c5c5c #787878
+     light page #f9f8f5 · text #24231f
+
+   IMPORTANT: Volantis decides its palette via
+     `:root:not([color-scheme])`  (system preference, inside a dark media query)
+     `[color-scheme='dark']` / `[color-scheme='light']`  (the manual switcher)
+   so every override here must be scoped the same way. An unconditional
+   `:root` override breaks whichever mode it wasn't written for — that is
+   exactly what made the navbar vanish and tables turn white-on-white.
+   ============================================================ */
+
+/* ---------- tokens ---------- */
+:root {
+  --yh-accent:       #ac9753;
+  --yh-accent-dim:   rgba(172, 151, 83, 0.55);
+  --yh-accent-faint: rgba(172, 151, 83, 0.16);
+}
+
+/* ============================================================
+   DARK
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([color-scheme='light']) {
+    --yh-bg:      #1c1c1e;
+    --yh-raised:  #242426;
+    --yh-code:    #1a1a1c;
+    --yh-text:    #e3e3e3;
+    --yh-strong:  #ffffff;
+    --yh-muted:   #a8a8a8;
+    --yh-faint:   #787878;
+    --yh-line:    rgba(255, 255, 255, 0.10);
+  }
+}
+:root[color-scheme='dark'],
+html.dark,
+body.dark,
+html[data-theme='dark'] {
+  --yh-bg:      #1c1c1e;
+  --yh-raised:  #242426;
+  --yh-code:    #1a1a1c;
+  --yh-text:    #e3e3e3;
+  --yh-strong:  #ffffff;
+  --yh-muted:   #a8a8a8;
+  --yh-faint:   #787878;
+  --yh-line:    rgba(255, 255, 255, 0.10);
+}
+
+/* ============================================================
+   LIGHT
+   ============================================================ */
+@media (prefers-color-scheme: light) {
+  :root:not([color-scheme='dark']) {
+    --yh-bg:      #f9f8f5;
+    --yh-raised:  #f0efeb;
+    --yh-code:    #f4f3ef;
+    --yh-text:    #24231f;
+    --yh-strong:  #141312;
+    --yh-muted:   #5c5a55;
+    --yh-faint:   #787670;
+    --yh-line:    rgba(0, 0, 0, 0.09);
+  }
+}
+:root[color-scheme='light'],
+html.light,
+body.light,
+html[data-theme='light'] {
+  --yh-bg:      #f9f8f5;
+  --yh-raised:  #f0efeb;
+  --yh-code:    #f4f3ef;
+  --yh-text:    #24231f;
+  --yh-strong:  #141312;
+  --yh-muted:   #5c5a55;
+  --yh-faint:   #787670;
+  --yh-line:    rgba(0, 0, 0, 0.09);
+}
+
+/* ---------- palette mapping (mode-agnostic: reads the tokens above) ---------- */
+:root {
+  --color-site-bg:       var(--yh-bg);
+  --color-site-body:     var(--yh-bg);
+  --color-read-bkg:      var(--yh-bg);
+  --color-read-post:     var(--yh-bg);
+  --color-card:          var(--yh-bg);
+  --color-block:         var(--yh-raised);
+  --color-codeblock:     var(--yh-code);
+  --color-copyright-bkg: transparent;
+
+  --color-text: var(--yh-text);
+  --color-p:    var(--yh-text);
+  --color-h1:   var(--yh-strong);
+  --color-h2:   var(--yh-strong);
+  --color-h3:   var(--yh-strong);
+  --color-h4:   var(--yh-text);
+  --color-h5:   var(--yh-muted);
+  --color-h6:   var(--yh-muted);
+  --color-list: var(--yh-text);
+  --color-meta: var(--yh-muted);
+
+  --theme:     var(--yh-accent);
+  --theme-a10: rgba(172, 151, 83, 0.10);
+  --theme-a20: rgba(172, 151, 83, 0.20);
+  --theme-a30: rgba(172, 151, 83, 0.30);
+  --color-link:   var(--yh-accent);
+  --link-color:   var(--yh-accent);
+  --color-accent: var(--yh-accent);
+}
+
+/* ---------- surfaces: flat, no floating cards ---------- */
+.white-box,
+#l_main .article,
+.post.post-v3,
+.post-preview-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: var(--yh-line) !important;
+}
+
+/* ---------- navbar (#l_header — NOT #navbar) ---------- */
+#l_header {
+  background: color-mix(in srgb, var(--yh-bg) 82%, transparent) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  border-bottom: 1px solid var(--yh-line) !important;
+  box-shadow: none !important;
+}
+#l_header .title,
+#l_header .nav-list a,
+.nav-main .nav-list a {
+  color: var(--yh-text) !important;
+}
+#l_header .nav-list a:hover,
+.nav-main .nav-list a:hover,
+.nav-main .nav-list .active a {
+  color: var(--yh-accent) !important;
+}
+
+/* ---------- sidebar widgets ---------- */
+.widget,
+.widget.tagcloud,
+.widget.category-list {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.widget header a,
+.widget .widget-title {
+  color: var(--yh-text) !important;
+}
+.widget.category-list a,
+.widget.category-list .name {
+  color: var(--yh-text) !important;
+}
+.widget.category-list .badge {
+  color: var(--yh-faint) !important;
+}
+
+/* Tag links carry inline colours written by the theme (e.g. #999 / #555),
+   which are fine on a light page and unreadable on a dark one. Override them
+   only in dark mode so light keeps the theme's own tuned ramp. */
+@media (prefers-color-scheme: dark) {
+  :root:not([color-scheme='light']) .widget.tagcloud .content a {
+    color: var(--yh-muted) !important;
+  }
+  :root:not([color-scheme='light']) .widget.tagcloud .content a:hover {
+    color: var(--yh-accent) !important;
+  }
+}
+:root[color-scheme='dark'] .widget.tagcloud .content a {
+  color: var(--yh-muted) !important;
+}
+:root[color-scheme='dark'] .widget.tagcloud .content a:hover {
+  color: var(--yh-accent) !important;
+}
+
+/* ---------- article typography ---------- */
+#post-body {
+  color: var(--yh-text);
+  font-size: 16px;
+  line-height: 1.8;
+}
+#post-body p { margin: 1em 0; }
+#post-body h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.4em 0 0.45em;
+  color: var(--yh-strong);
+}
+#post-body h3 {
+  font-size: 1.22em;
+  font-weight: 600;
+  margin: 1.3em 0 0.4em;
+  color: var(--yh-strong);
+}
+#post-body a {
+  color: var(--yh-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--yh-accent-faint);
+  transition: border-color 180ms ease;
+}
+#post-body a:hover { border-bottom-color: var(--yh-accent-dim); }
+
+#post-body blockquote {
+  border-left: 2px solid var(--yh-accent-dim);
+  background: transparent;
+  color: var(--yh-muted);
+  padding-left: 1em;
+  margin: 1.2em 0;
+}
+
+/* ---------- tables ----------
+   Volantis styles tables under `:root:not([color-scheme])` and
+   `[color-scheme='dark']` only — there is no light-mode variant. Without an
+   explicit rule here the light palette leaks a white table onto a dark page. */
+#post-body table,
+.post-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2em 0;
+  background: transparent !important;
+  color: var(--yh-text) !important;
+}
+#post-body table thead,
+#post-body table tr,
+#post-body table th,
+#post-body table td {
+  background: transparent !important;
+  color: var(--yh-text) !important;
+  border-color: var(--yh-line) !important;
+}
+#post-body table th {
+  color: var(--yh-strong) !important;
+  font-weight: 600;
+  border-bottom: 1px solid var(--yh-line) !important;
+}
+#post-body table tr:nth-child(even) {
+  background: color-mix(in srgb, var(--yh-text) 4%, transparent) !important;
+}
+#post-body table tr:hover {
+  background: color-mix(in srgb, var(--yh-accent) 8%, transparent) !important;
+}
+#post-body table td,
+#post-body table th {
+  padding: 0.5em 0.75em;
+}
+
+#post-body code:not(pre code) {
+  background: var(--yh-accent-faint);
+  color: var(--yh-accent);
+  border-radius: 4px;
+  padding: 0.12em 0.36em;
+  font-size: 0.9em;
+}
+#post-body pre {
+  background: var(--yh-code) !important;
+  border: 1px solid var(--yh-line);
+  border-radius: 6px;
+}
+#post-body hr { border-color: var(--yh-line); }
+#post-body img { border-radius: 6px; }
+
+/* ---------- meta row ---------- */
+.article-meta {
+  color: var(--yh-faint) !important;
+  font-size: 0.84rem;
+}
+.article-meta a, .article-meta .meta-label { color: var(--yh-muted) !important; }
+#post .article-title,
+.article-title a { color: var(--yh-strong) !important; font-weight: 700; }
+
+/* ---------- TOC ---------- */
+.widget.toc-wrapper { background: transparent !important; border: none !important; }
+.toc-link {
+  color: color-mix(in srgb, var(--yh-text) 38%, transparent) !important;
+  font-size: 0.82rem;
+  transition: color 200ms ease;
+}
+.toc-link:hover { color: var(--yh-text) !important; }
+.toc-item.active > .toc-link,
+.toc-link.active { color: var(--yh-accent) !important; font-weight: 500; }
+.toc-item.active { position: relative; }
+.toc-item.active::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--yh-accent) 80%, transparent);
+  box-shadow: 0 0 6px rgba(172, 151, 83, 0.35);
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--yh-text) 14%, transparent);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--yh-text) 26%, transparent);
+}

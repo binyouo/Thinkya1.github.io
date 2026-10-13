@@ -1,7 +1,7 @@
 ---
 title: "RRF 排序融合，混合检索如何统一 BM25 和向量搜索"
 date: 2026-07-09 01:04:11
-updated: 2026-07-09 05:11:02
+updated: 2026-10-12 21:40:00
 categories:
   - "AI"
 tags:
@@ -37,6 +37,8 @@ BM25 分数会受到词频、文档长度和索引语料影响。向量检索还
 
 RRF 绕过了这道题。
 
+> 这篇是 [RAG 概念专题](/2026/10/12/ai-agent-rag/)中的排序细节，完整系列见 [Ai Agent概念扫盲](/2026/10/12/ai-agent-concepts/)。
+
 ## RRF 怎么计算
 
 RRF 的全称是 Reciprocal Rank Fusion，也就是倒数排名融合。
@@ -44,12 +46,12 @@ RRF 的全称是 Reciprocal Rank Fusion，也就是倒数排名融合。
 对于文档 `d`，它的融合分数可以写成下面这样。
 
 $$  
-score(d) = \sum\_{i=1}^{n} \frac{1}{k + rank\_i(d)}  
+score(d) = \sum_{i=1}^{n} \frac{1}{k + rank_i(d)}
 $$
 
 `rank_i(d)` 表示文档 `d` 在第 `i` 路结果中的排名。排名从 1 开始。某篇文档没有出现在一路结果中时，那一路就不给它加分。
 
-`k` 是平滑常数，常见取值是 60。它会削弱第一名和后面名次之间过于悬殊的差距，让多路都排得靠前的文档得到更稳定的优势。
+`k` 是平滑常数，常见取值是 60。它会削弱第一名和后面名次之间过于悬殊的差距，让多路都排得靠前的文档得到更稳定的优势。这里的 `k` 与检索返回数量 Top K 不同；公式和具体参数可参考 [Elasticsearch 的 RRF 文档](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion)。
 
 这里最重要的变化是，原始相关性分数消失了。
 
@@ -137,6 +139,8 @@ for document_id, score in fused_results:
 代码里额外处理了同一文档在一路结果中重复出现的情况。正常的检索器通常不会返回重复 ID，但在合并多个分片或自行拼装结果时，去重可以避免同一路对某篇文档重复加分。
 
 ## 在 LangChain 里使用 EnsembleRetriever
+
+下面保留的是旧版 LangChain API 示例，用于理解组合方式，不表示当前版本安装后可直接运行。实际项目应按所用版本核对包名和导入路径；上面的独立 Python 实现不依赖 LangChain。
 
 如果用 LangChain 搭混合检索，RRF 也经常不是自己手写，而是通过 `EnsembleRetriever` 这类组件完成。
 
@@ -227,7 +231,7 @@ for index, doc in enumerate(docs, start=1):
 可以给每一路增加权重。
 
 $$  
-score(d) = \sum\_{i=1}^{n} \frac{w\_i}{k + rank\_i(d)}  
+score(d) = \sum_{i=1}^{n} \frac{w_i}{k + rank_i(d)}
 $$
 
 这样仍然绕开了原始分数尺度，只调整各路排名信号的重要程度。

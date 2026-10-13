@@ -1,7 +1,7 @@
 ---
 title: "MCP 和 Skill，到底是什么关系？"
 date: 2026-04-14 15:05:43
-updated: 2026-07-09 05:10:36
+updated: 2026-10-12 21:40:00
 categories:
   - "AI"
 tags:
@@ -10,6 +10,8 @@ tags:
   - "Skill"
   - "Function Calling"
 ---
+
+> 这篇可以接着 [Ai Agent概念扫盲](/2026/10/12/ai-agent-concepts/) 阅读。想把 ACP、A2A、LSP 和 Code Mode 一起弄清楚，可以看 [工具与协议专题](/2026/10/12/ai-agent-tools-protocols/)。
 
 最近看 Agent 相关的项目，经常会同时碰到三个词，Function Calling、MCP 和 Skill。
 
@@ -79,15 +81,7 @@ MCP Server 暴露的内容也不只有工具。
 
 Function Calling 是模型如何发出调用，MCP 是外部能力怎样标准化接进来。
 
-这一点也是 Function Calling 单独使用时最容易碰到的痛点。
-
-如果只靠 Function Calling，每个项目都要自己维护一份工具 schema、调用路由和结果处理逻辑。A 项目接了 10 个工具，B 项目想复用，通常就要复制 schema、重写适配代码；模型供应商的工具调用格式稍有不同，还要再写一层转换。等某个工具参数变了，又得去每个项目里逐个更新。
-
-MCP 的价值就在这里。工具提供方把能力做成独立的 MCP Server，对外统一暴露工具、资源和提示模板。支持 MCP 的 Host 连上来以后，可以自动发现这些能力，而不是每个项目从零手写一遍对接代码。
-
-从模型视角看，它甚至不一定知道 MCP 存在。MCP Client 会把 Server 暴露的工具转换成模型能够理解的调用格式，模型仍然输出普通的工具调用请求，Client 再把请求转发给对应的 Server。换句话说，Function Calling 仍然是模型表达调用的语言，MCP 是管理和复用这些工具的生态层。
-
-这也意味着，MCP 不是让模型凭空拥有执行能力。它需要 Host、Client、Server 和模型工具调用能力一起配合。模型负责提出结构化调用意图，宿主程序负责真正执行和回填结果。
+MCP 减少的是各应用重复维护工具接入的负担。协议接通之后，仍然需要 Host、Client、Server 和模型调用机制配合，实际操作也需要对应业务权限。架构和角色可以参考 [MCP 官方说明](https://modelcontextprotocol.io/docs/learn/architecture)。
 
 ## Skill 解决的是工作方法
 
@@ -115,7 +109,7 @@ description: 审查代码修改，识别正确性、安全和性能问题
 4. 按严重程度输出问题和证据
 ```
 
-这份 Skill 没有直接提供读取文件的能力。它只规定审查应该怎样展开。真正读取文件时，Agent 仍然需要使用本地工具或 MCP Server 暴露的能力。
+这份 Skill 没有直接提供读取文件的能力。它只规定审查应该怎样展开。真正读取文件时，Agent 仍然需要使用本地工具或 MCP Server 暴露的能力。Skill 中声明要使用某工具，也不会自动授予执行权限。格式与渐进式加载可以参考 [Agent Skills 规范](https://agentskills.io/specification)。
 
 所以可以把两者记成一句话。
 

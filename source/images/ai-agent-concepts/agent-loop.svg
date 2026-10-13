@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="660" viewBox="0 0 760 660" role="img" aria-labelledby="title desc">
+<title id="title">一次 Agent 任务怎样推进</title><desc id="desc">目标进入上下文，模型选择行动，宿主检查和执行工具，结果回到模型。准备交付时检查验收，失败则继续；也可以等待、取消或出错。</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#53677a"/></marker></defs>
+<rect width="760" height="660" fill="#f8fafc"/>
+<g font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif">
+<text x="36" y="48" font-size="29" font-weight="700" fill="#182a3b">一次 Agent 任务怎样推进</text>
+<rect x="36" y="90" width="688" height="80" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="380.0" y="138.0" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">用户目标与约束</text>
+<path d="M380 170 V183 H186 V195" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="200" width="300" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="186.0" y="237" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">组织上下文</text>
+<text x="186.0" y="268" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">目标、资料、历史</text>
+<path d="M336 248 H418" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="424" y="200" width="300" height="95" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="574.0" y="237" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">模型选择下一步</text>
+<text x="574.0" y="268" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">行动 / 准备交付</text>
+<path d="M574 295 V345" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="650" y="330" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">需要行动</text>
+<rect x="424" y="350" width="300" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="574.0" y="387" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">宿主校验并执行</text>
+<text x="574.0" y="418" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">参数、权限、工具</text>
+<path d="M424 398 H342" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="350" width="300" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="186.0" y="387" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">获得结果、更新状态</text>
+<text x="186.0" y="418" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">成功、失败、真实反馈</text>
+<path d="M186 350 V301" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="257" y="329" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">继续判断</text>
+<path d="M574 295 H750 V491 H574 V515" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="605" y="478" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">准备交付</text>
+<rect x="424" y="520" width="300" height="80" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="574.0" y="568.0" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">检查验收 → 交付</text>
+<rect x="36" y="520" width="300" height="80" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="186.0" y="568.0" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">也可能等待 / 失败 / 取消</text>
+<text x="36" y="638" font-size="22" fill="#526574" text-anchor="start" font-weight="400">验收仍有缺口时，回到上下文与行动链继续。</text>
+</g></svg>

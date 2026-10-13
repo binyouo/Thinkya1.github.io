@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="615" viewBox="0 0 760 615" role="img" aria-labelledby="title desc">
+<title id="title">工具调用：请求、执行、反馈</title><desc id="desc">模型提出调用请求，宿主校验并执行，工具结果交回模型，再判断任务是否完成。</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#53677a"/></marker></defs>
+<rect width="760" height="615" fill="#f8fafc"/>
+<g font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif">
+<text x="36" y="48" font-size="29" font-weight="700" fill="#182a3b">工具调用：请求、执行、反馈</text>
+<text x="208" y="103" font-size="24" fill="#182a3b" text-anchor="middle" font-weight="600">模型侧</text>
+<text x="556" y="103" font-size="24" fill="#182a3b" text-anchor="middle" font-weight="600">宿主 / 执行环境</text>
+<rect x="36" y="125" width="320" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="196.0" y="162" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">知道可用工具</text>
+<text x="196.0" y="193" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">名称、说明、参数结构</text>
+<rect x="404" y="125" width="320" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="564.0" y="162" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">提供工具定义</text>
+<text x="564.0" y="193" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">本地工具 / 外部服务</text>
+<path d="M404 171 H362" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M196 220 V251" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="257" width="320" height="95" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="196.0" y="294" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">生成调用请求</text>
+<text x="196.0" y="325" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">工具名、参数、调用 ID</text>
+<path d="M356 305 H398" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="404" y="257" width="320" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="564.0" y="294" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">检查后执行</text>
+<text x="564.0" y="325" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">校验参数与业务权限</text>
+<path d="M564 352 V383" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="404" y="389" width="320" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="564.0" y="426" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">返回执行结果</text>
+<text x="564.0" y="457" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">内容、状态、错误</text>
+<path d="M404 437 H362" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="389" width="320" height="95" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="196.0" y="426" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">根据结果继续判断</text>
+<text x="196.0" y="457" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">再调用 / 准备交付</text>
+<text x="380" y="550" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">请求已生成 ≠ 工具已成功 ≠ 用户目标已完成</text>
+<text x="380" y="588" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">托管工具可由提供方执行；具体位置看实现。</text>
+</g></svg>

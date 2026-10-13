@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1035" viewBox="0 0 760 1035" role="img" aria-labelledby="title desc">
+<title id="title">RAG：资料准备与查询回答</title><desc id="desc">资料解析分块后建立索引，用户问题经过检索、融合与重排、证据组织生成有引用的回答。权限和版本检查贯穿取数及输出。</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#53677a"/></marker></defs>
+<rect width="760" height="1035" fill="#f8fafc"/>
+<g font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif">
+<text x="36" y="48" font-size="29" font-weight="700" fill="#182a3b">RAG：资料准备与查询回答</text>
+<text x="36" y="103" font-size="24" fill="#182a3b" text-anchor="start" font-weight="600">资料准备</text>
+<rect x="36" y="120" width="688" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="380.0" y="157" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">获取并解析资料</text>
+<text x="380.0" y="188" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">文档、表格、OCR、来源</text>
+<path d="M380 215 V243" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="250" width="688" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="380.0" y="287" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">分块、添加元数据</text>
+<text x="380.0" y="318" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">主题边界、版本、权限</text>
+<path d="M380 345 V373" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="380" width="688" height="95" rx="8" fill="#fff" stroke="#b5c3cf" stroke-width="2"/>
+<text x="380.0" y="417" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">建立并更新索引</text>
+<text x="380.0" y="448" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">关键词索引 / 向量索引</text>
+<text x="36" y="522" font-size="24" fill="#182a3b" text-anchor="start" font-weight="600">查询回答</text>
+<rect x="36" y="540" width="688" height="95" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="380.0" y="577" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">理解问题、检索候选</text>
+<text x="380.0" y="608" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">查询改写、BM25、向量或结构化查询</text>
+<path d="M380 635 V663" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="670" width="688" height="95" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="380.0" y="707" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">融合与重排候选</text>
+<text x="380.0" y="738" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">Hybrid Search、RRF、Reranker</text>
+<path d="M380 765 V793" fill="none" stroke="#53677a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="36" y="800" width="688" height="95" rx="8" fill="#eaf3fa" stroke="#426f92" stroke-width="2"/>
+<text x="380.0" y="837" font-size="25" fill="#182a3b" text-anchor="middle" font-weight="600">组织证据、生成与核查</text>
+<text x="380.0" y="868" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">去重、预算、来源与声明支持</text>
+<text x="380" y="950" font-size="24" fill="#182a3b" text-anchor="middle" font-weight="600">权限与版本检查贯穿取数和输出。</text>
+<text x="380" y="997" font-size="22" fill="#526574" text-anchor="middle" font-weight="400">搜到资料、资料进入上下文、回答正确，分层验证。</text>
+</g></svg>
