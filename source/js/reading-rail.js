@@ -239,8 +239,11 @@
       ampVel += (90 * (targetAmp - amp) - 2 * Math.sqrt(90) * 0.75 * ampVel) * sub;
       amp = Math.max(-4, amp + ampVel * sub);
 
-      // breathing sine on the amplitude (reference: 10.4 + .6*sin(t/9s*2π))
-      var breathe = 10.4 + 0.6 * Math.sin(t / RIPPLE_T * Math.PI * 2);
+      // NOTE: the reference adds a constant "breathing" baseline here
+      // (`10.4 + 0.6*sin(t/9s*2π)`), which means its line is never straight —
+      // it always keeps a ~10px bulge. The requested behaviour is two distinct
+      // states (idle = plain line, scrolling = curve), so the bulge is driven by
+      // scroll velocity ONLY and decays to zero when the page settles.
 
       if (!trackH) { raf = requestAnimationFrame(frame); return; }
 
@@ -253,7 +256,7 @@
       // edge falloff: bulge fades out near both ends of the track
       var len = BULGE_MIN + BULGE_K * amp;
       var edgeF = clamp(Math.min(D / len, (trackH - D) / len), 0, 1);
-      var F = cur * (breathe + amp) * edgeF;
+      var F = cur * amp * edgeF;
       var s = WIDTH_BASE + F;
 
       var d = buildPath(D, s, len, trackH);
@@ -293,35 +296,55 @@
     }
     var lastShownPct = -1;
 
-    // ---- activation ----
-    // The reference reveals the rail on article hover. On a blog post we want it
-    // visible while reading instead, so it wakes on scroll and on hovering either
-    // the article or the rail itself, and fades after a short idle.
-    var hovering = false;
+    // ---- activation: HOVER-REVEALED ----
+    // Matches the reference (it reveals on hovering the aside) and the requested
+    // behaviour: the rail is hidden at rest and fades in when the pointer enters
+    // the reading area. It also reveals while actively scrolling, so the line is
+    // visible during the gesture that gives it its curve.
     function setActive(on) {
       target = on ? 1 : 0;
       if (on) { rail.classList.add(ACTIVE_CLASS); rail.classList.add(VISIBLE_CLASS); }
       else rail.classList.remove(ACTIVE_CLASS);
     }
 
-    var article = document.querySelector('#post-body');
-    var host = article ? (article.closest('article') || article) : null;
-    if (host) {
-      host.addEventListener('mouseenter', function () { hovering = true; wake(); });
-      host.addEventListener('mouseleave', function () { hovering = false; });
-    }
-    rail.addEventListener('mouseenter', function () { hovering = true; wake(); });
-    rail.addEventListener('mouseleave', function () { hovering = false; });
+    var hovering = false;
+    var scrollIdle = null;
 
-    // Keep the rail on for as long as the article is on screen — the reference
-    // gates it on hover, but a reading rail that disappears mid-paragraph is
-    // worse than one that stays. It only hides when the article scrolls away.
-    function wake() { setActive(true); }
-    window.addEventListener('scroll', wake, { passive: true });
+    function reveal() {
+      setActive(true);
+      if (scrollIdle) clearTimeout(scrollIdle);
+      // keep it up briefly after the gesture, then fall back to hover state
+      scrollIdle = setTimeout(function () { if (!hovering) setActive(false); }, 1100);
+    }
+
+    // hover targets: the article, the TOC column, and the rail's own hit area
+    var article = document.querySelector('#post-body');
+    var hoverTargets = [
+      article,
+      article && (article.closest('article') || article),
+      document.querySelector('#l_side'),
+      rail
+    ].filter(Boolean);
+    hoverTargets.forEach(function (el) {
+      el.addEventListener('mouseenter', function () { hovering = true; setActive(true); });
+      el.addEventListener('mouseleave', function () { hovering = false; setActive(false); });
+    });
+
+    // the gutter strip left of the article is a thin hover target of its own,
+    // so the rail is reachable without having to hover the text
+    var gutter = document.createElement('div');
+    gutter.className = 'yh-rail-gutter';
+    gutter.setAttribute('aria-hidden', 'true');
+    gutter.addEventListener('mouseenter', function () { hovering = true; setActive(true); });
+    gutter.addEventListener('mouseleave', function () { hovering = false; setActive(false); });
+    document.body.appendChild(gutter);
+
+    window.addEventListener('scroll', reveal, { passive: true });
 
     window.addEventListener('resize', measure, { passive: true });
     measure();
-    setActive(true);          // lay out immediately so the dots get positions
+    // lay the geometry out once (dots need positions) but stay hidden at rest
+    target = 0; cur = 1;
     readout.style.transform = 'translateY(' + (readPercent() / 100 * trackH) + 'px) translateY(-50%)';
     raf = requestAnimationFrame(frame);
   }

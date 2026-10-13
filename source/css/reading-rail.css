@@ -160,3 +160,75 @@
 @media print {
   .yh-rail, .yh-edge-progress { display: none !important; }
 }
+
+/* ---------- hover gutter ----------
+   A thin invisible strip in the left gutter. Without it the rail is only
+   reachable by hovering the text itself, which feels accidental. */
+.yh-rail-gutter {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 120px;
+  z-index: 2;
+  background: transparent;
+  pointer-events: auto;
+}
+@media (max-width: 768px) { .yh-rail-gutter { display: none; } }
+
+/* ---------- TOC accessories: wavy rule + ring progress + back-to-top ---------- */
+.yh-toc-wavy {
+  display: block;
+  height: 10px;
+  width: 150px;
+  max-width: 100%;
+  margin: 14px 0 4px;
+  opacity: 0.55;
+}
+.yh-toc-wavy path {
+  fill: none;
+  stroke: var(--yh-rail-base);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.yh-toc-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+.yh-toc-ring {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--yh-text, #e3e3e3);
+}
+.yh-toc-ring svg { flex: none; display: block; }
+.yh-toc-ring-progress {
+  transition: stroke-dashoffset 300ms ease;
+}
+.yh-toc-pct {
+  font-variant-numeric: tabular-nums;
+}
+.yh-toc-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin-top: 2px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  color: var(--yh-muted, #a8a8a8);
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease, color 180ms ease;
+}
+.yh-toc-top.yh-toc-top-shown { opacity: 1; pointer-events: auto; }
+.yh-toc-top:hover { color: var(--yh-accent, #ac9753); }
+.yh-toc-top svg { flex: none; display: block; }

@@ -1,0 +1,185 @@
+/* ============================================================
+   Article stats row + back button.
+   Colours come from the tokens defined in reading-theme.css, so both
+   light and dark modes follow automatically.
+   ============================================================ */
+
+/* ---------- stats row ---------- */
+.yh-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 4px;
+  font-size: 0.82rem;
+  color: var(--yh-faint);
+  line-height: 1.5;
+}
+.yh-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.yh-stat-label { color: var(--yh-faint); }
+.yh-stat-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--yh-muted);
+  font-weight: 500;
+}
+.yh-stat-sep { color: var(--yh-line); user-select: none; }
+
+/* eye glyph, drawn in CSS so no icon font is needed */
+.yh-ico-eye {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: no-repeat center / contain
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12 5c-5.5 0-9.6 4.3-10.7 6.3a1.5 1.5 0 0 0 0 1.4C2.4 14.7 6.5 19 12 19s9.6-4.3 10.7-6.3a1.5 1.5 0 0 0 0-1.4C21.6 9.3 17.5 5 12 5Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-2.2a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6Z'/></svg>");
+  mask: no-repeat center / contain
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12 5c-5.5 0-9.6 4.3-10.7 6.3a1.5 1.5 0 0 0 0 1.4C2.4 14.7 6.5 19 12 19s9.6-4.3 10.7-6.3a1.5 1.5 0 0 0 0-1.4C21.6 9.3 17.5 5 12 5Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-2.2a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6Z'/></svg>");
+}
+/* no data source: hide the row instead of showing dashes forever */
+.yh-stats-unavailable { display: none !important; }
+
+/* ---------- back button ---------- */
+.yh-back {
+  position: fixed;
+  left: 24px;
+  bottom: 28px;
+  z-index: 40;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px 8px 11px;
+
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: var(--yh-muted);
+
+  background: color-mix(in srgb, var(--yh-bg) 86%, transparent);
+  border: 1px solid var(--yh-line);
+  border-radius: 999px;
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
+
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease,
+              color 180ms ease, border-color 180ms ease;
+}
+.yh-back.yh-back-shown {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.yh-back:hover {
+  color: var(--yh-accent);
+  border-color: color-mix(in srgb, var(--yh-accent) 45%, transparent);
+}
+.yh-back:active { transform: scale(0.97); }
+
+.yh-ico-back {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: no-repeat center / contain
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M11.3 4.3a1 1 0 0 0-1.4-1.4l-7 7a1 1 0 0 0 0 1.4l7 7a1 1 0 1 0 1.4-1.4L5.4 11H20a1 1 0 1 0 0-2H5.4l5.9-5.9Z'/></svg>");
+  mask: no-repeat center / contain
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M11.3 4.3a1 1 0 0 0-1.4-1.4l-7 7a1 1 0 0 0 0 1.4l7 7a1 1 0 1 0 1.4-1.4L5.4 11H20a1 1 0 1 0 0-2H5.4l5.9-5.9Z'/></svg>");
+}
+
+@media (max-width: 768px) {
+  .yh-back { left: 14px; bottom: 16px; padding: 7px 11px; }
+}
+@media print {
+  .yh-back, .yh-stats { display: none !important; }
+}
+
+/* ============================================================
+   Layout: match innei.in. Measured on the reference at 1440px wide:
+     article   x=160  w=920
+     toc col   x=1096 w=200   (right margin 144px)
+   i.e. article + right-hand TOC sit centred in the viewport with the TOC on
+   the RIGHT. Volantis leaves .toc-wrapper in normal flow on desktop (its
+   `position: fixed` rule only exists inside @media (max-width: 768px)), so we
+   pin it ourselves and rebalance the gutters.
+   ============================================================ */
+@media (min-width: 1200px) {
+  /* Volantis caps the whole content area at `max-width: 55vw` and does not
+     centre it, which is why the column sat hard against the left edge. Widen
+     it to the reference's proportions and centre it: at 1440px the reference
+     puts the article at x=160 (w=920) and the TOC at x=1096 (w=200), i.e.
+     a ~1152px block centred with even gutters. */
+  .body-wrapper {
+    max-width: 1152px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    /* Nudge left by 8px so the article lands at x=160, matching the reference.
+       Uses relative offset, NOT `transform`: a transform on an ancestor makes
+       that ancestor the containing block for `position: fixed` descendants,
+       which silently broke the TOC's fixed positioning (it scrolled away). */
+    position: relative;
+    left: -8px;
+  }
+  #safearea { margin-left: 0 !important; margin-right: 0 !important; }
+
+  /* inside that block the article keeps the left side and reserves the
+     right-hand 232px for the TOC (200px card + 32px gap) */
+  #l_main {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-right: 232px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* the TOC: pinned on the RIGHT, aligned to the viewport's centre block */
+  #l_side .toc-wrapper {
+    position: fixed !important;
+    top: 96px !important;
+    right: auto !important;
+    left: 50% !important;
+    /* half the 1152px block (576) minus the card (200) + the gap */
+    margin-left: 384px !important;   /* measured: puts the card at x=1096 @1440 */
+    width: 200px !important;
+    max-width: 200px !important;
+    max-height: calc(100vh - 140px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    z-index: 20 !important;
+  }
+
+  /* the reading rail sits on the LEFT edge of the article, not the viewport */
+  .yh-rail {
+    width: 32px !important;
+  }
+  .yh-rail .yh-rail-track {
+    top: 96px !important;
+    bottom: 48px !important;
+  }
+  .yh-rail .yh-rail-readout {
+    display: none !important;   /* the TOC names the headings already */
+  }
+}
+
+/* narrower screens keep the theme's own behaviour */
+@media (max-width: 1199px) {
+  #l_side .toc-wrapper {
+    position: fixed !important;
+    top: 48px !important;
+    right: 16px !important;
+    left: auto !important;
+    margin-left: 0 !important;
+  }
+  #l_main {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+}
