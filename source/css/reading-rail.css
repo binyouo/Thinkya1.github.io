@@ -15,7 +15,7 @@
   --yh-rail-dot:       rgba(255, 255, 255, 0.18);
   --yh-rail-dot-root:  rgba(255, 255, 255, 0.30);
   --yh-rail-dot-cur:   rgba(172, 151, 83, 0.72);
-  --yh-rail-title:     rgba(255, 255, 255, 0.42);
+  --yh-rail-title:     rgba(255, 255, 255, 0.72);
 }
 @media (prefers-color-scheme: light) {
   :root:not([color-scheme='dark']) {
@@ -23,7 +23,7 @@
     --yh-rail-dot:       rgba(20, 19, 18, 0.20);
     --yh-rail-dot-root:  rgba(20, 19, 18, 0.34);
     --yh-rail-dot-cur:   rgba(150, 130, 66, 0.80);
-    --yh-rail-title:     rgba(20, 19, 18, 0.45);
+    --yh-rail-title:     rgba(20, 19, 18, 0.78);
   }
 }
 :root[color-scheme='light'] {
@@ -31,7 +31,7 @@
   --yh-rail-dot:       rgba(20, 19, 18, 0.20);
   --yh-rail-dot-root:  rgba(20, 19, 18, 0.34);
   --yh-rail-dot-cur:   rgba(150, 130, 66, 0.80);
-  --yh-rail-title:     rgba(20, 19, 18, 0.45);
+  --yh-rail-title:     rgba(20, 19, 18, 0.78);
 }
 
 /* ---------- container: pointer-events-none absolute inset-y-0 left-0 w-12 ---------- */
@@ -122,14 +122,15 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 10px;
-  line-height: 1.25;
+  font-size: 12px;
+  line-height: 18px;
   color: var(--yh-rail-title);
 }
 .yh-rail-percent {
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 18px;
   font-variant-numeric: tabular-nums;
-  color: rgba(172, 151, 83, 0.50);
+  color: var(--yh-accent);
 }
 
 /* ---------- right-edge hairline progress (ReadIndicator) ---------- */

@@ -157,34 +157,17 @@
     function measure() {
       // keep the structural map fresh whenever layout can have shifted
       computeRatios();
-      // Horizontal anchor. Two candidates, in order of preference:
-      //   a) tucked in the gutter just left of the article
-      //   b) pushed to the far left edge, which is what makes room for the
-      //      read-out label (it sits 36px right of the line and is up to 150px
-      //      wide, so it needs ~186px of clearance before the text starts)
+      // Horizontal anchor: hug the viewport's left edge, exactly like the
+      // reference. The path's own x=8 then lands where innei.in draws it, and
+      // the read-out label sits in the gutter to the right of the line.
       var articleEl = document.querySelector('#post-body') ||
                       document.querySelector('#post') ||
                       document.querySelector('#l_main');
       var LABEL_LEFT = 36;      // .yh-rail-readout { left: 36px }
       var LABEL_W = 150;        // .yh-rail-title { max-width: 140px } + slack
-      var RAIL_W_PX = 48;       // w-12
-      // On wide screens the CSS hides the read-out label (the TOC already names
-      // the headings) and the article is a centred column with a wide gutter, so
-      // the rail can always sit next to the text — no label clearance needed.
-      var wide = window.matchMedia('(min-width: 1200px)').matches;
-      var left = 16;
+      var left = 0;
       var artLeft = articleEl ? Math.round(articleEl.getBoundingClientRect().left) : 0;
-      if (articleEl) {
-        var GUTTER = (wide ? 32 : RAIL_W_PX) + (wide ? 16 : 28);
-        var near = artLeft - GUTTER;                  // (a)
-        if (wide) {
-          left = Math.max(0, near);
-        } else {
-          var roomNear = artLeft - (near + LABEL_LEFT); // space left for the label
-          left = roomNear >= LABEL_W ? near : 16;      // (b) fall back to the edge
-        }
-      }
-      rail.style.left = Math.max(0, left) + 'px';
+      rail.style.left = left + 'px';
 
       // The invisible hover strip should cover the gutter next to the article,
       // wherever that gutter happens to be once the column is centred.
@@ -193,11 +176,9 @@
         gutter.style.width = (artLeft - left) + 'px';
       }
 
-      // If even the far-left position cannot fit the label, drop the label and
-      // keep the rail itself — a bare line still reads as a progress indicator.
-      var room = articleEl
-        ? Math.round(articleEl.getBoundingClientRect().left) - (left + LABEL_LEFT)
-        : LABEL_W;
+      // The read-out needs clearance before the text starts; when the column is
+      // narrow enough that it would collide, keep the bare line instead.
+      var room = articleEl ? artLeft - (left + LABEL_LEFT) : LABEL_W;
       rail.classList.toggle('yh-rail-no-label', room < LABEL_W);
 
       var r = track.getBoundingClientRect();
@@ -356,7 +337,21 @@
 
     window.addEventListener('scroll', reveal, { passive: true });
 
-    window.addEventListener('resize', measure, { passive: true });
+    // Layout can still shift after mount (webfonts swapping in, images
+    // decoding, the pjax re-render). A single measure() at mount is not
+    // enough: it can read #post-body before it settles and then permanently
+    // mis-classify the label clearance. Re-measure on any later layout change.
+    var measureTimer = null;
+    function scheduleMeasure() {
+      if (measureTimer) clearTimeout(measureTimer);
+      measureTimer = setTimeout(function () { measureTimer = null; measure(); }, 120);
+    }
+
+    window.addEventListener('resize', scheduleMeasure, { passive: true });
+    window.addEventListener('load', scheduleMeasure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleMeasure);
+    if (window.ResizeObserver) new ResizeObserver(scheduleMeasure).observe(document.body);
+
     measure();
     // lay the geometry out once (dots need positions) but stay hidden at rest
     target = 0; cur = 1;

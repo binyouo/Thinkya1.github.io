@@ -16,6 +16,8 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 <!-- more -->
 
+## 协议与工具
+
 **[Skill](/2026/10/12/ai-agent-tools-protocols/)：** 可复用的任务知识、流程与资源包。它告诉 Agent 一类事情应该怎么做，通常以 `SKILL.md` 为核心，还可以带脚本、模板和参考资料。比如代码审查 Skill 规定先看改动目标，再查影响、验证并输出报告。真正读文件和跑测试，仍需要工具。
 
 **[MCP](/2026/10/12/ai-agent-tools-protocols/)：** Model Context Protocol，模型上下文协议，统一 AI 应用接入外部工具和资料的方式。比如把 GitHub 查询能力接到 Agent 应用里。MCP Server 可以提供工具、可读取的资源和提示模板；应用负责连接、发现和路由调用。
@@ -48,9 +50,13 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Plugin / Extension](/2026/10/12/ai-agent-tools-protocols/)：** 插件或扩展，用来安装和分发附加能力。一个插件可以同时包含 Skill、工具连接配置、命令或 Hook。Hook 在特定事件触发逻辑，Command 则提供显式命令入口。
 
+## Agent 与工作流
+
 **[Agent](/2026/10/12/ai-agent-loop-runtime/)：** 在本系列的 LLM 应用语境中，指围绕目标，根据任务与反馈选择行动、使用工具并推进工作的系统。比如发现测试失败后，自行查日志、定位原因、修改并重新验证。模型负责判断，外围程序负责执行和状态管理。
 
 **[Workflow](/2026/10/12/ai-agent-loop-runtime/)：** 工作流，预先组织步骤与分支。比如「解析文档 → 检索 → 生成 → 校验」。Agent 更侧重根据反馈动态决定下一步；实际系统经常把工作流与 Agent 组合使用。
+
+## 模型与推理
 
 **[LLM](/2026/10/12/ai-agent-model-basics/)：** Large Language Model，大语言模型，用于理解输入和生成内容。它可以生成文字、代码和工具参数。聊天产品通常还包含工具、历史存储和执行程序，产品与模型不是同一个对象。
 
@@ -66,6 +72,8 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Fine-tuning](/2026/10/12/ai-agent-model-basics/)：** 微调，通过训练调整模型参数来适应任务或数据。SFT、偏好优化等涉及训练方法，LoRA 是参数高效适配的一种方法。读 Skill、查 RAG、保存记忆通常属于运行时信息组织，没有直接更新模型权重。
 
+## 上下文与记忆
+
 **[Prompt](/2026/10/12/ai-agent-context-memory/)：** 当前任务的指令与输入，有些语境也泛指整份模型输入。例如「只根据这份文档回答，资料没有提到的内容标为未知」。Prompt Engineering 关注怎样把目标、例子、约束和输出要求写清楚。
 
 **[Context](/2026/10/12/ai-agent-context-memory/)：** 上下文，本次模型调用实际可用的信息，可能包括用户问题、历史、工具定义、工具结果、检索资料和记忆。信息保存在系统里，不代表这次一定交给了模型。
@@ -77,6 +85,8 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 **[Context Engineering](/2026/10/12/ai-agent-context-memory/)：** 上下文工程，管理什么信息、在什么时候、以什么形式进入模型。例如把完整日志放到文件里，先提供失败摘要和读取入口，让模型需要时再查细节。
 
 **[Compaction](/2026/10/12/ai-agent-context-memory/)：** 上下文压缩，把较长历史整理成继续工作所需的材料。应保留目标、约束、进度、决定和验证结果。它可能丢失细节，摘要也不能替代已经变化的文件和真实业务状态。
+
+## 检索与 RAG
 
 **[RAG](/2026/10/12/ai-agent-rag/)：** Retrieval-Augmented Generation，检索增强生成，先获取外部依据，再结合依据回答。比如先检索公司的最新报销制度，再解释额度。完整链路包括资料准备、检索、排序、证据组织、生成与核查。
 
@@ -100,6 +110,8 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Agentic RAG](/2026/10/12/ai-agent-rag/)：** 让 Agent 参与决定是否检索、查哪里、怎样改写问题、是否继续，以及证据是否足够。查到旧制度后继续寻找新版本，是一个简单例子。Self-RAG、Corrective RAG 则有各自的研究机制，不能仅凭名称视为同一种方法。
 
+## 运行与状态
+
 **[Agent Loop](/2026/10/12/ai-agent-loop-runtime/)：** Agent 的控制循环，准备上下文、调用模型、执行工具、取得观察，再决定继续、等待或结束。一次模型生成结束，不代表整个任务已经完成。
 
 **[ReAct](/2026/10/12/ai-agent-loop-runtime/)：** Reasoning 与 Acting，强调判断和行动交替推进。比如原先怀疑网络故障，读日志后发现数据库权限错误，随后调整排查方向。它与前端 UI 库 React 是不同概念。
@@ -120,11 +132,15 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Retry / Idempotency](/2026/10/12/ai-agent-loop-runtime/)：** Retry 是重试，Idempotency 是幂等性，在约定范围内重复同一请求，其预期业务效果与执行一次相同。超时不证明操作未成功；响应丢失后可以先核对真实状态，再决定是否重试。
 
+## 协作与界面
+
 **[Multi-agent / Subagent](/2026/10/12/ai-agent-collaboration-computer-use/)：** Multi-agent 是多个 Agent 协作，Subagent 是被委派子任务的 Agent。它们可以分工、独立审查或并行处理，但需要明确上下文、文件责任和结果汇总方式；数量增加也会增加协调成本。
 
 **[Handoff](/2026/10/12/ai-agent-collaboration-computer-use/)：** 把控制权交给另一个 Agent，例如客服把后续处理移交给退款 Agent。让子 Agent 返回一份报告则通常属于 Agent-as-a-Tool，主 Agent 收到结果后继续负责，交互语义不同。
 
 **[Computer Use / ACI](/2026/10/12/ai-agent-collaboration-computer-use/)：** Computer Use 是通过工具观察和操作电脑界面的能力，可利用 DOM、可访问性树、截图和鼠标键盘。ACI 是 Agent 与计算机的交互接口设计，关注观察和操作怎样帮助模型完成任务。点击保存之后，还要确认真实保存结果。
+
+## 缓存与观测
 
 **[Cache Hit](/2026/10/12/ai-agent-cache-observability/)：** 缓存命中，找到满足复用条件的计算状态或结果。它可能命中输入前缀计算、完整答案、工具结果或工具目录，必须先说明缓存对象。命中率高不自动证明整个任务更快。
 
@@ -135,6 +151,8 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 **[Trace / Logs / Metrics](/2026/10/12/ai-agent-cache-observability/)：** Trace 关联一次过程中的多个操作，Span 描述其中一段操作；Logs 记录离散事件，Metrics 汇总数量和分布。它们帮助判断哪里慢、哪里失败，持久恢复仍需要另外的状态与执行机制。
 
 **[Latency / TTFT](/2026/10/12/ai-agent-cache-observability/)：** Latency 是从指定起点到终点的耗时，TTFT 是首 Token 延迟，端到端延迟则看任务提交到完成的总时间。首字出现得快，后面的工具和外部任务仍可能让总时间很长。
+
+## 安全与评测
 
 **[Sandbox / Approval](/2026/10/12/ai-agent-safety-evaluation/)：** Sandbox 限制代码能接触的资源；Approval 确认这次具体动作是否获准。Authentication 确认身份，Authorization 确认可执行范围。这几层需要配合，连接工具或读到 Skill 不会自动授予额外权限。
 
