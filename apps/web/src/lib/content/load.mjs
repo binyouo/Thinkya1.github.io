@@ -10,15 +10,15 @@
 import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 import { parse as parseYaml } from 'yaml'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-// apps/web/src/lib/content -> repo root
-const ROOT = path.resolve(__dirname, '../../../../..')
-const CONTENT_DIR = path.join(ROOT, 'content', 'posts')
-const PAGES_DIR = path.join(ROOT, 'content', 'pages')
+// Next bundles this module into the route handler, so `import.meta.url` points
+// inside `.next/server`. Resolve content from the app root instead: in dev,
+// `next start`, and the standalone server the cwd is the `apps/web` directory.
+const WEB_ROOT = process.env.CONTENT_ROOT || process.cwd()
+const CONTENT_DIR = path.join(WEB_ROOT, 'content', 'posts')
+const PAGES_DIR = path.join(WEB_ROOT, 'content', 'pages')
 
 const ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'https://binzi.top'
 

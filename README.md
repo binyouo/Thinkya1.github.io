@@ -11,18 +11,18 @@ Mix Space 兼容接口，直接读取 `content/posts`，因此写作流程仍然
 
 ```
 apps/web/                 Shiro 前端（Next.js 16 App Router）
+  content/                文章与页面（Markdown）
+    posts/                文章（front matter + 正文）
+    pages/                独立页面（如关于）
+    .obsidian/            Obsidian vault 配置
   src/app/api/v2/[...path]/route.ts   Mix Space 兼容 API
   src/lib/content/load.mjs            Markdown 读取与聚合
-content/
-  posts/                  文章（front matter + 正文）
-  pages/                  独立页面（如关于）
-  .obsidian/              Obsidian vault 配置
 patches/                  pnpm patch（修正依赖里 Next 无法解析的 CSS）
 ```
 
 ## 写作
 
-在 `content/posts` 下新建 Markdown，front matter 支持 `title`、`date`、`updated`、
+在 `apps/web/content/posts` 下新建 Markdown，front matter 支持 `title`、`date`、`updated`、
 `description`、`categories`、`tags`。分类取第一个值，文章地址为
 `/posts/{分类 slug}/{文件名}`，中文分类直接使用中文。
 

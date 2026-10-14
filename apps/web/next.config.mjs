@@ -35,6 +35,9 @@ let nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   output: 'standalone',
+  outputFileTracingIncludes: {
+    '/api/v2/[...path]': ['./content/**/*'],
+  },
   assetPrefix: isProd ? env.ASSETPREFIX || undefined : undefined,
   typescript: {
     ignoreBuildErrors: true,
