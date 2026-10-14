@@ -193,9 +193,15 @@ export const GET = async (
     const {
       user: { avatar },
       seo,
+      url: siteUrl,
       theme,
     } = aggregation
-    const ogAvatar = theme?.config.module?.og?.avatar || avatar
+    const rawAvatar = theme?.config.module?.og?.avatar || avatar
+    // ImageResponse can only load absolute URLs; avatars are stored as paths.
+    const ogAvatar =
+      rawAvatar?.startsWith('/') && siteUrl?.webUrl
+        ? `${siteUrl.webUrl}${rawAvatar}`
+        : rawAvatar
 
     if (!title) {
       return new Response(
@@ -203,6 +209,21 @@ export const GET = async (
         { status: 400 },
       )
     }
+
+    const fontList = [
+      fontData && {
+        name: useGeist ? 'Geist' : 'LXGW WenKai',
+        data: fontData,
+        weight: 400,
+        style: 'normal',
+      },
+      fontDataBold && {
+        name: useGeist ? 'Geist' : 'LXGW WenKai',
+        data: fontDataBold,
+        weight: 600,
+        style: 'normal',
+      },
+    ].filter(Boolean) as any[]
 
     return new ImageResponse(
       <div
@@ -330,20 +351,9 @@ export const GET = async (
       {
         width: 1200,
         height: 630,
-        fonts: [
-          fontData && {
-            name: useGeist ? 'Geist' : 'LXGW WenKai',
-            data: fontData,
-            weight: 400,
-            style: 'normal',
-          },
-          fontDataBold && {
-            name: useGeist ? 'Geist' : 'LXGW WenKai',
-            data: fontDataBold,
-            weight: 600,
-            style: 'normal',
-          },
-        ].filter(Boolean) as any[],
+        // Satori needs at least one font. Fall back to its built-in default
+        // when no system font is available (e.g. the Vercel runtime).
+        ...(fontList.length ? { fonts: fontList } : {}),
         headers: {
           'Cache-Control':
             'public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400',

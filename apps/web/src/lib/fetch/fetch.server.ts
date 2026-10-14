@@ -5,12 +5,40 @@ import { createFetch } from 'ofetch'
 
 import PKG from '~/../package.json'
 import { REQUEST_LOCALE } from '~/constants/system'
+import { handleGet } from '~/lib/content/load.mjs'
 
 import { createApiClient, createFetchAdapter } from './shared'
 
 const isDev = process.env.NODE_ENV === 'development'
 
+const API_PATH = '/api/v2/'
+
+// Server components fetch this site's own compatibility API. Routing that back
+// through the network (and the Vercel CDN) is unreliable, so resolve it in
+// process. Any other URL still goes out over fetch.
+const inProcessFetch: typeof globalThis.fetch = (input, init) => {
+  const url =
+    typeof input === 'string'
+      ? input
+      : input instanceof URL
+        ? input.toString()
+        : input.url
+
+  const index = url.indexOf(API_PATH)
+  if (index === -1) return globalThis.fetch(input as any, init)
+
+  const afterBase = url.slice(index + API_PATH.length)
+  const queryIndex = afterBase.indexOf('?')
+  const rawPath = queryIndex === -1 ? afterBase : afterBase.slice(0, queryIndex)
+  const rawQuery = queryIndex === -1 ? '' : afterBase.slice(queryIndex + 1)
+  const segments = rawPath.split('/').filter(Boolean).map(decodeURIComponent)
+  const searchParams = new URLSearchParams(rawQuery)
+
+  return Promise.resolve(handleGet(segments, searchParams))
+}
+
 export const $fetch = createFetch({
+  fetch: inProcessFetch,
   defaults: {
     timeout: 8000,
     credentials: 'include',

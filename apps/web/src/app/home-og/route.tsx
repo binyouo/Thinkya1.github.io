@@ -5,7 +5,8 @@ import { apiClient } from '~/lib/request'
 
 export const revalidate = 86400 // 24 hours
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 const resOptions = {
   width: 1200,
@@ -26,10 +27,15 @@ export const GET = async () => {
   const {
     seo,
     user: { avatar },
+    url,
     theme,
   } = aggregateData.$serialized
-  const ogAvatar =
+  const rawAvatar =
     (theme as AppThemeConfig | undefined)?.config.module?.og?.avatar || avatar
+  // ImageResponse can only load absolute URLs; avatars are stored as paths.
+  const ogAvatar = rawAvatar?.startsWith('/')
+    ? `${url.webUrl}${rawAvatar}`
+    : rawAvatar
 
   return new ImageResponse(
     <div
