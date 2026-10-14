@@ -5,8 +5,10 @@
 debug: false
 
 # 顶部导航：只保留核心页面
+# visiable: always —— 不要用 auto。auto 会依赖封面状态，而封面已关闭
+# （cover.display 全 false），于是导航栏在回到页面顶部时会被隐藏。
 navbar:
-  visiable: auto
+  visiable: always
   logo:
     img:
     icon: fa-solid fa-feather

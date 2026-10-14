@@ -168,15 +168,30 @@
       var LABEL_LEFT = 36;      // .yh-rail-readout { left: 36px }
       var LABEL_W = 150;        // .yh-rail-title { max-width: 140px } + slack
       var RAIL_W_PX = 48;       // w-12
+      // On wide screens the CSS hides the read-out label (the TOC already names
+      // the headings) and the article is a centred column with a wide gutter, so
+      // the rail can always sit next to the text — no label clearance needed.
+      var wide = window.matchMedia('(min-width: 1200px)').matches;
       var left = 16;
+      var artLeft = articleEl ? Math.round(articleEl.getBoundingClientRect().left) : 0;
       if (articleEl) {
-        var artLeft = Math.round(articleEl.getBoundingClientRect().left);
-        var GUTTER = RAIL_W_PX + 28;
-        var near = artLeft - GUTTER;                 // (a)
-        var roomNear = artLeft - (near + LABEL_LEFT); // space left for the label
-        left = roomNear >= LABEL_W ? near : 16;      // (b) fall back to the edge
+        var GUTTER = (wide ? 32 : RAIL_W_PX) + (wide ? 16 : 28);
+        var near = artLeft - GUTTER;                  // (a)
+        if (wide) {
+          left = Math.max(0, near);
+        } else {
+          var roomNear = artLeft - (near + LABEL_LEFT); // space left for the label
+          left = roomNear >= LABEL_W ? near : 16;      // (b) fall back to the edge
+        }
       }
       rail.style.left = Math.max(0, left) + 'px';
+
+      // The invisible hover strip should cover the gutter next to the article,
+      // wherever that gutter happens to be once the column is centred.
+      if (gutter && articleEl && artLeft > left + 24) {
+        gutter.style.left = left + 'px';
+        gutter.style.width = (artLeft - left) + 'px';
+      }
 
       // If even the far-left position cannot fit the label, drop the label and
       // keep the rail itself — a bare line still reads as a progress indicator.

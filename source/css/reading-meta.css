@@ -103,50 +103,70 @@
 }
 
 /* ============================================================
-   Layout: match innei.in. Measured on the reference at 1440px wide:
-     article   x=160  w=920
-     toc col   x=1096 w=200   (right margin 144px)
-   i.e. article + right-hand TOC sit centred in the viewport with the TOC on
-   the RIGHT. Volantis leaves .toc-wrapper in normal flow on desktop (its
-   `position: fixed` rule only exists inside @media (max-width: 768px)), so we
-   pin it ourselves and rebalance the gutters.
+   Layout — a centred reading column with the TOC pinned beside it.
+
+   Two bugs this replaces, both of which pushed the text off-centre:
+     1. `#l_main { padding-right: 232px }` reserved space for a TOC that is
+        `position: fixed` anyway, so the padding only shoved the article left.
+     2. `margin: 0 !important` cancelled the theme's own `margin: auto` on
+        `#l_main.no_sidebar`, so articles without a TOC stuck to the left edge.
+
+   The article is now a fixed, centred column. `--yh-read-w` shrinks it on
+   narrower desktops so the TOC always keeps a right-hand gutter (the 520px
+   reserve = 2 × (40px gap + 200px TOC + 20px margin)).
+   Below 1200px there is not enough room for that, so the theme's own flow
+   layout takes over again.
    ============================================================ */
 @media (min-width: 1200px) {
-  /* Volantis caps the whole content area at `max-width: 55vw` and does not
-     centre it, which is why the column sat hard against the left edge. Widen
-     it to the reference's proportions and centre it: at 1440px the reference
-     puts the article at x=160 (w=920) and the TOC at x=1096 (w=200), i.e.
-     a ~1152px block centred with even gutters. */
+  :root {
+    --yh-read-w: min(840px, 100vw - 520px);
+  }
+
+  /* the content block: centred, with no leftover left nudge */
   .body-wrapper {
     max-width: 1152px !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    /* Nudge left by 8px so the article lands at x=160, matching the reference.
-       Uses relative offset, NOT `transform`: a transform on an ancestor makes
-       that ancestor the containing block for `position: fixed` descendants,
-       which silently broke the TOC's fixed positioning (it scrolled away). */
-    position: relative;
-    left: -8px;
+    left: 0 !important;
+    justify-content: center !important;
   }
   #safearea { margin-left: 0 !important; margin-right: 0 !important; }
 
-  /* inside that block the article keeps the left side and reserves the
-     right-hand 232px for the TOC (200px card + 32px gap) */
+  /* never cancel the theme's own centring — doing that is what pinned
+     articles without a TOC to the left edge */
   #l_main {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-right: 232px !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-right: 0 !important;
     box-sizing: border-box !important;
   }
 
-  /* the TOC: pinned on the RIGHT, aligned to the viewport's centre block */
+  /* list pages keep their 240px widget column... */
+  #l_side {
+    flex: 0 0 240px !important;
+  }
+
+  /* ...but on article pages the sidebar holds nothing but the TOC, which is
+     pinned to the viewport anyway — so it must not reserve any flow width,
+     otherwise its empty 240px drags the reading column off-centre. */
+  .body-wrapper:has(#l_side .toc-wrapper) #l_main {
+    flex: 0 0 auto !important;
+    width: var(--yh-read-w) !important;
+    max-width: var(--yh-read-w) !important;
+  }
+  .body-wrapper:has(#l_side .toc-wrapper) #l_side {
+    flex: 0 0 0 !important;
+    width: 0 !important;
+  }
+
+  /* the TOC: fixed, sitting just to the right of the reading column */
   #l_side .toc-wrapper {
     position: fixed !important;
     top: 96px !important;
     right: auto !important;
     left: 50% !important;
-    /* half the 1152px block (576) minus the card (200) + the gap */
-    margin-left: 384px !important;   /* measured: puts the card at x=1096 @1440 */
+    margin-left: calc(var(--yh-read-w) / 2 + 40px) !important;
     width: 200px !important;
     max-width: 200px !important;
     max-height: calc(100vh - 140px) !important;
@@ -155,7 +175,7 @@
     z-index: 20 !important;
   }
 
-  /* the reading rail sits on the LEFT edge of the article, not the viewport */
+  /* the reading rail sits in the left gutter of the reading column */
   .yh-rail {
     width: 32px !important;
   }
@@ -168,18 +188,4 @@
   }
 }
 
-/* narrower screens keep the theme's own behaviour */
-@media (max-width: 1199px) {
-  #l_side .toc-wrapper {
-    position: fixed !important;
-    top: 48px !important;
-    right: 16px !important;
-    left: auto !important;
-    margin-left: 0 !important;
-  }
-  #l_main {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-right: 0 !important;
-  }
-}
+/* Narrower desktops keep the theme's own flow layout (TOC in the sidebar). */
