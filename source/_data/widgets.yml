@@ -2,7 +2,7 @@
 blogger:
   class: blogger
   display: [desktop]
-  avatar: /img/qq.jpg
+  avatar: /img/avatar.jpg
   shape: circle
   url: /about/
   title: 彬子

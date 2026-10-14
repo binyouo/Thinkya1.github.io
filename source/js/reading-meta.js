@@ -30,7 +30,14 @@
     var heading = document.querySelector('.article-title, .post-title, h1');
     var host = heading ? heading.parentElement : null;
 
-    var stats = h('div', 'yh-stats');
+    // busuanzi keys every counter to the exact hostname the page runs on. The
+    // "localhost" bucket is shared by everyone in the world who runs it
+    // locally, so a dev preview shows eight-figure nonsense. Only the real
+    // domain has meaningful numbers — anywhere else, skip the row entirely
+    // rather than show someone else's traffic.
+    var canonical = /(^|\.)binzi\.top$/i.test(location.hostname);
+    if (canonical) {
+      var stats = h('div', 'yh-stats');
     stats.innerHTML =
       '<span class="yh-stat" title="本篇阅读量">' +
         '<i class="yh-ico-eye" aria-hidden="true"></i>' +
@@ -52,6 +59,7 @@
       host.insertAdjacentElement('afterend', stats);
     } else {
       article.insertBefore(stats, article.firstChild);
+    }
     }
 
     // ---------- 2. back button (fixed, bottom-left of the reading column) ----------
@@ -76,7 +84,7 @@
     syncBack();
 
     // ---------- 3. load busuanzi (real counters) ----------
-    if (!document.getElementById('busuanzi-script')) {
+    if (canonical && !document.getElementById('busuanzi-script')) {
       var s = document.createElement('script');
       s.id = 'busuanzi-script';
       s.src = BZ_SCRIPT;

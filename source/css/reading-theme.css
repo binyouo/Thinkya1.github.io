@@ -278,22 +278,24 @@ html[data-theme='light'] {
 .toc-link {
   color: color-mix(in srgb, var(--yh-text) 38%, transparent) !important;
   font-size: 0.82rem;
-  transition: color 200ms ease;
+  border-left: 2px solid transparent;
+  transition: color 200ms ease, border-color 200ms ease;
 }
-.toc-link:hover { color: var(--yh-text) !important; }
-.toc-item.active > .toc-link,
-.toc-link.active { color: var(--yh-accent) !important; font-weight: 500; }
-.toc-item.active { position: relative; }
-.toc-item.active::before {
-  content: '';
-  position: absolute;
-  left: -10px;
-  top: 0.15em;
-  bottom: 0.15em;
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(to bottom, var(--yh-accent) 80%, transparent);
-  box-shadow: 0 0 6px rgba(172, 151, 83, 0.35);
+.toc-link:hover { color: var(--yh-text) !important; border-left-color: transparent !important; }
+/* The theme ships `#l_side .toc-wrapper .content a.active { color: var(--color-list-hl) }`
+   — an id + 3 classes, which beats a plain `.toc-item.active > .toc-link`.
+   `--color-list-hl` also derives from the old grey theme colour, so the active
+   heading rendered grey rather than gold. Match its specificity. */
+#l_side .toc-wrapper .content .toc-item.active > .toc-link,
+#l_side .toc-wrapper .content a.toc-link.active {
+  color: var(--yh-accent) !important;
+  font-weight: 500;
+  border-left-color: var(--yh-accent) !important;
+}
+#l_side .toc-wrapper .content a.toc-link:hover {
+  color: var(--yh-text) !important;
+  background: transparent !important;
+  border-left-color: transparent !important;
 }
 
 /* ---------- scrollbar ---------- */

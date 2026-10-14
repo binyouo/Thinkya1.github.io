@@ -174,15 +174,6 @@
     overflow-x: hidden !important;
     z-index: 20 !important;
   }
-
-  /* the reading rail hugs the viewport's left edge, like the reference */
-  .yh-rail {
-    width: 48px !important;
-  }
-  .yh-rail .yh-rail-track {
-    top: 64px !important;
-    bottom: 64px !important;
-  }
 }
 
 /* Narrower desktops keep the theme's own flow layout (TOC in the sidebar). */

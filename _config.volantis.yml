@@ -57,7 +57,7 @@ article:
   body:
     meta_library:
       author:
-        avatar: /img/qq.jpg
+        avatar: /img/avatar.jpg
         name: 彬子
         url: /about/
 
@@ -96,6 +96,10 @@ plugins:
     enable: false
   darkmode:
     enable: true
+  # 复制时不再弹出「知识共享许可协议」提示
+  message:
+    copyright:
+      enable: false
 
 # 页面卡片不使用阴影及悬停浮起效果
 custom_css:

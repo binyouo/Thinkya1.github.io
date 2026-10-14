@@ -37,6 +37,12 @@
     if (!toc) return;
     var content = toc.querySelector('.content') || toc;
 
+    // The reference keeps these pinned under the (scrollable) heading list, so
+    // they are appended to the panel, not into .content — otherwise a long TOC
+    // scrolls the ring and the back-to-top control out of view.
+    var extras = document.createElement('div');
+    extras.className = 'yh-toc-extras';
+
     // ---------- 1. wavy rule ----------
     var wavy = svgEl('svg', {
       class: 'yh-toc-wavy',
@@ -47,7 +53,7 @@
     wavy.appendChild(svgEl('path', {
       d: WAVES[Math.floor(Math.random() * WAVES.length)]
     }));
-    content.appendChild(wavy);
+    extras.appendChild(wavy);
 
     // ---------- 2. ring progress + percentage ----------
     var readout = document.createElement('div');
@@ -99,7 +105,10 @@
 
     readout.appendChild(ringWrap);
     readout.appendChild(top);
-    content.appendChild(readout);
+    extras.appendChild(readout);
+    toc.appendChild(extras);
+    // the extras must not be part of the scrolling list
+    if (content.parentElement === toc) content.classList.add('yh-toc-scroll');
 
     // ---------- sync ----------
     var last = -1;

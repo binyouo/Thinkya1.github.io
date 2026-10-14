@@ -1,0 +1,150 @@
+/* ============================================================
+   List pages — home / category / tag / archive.
+
+   Structure ported from innei.in/categories/tech: a narrow editorial column,
+   no sidebar, with an eyebrow + big count + title + short accent rule, then a
+   year-grouped list of rows (title · #tags · date). This is what makes the
+   list pages read as the same site as the article page.
+   ============================================================ */
+
+#l_main.yh-list-page {
+  float: none !important;
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  padding: 48px 24px 64px !important;
+  box-sizing: border-box !important;
+}
+.body-wrapper:has(#l_main.yh-list-page) {
+  max-width: none !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* ---------- header block ---------- */
+.yh-list-page .yh-list-head { margin-bottom: 8px; }
+.yh-list-page .yh-list-eyebrow {
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--yh-faint);
+  margin-bottom: 16px;
+}
+.yh-list-page .yh-list-count {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.yh-list-page .yh-list-num {
+  font-size: 56px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -1.4px;
+  color: var(--yh-strong);
+  font-variant-numeric: tabular-nums;
+}
+.yh-list-page .yh-list-unit {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--yh-faint);
+}
+.yh-list-page .yh-list-title {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: var(--yh-text);
+}
+.yh-list-page .yh-list-rule {
+  width: 28px;
+  height: 1px;
+  margin: 24px 0 28px;
+  background: color-mix(in srgb, var(--yh-accent) 70%, transparent);
+}
+
+/* ---------- list ---------- */
+.yh-list-page .yh-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.yh-list-page .yh-list-year {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 20px 0 8px;
+}
+.yh-list-page .yh-list-year:first-child { padding-top: 0; }
+.yh-list-page .yh-year {
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.7px;
+  color: color-mix(in srgb, var(--yh-text) 35%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+.yh-list-page .yh-year-count {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: var(--yh-faint);
+}
+.yh-list-page .yh-list-item { border-bottom: 1px solid var(--yh-line); }
+.yh-list-page .yh-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 12px;
+  margin: 0 -12px;
+  text-decoration: none;
+  transition: background 300ms ease;
+}
+.yh-list-page .yh-row:hover {
+  background: linear-gradient(90deg,
+    transparent,
+    var(--yh-accent-faint),
+    transparent);
+}
+.yh-list-page .yh-row-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--yh-text);
+  transition: color 200ms ease;
+}
+.yh-list-page .yh-row:hover .yh-row-title { color: var(--yh-accent); }
+.yh-list-page .yh-row-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+.yh-list-page .yh-row-tags { white-space: nowrap; }
+.yh-list-page .yh-tag { color: var(--yh-accent); }
+.yh-list-page .yh-tag-sep { color: var(--yh-faint); }
+.yh-list-page .yh-more { color: var(--yh-faint); }
+.yh-list-page .yh-row-date {
+  min-width: 84px;
+  text-align: right;
+  color: var(--yh-faint);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  #l_main.yh-list-page { padding: 32px 18px 48px !important; }
+  .yh-list-page .yh-list-num { font-size: 44px; }
+  .yh-list-page .yh-list-title { font-size: 24px; }
+  .yh-list-page .yh-year { font-size: 24px; }
+  .yh-list-page .yh-row-tags { display: none; }
+  .yh-list-page .yh-row-date { min-width: 0; }
+}
