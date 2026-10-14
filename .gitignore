@@ -1,13 +1,58 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# testing
+/coverage
+
+# next.js
+.next/
+/out/
+
+# production
+/build
+
+# misc
 .DS_Store
-Thumbs.db
-db.json
-*.log
-node_modules/
-public/
-.deploy_git/
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.env
+.idea
+
+.vscode/sftp.json
+
+apps/web/src/app/dev
+
+apps/web/public/static
+apps/web/public/pusher-sw.js
+
+dev
+
+# turbo
+.turbo
+
+# benchmark compiled output
+_bench_compiled*
 
 # Obsidian 易变文件
-source/.obsidian/workspace.json
-source/.obsidian/workspace-mobile.json
-source/.obsidian/cache/
+content/.obsidian/workspace.json
+content/.obsidian/workspace-mobile.json
+content/.obsidian/cache/
 .alma-snapshots

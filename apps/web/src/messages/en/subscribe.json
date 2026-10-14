@@ -1,0 +1,15 @@
+{
+  "not_enabled": "Subscription feature is not enabled yet",
+  "type_post": "Posts",
+  "type_note": "Notes",
+  "type_say": "Quotes",
+  "type_recently": "Quick notes",
+  "success": "Subscribed successfully, thank you!",
+  "welcome": "Thanks for subscribing to \"{title}\". I'll send the latest updates to your email from time to time.",
+  "rss_hint": "You can also subscribe via",
+  "rss_link": "/feed",
+  "rss_suffix": "to subscribe to the RSS feed for \"{title}\".",
+  "telegram_hint": "You can also subscribe to the Telegram channel",
+  "submit": "Subscribe",
+  "form_email": "Your Email *"
+}

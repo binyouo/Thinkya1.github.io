@@ -1,31 +1,66 @@
 {
-  "name": "binzi-blog",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "hexo generate",
-    "clean": "hexo clean",
-    "server": "hexo server",
-    "deploy": "hexo deploy"
-  },
-  "type": "commonjs",
-  "dependencies": {
-    "@renbaoshuo/markdown-it-katex": "^2.0.2",
-    "hexo": "^7.3.0",
-    "hexo-generator-archive": "^2.0.0",
-    "hexo-generator-category": "^2.0.0",
-    "hexo-generator-feed": "^4.0.0",
-    "hexo-generator-index": "^4.0.0",
-    "hexo-generator-tag": "^2.0.0",
-    "hexo-renderer-markdown-it": "^7.1.1",
-    "hexo-renderer-stylus": "^3.0.1",
-    "hexo-server": "^3.0.0",
-    "hexo-theme-volantis": "^6.6.1"
-  },
+  "name": "shiro",
   "private": true,
-  "hexo": {
-    "version": "7.3.0"
+  "type": "module",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev --filter @shiro/web",
+    "lint": "turbo lint",
+    "prepare": "pnpm exec simple-git-hooks",
+    "release": "bumpp -r",
+    "release:dry": "bumpp -r --no-commit --no-tag --no-push"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --ignore-path ./.gitignore --write "
+    ],
+    "*.{js,ts,cjs,mjs,jsx,tsx,json}": [
+      "eslint --fix"
+    ]
   },
   "devDependencies": {
-    "hexo-cli": "^4.3.2"
+    "@types/node": "25.0.10",
+    "bumpp": "^10.4.1",
+    "lint-staged": "16.2.7",
+    "simple-git-hooks": "2.13.1",
+    "turbo": "^2.8.10"
+  },
+  "packageManager": "pnpm@10.27.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "esbuild",
+      "sharp",
+      "simple-git-hooks"
+    ],
+    "overrides": {
+      "array-includes": "npm:@nolyfill/array-includes@^1.0.44",
+      "array.prototype.findlastindex": "npm:@nolyfill/array.prototype.findlastindex@^1.0.44",
+      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@^1.0.44",
+      "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@^1.0.44",
+      "array.prototype.tosorted": "npm:@nolyfill/array.prototype.tosorted@^1.0.44",
+      "has": "npm:@nolyfill/has@^1.0.44",
+      "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39",
+      "object.assign": "npm:@nolyfill/object.assign@^1.0.44",
+      "object.entries": "npm:@nolyfill/object.entries@^1.0.44",
+      "object.fromentries": "npm:@nolyfill/object.fromentries@^1.0.44",
+      "object.groupby": "npm:@nolyfill/object.groupby@^1.0.44",
+      "object.hasown": "npm:@nolyfill/object.hasown@^1.0.44",
+      "object.values": "npm:@nolyfill/object.values@^1.0.44",
+      "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1.0.44",
+      "@types/react": "19.2.9",
+      "@types/react-dom": "19.2.3"
+    },
+    "patchedDependencies": {
+      "@haklex/rich-editor@0.0.105": "patches/@haklex__rich-editor@0.0.105.patch",
+      "@innei/markdown-to-jsx-yet": "patches/@innei__markdown-to-jsx-yet.patch"
+    }
   }
 }

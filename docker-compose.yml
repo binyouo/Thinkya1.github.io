@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  shiro:
+    container_name: shiro
+    image: innei/shiro:latest
+    volumes:
+      - ./.env:/app/apps/web/.env
+      - ./public:/app/apps/web/public
+    restart: always
+    ports:
+      - 2323:2323

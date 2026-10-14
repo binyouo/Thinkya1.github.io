@@ -1,0 +1,15 @@
+{
+  "page_title": "ひとこと",
+  "edit_say": "ひとことを編集",
+  "publish_say": "ひとことを公開",
+  "update_success": "更新しました",
+  "publish_success": "公開しました",
+  "update": "更新",
+  "publish": "公開",
+  "content": "内容",
+  "source": "出典",
+  "author": "作者",
+  "from_source": "\"{source}\"より",
+  "author_label": "作者：{author}",
+  "owner_says": "サイト主のひとこと"
+}
