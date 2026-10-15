@@ -21,6 +21,7 @@ import {
   BottomToUpTransitionView,
 } from '~/components/ui/transition'
 import { OnlyMobile } from '~/components/ui/viewport/OnlyMobile'
+import { Link } from '~/i18n/navigation'
 import { getOgUrl } from '~/lib/helper.server'
 import { getSummaryFromMd } from '~/lib/markdown'
 import { definePrerenderPage } from '~/lib/request.server'
@@ -121,10 +122,16 @@ export const generateMetadata = async (props: {
 const PostPage = ({ data }: { data: PostWithTranslation }) => {
   const { id } = data
   return (
-    <div className="relative w-full min-w-0">
+    <div className="paper-article relative w-full min-w-0">
       <AckRead id={id} type="post" />
       <div>
         <div className="mb-8">
+          <Link
+            className="paper-breadcrumb"
+            href={`/posts/category/${encodeURIComponent(data.category.slug)}`}
+          >
+            ← 文稿 · {data.category.name}
+          </Link>
           <PostTitle />
           <GoToAdminEditingButton
             id={id!}

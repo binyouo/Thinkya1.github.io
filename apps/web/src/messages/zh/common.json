@@ -1,4 +1,6 @@
 {
+  "nav_about": "关于",
+  "search_keyboard_hint": "↑ ↓ 选择 · Enter 打开 · Esc 关闭",
   "nav_home": "首页",
   "nav_posts": "文稿",
   "nav_notes": "手记",

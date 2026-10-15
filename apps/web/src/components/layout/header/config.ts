@@ -15,6 +15,7 @@ import {
   MdiLightbulbOn20,
   RMixPlanet,
 } from '~/components/icons/menu-collection'
+import { isSiteRouteEnabled } from '~/constants/site'
 
 export interface IHeaderMenu {
   title: string
@@ -27,7 +28,7 @@ export interface IHeaderMenu {
   search?: Record<string, string>
   do?: () => void
 }
-export const headerMenuConfig: IHeaderMenu[] = [
+const allHeaderMenuConfig: IHeaderMenu[] = [
   {
     title: '首页',
     titleKey: 'nav_home',
@@ -130,4 +131,17 @@ export const headerMenuConfig: IHeaderMenu[] = [
       },
     ],
   },
+  {
+    title: '关于',
+    titleKey: 'nav_about',
+    path: '/about',
+    icon: h(FaSolidUserFriends),
+  },
 ]
+
+export const headerMenuConfig: IHeaderMenu[] = allHeaderMenuConfig
+  .filter((item) => isSiteRouteEnabled(item.path))
+  .map((item) => ({
+    ...item,
+    subMenu: item.subMenu?.filter((child) => isSiteRouteEnabled(child.path)),
+  }))

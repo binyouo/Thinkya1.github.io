@@ -47,8 +47,8 @@ const toIso = (value) => {
   if (!str) return null
   // `2026-10-14 19:30:00` has no timezone: treat it as Asia/Shanghai (+08:00).
   const normalized = /\d{2}:\d{2}/.test(str)
-    ? str.includes('+') || str.endsWith('Z')
-      ? str
+    ? /(?:Z|[+-]\d{2}:?\d{2})$/i.test(str)
+      ? str.replace(' ', 'T')
       : `${str.replace(' ', 'T')}+08:00`
     : `${str}T00:00:00+08:00`
   const date = new Date(normalized)
@@ -95,7 +95,8 @@ const excerpt = (markdown, limit = 310) => {
 
 const normalizeTags = (value) => {
   if (!value) return []
-  if (Array.isArray(value)) return value.map((t) => String(t).trim()).filter(Boolean)
+  if (Array.isArray(value))
+    return value.map((t) => String(t).trim()).filter(Boolean)
   return String(value)
     .split(/[,，]/)
     .map((t) => t.trim())
@@ -104,7 +105,8 @@ const normalizeTags = (value) => {
 
 const normalizeCategories = (value) => {
   if (!value) return []
-  if (Array.isArray(value)) return value.map((c) => String(c).trim()).filter(Boolean)
+  if (Array.isArray(value))
+    return value.map((c) => String(c).trim()).filter(Boolean)
   return String(value)
     .split(/[,，/]/)
     .map((c) => c.trim())
@@ -132,10 +134,20 @@ const buildCategory = (name) => {
 }
 
 let cache = null
+let cacheSignature = ''
 
 const loadAll = () => {
-  if (cache) return cache
+  if (cache && process.env.NODE_ENV === 'production') return cache
   const files = walkMarkdown(CONTENT_DIR)
+  // Markdown is the editing surface in development. A module-lifetime cache
+  // otherwise keeps edits, new posts and deletions invisible until restart.
+  const signature = files
+    .map((file) => {
+      const stat = fs.statSync(file)
+      return `${file}:${stat.mtimeMs}:${stat.size}`
+    })
+    .join('\n')
+  if (cache && signature === cacheSignature) return cache
   const categoryMap = new Map()
   const posts = []
 
@@ -143,14 +155,17 @@ const loadAll = () => {
     const rel = path.relative(CONTENT_DIR, file)
     const raw = fs.readFileSync(file, 'utf8')
     const { data, body } = parseFrontMatter(raw)
+    if (data.published === false) continue
     const basename = path.basename(file, '.md')
     const categories = normalizeCategories(data.categories)
     const primary = categories[0] || '未分类'
-    const category = buildCategory(primary)
+    const category =
+      categoryMap.get(categorySlug(primary)) || buildCategory(primary)
     categoryMap.set(category.slug, category)
     category.count += 1
 
-    const created = toIso(data.date) || new Date(fs.statSync(file).mtime).toISOString()
+    const created =
+      toIso(data.date) || new Date(fs.statSync(file).mtime).toISOString()
     const modified = toIso(data.updated) || created
     const slug = String(data.slug || data.abbrlink || basename)
     const image = firstImage(body)
@@ -159,6 +174,7 @@ const loadAll = () => {
     posts.push({
       id: hash(rel),
       _rel: rel,
+      _categories: categories,
       title: String(data.title || basename),
       slug,
       category,
@@ -181,6 +197,7 @@ const loadAll = () => {
 
   posts.sort((a, b) => new Date(b.created) - new Date(a.created))
   cache = { posts, categories: [...categoryMap.values()] }
+  cacheSignature = signature
   return cache
 }
 
@@ -190,6 +207,7 @@ const loadPages = () => {
     const rel = path.relative(PAGES_DIR, file)
     const raw = fs.readFileSync(file, 'utf8')
     const { data, body } = parseFrontMatter(raw)
+    if (data.published === false) continue
     const slug = String(data.slug || path.basename(file, '.md'))
     pages.push({
       id: hash(`page:${rel}`),
@@ -197,7 +215,7 @@ const loadPages = () => {
       slug,
       subtitle: data.subtitle ? String(data.subtitle) : undefined,
       text: body,
-      created: toIso(data.date) || new Date().toISOString(),
+      created: toIso(data.date) || fs.statSync(file).mtime.toISOString(),
       modified: toIso(data.updated) || null,
       contentFormat: 'markdown',
       allowComment: false,
@@ -214,7 +232,7 @@ const loadPages = () => {
 // ---------------------------------------------------------------------------
 
 const toListItem = (post) => {
-  const { _rel, ...rest } = post
+  const { _rel, _categories, ...rest } = post
   return {
     ...rest,
     text: excerpt(post.text),
@@ -222,7 +240,7 @@ const toListItem = (post) => {
 }
 
 const toDetail = (post) => {
-  const { _rel, ...rest } = post
+  const { _rel, _categories, ...rest } = post
   return rest
 }
 
@@ -260,7 +278,7 @@ const aggregateUser = () => ({
 const aggregateSeo = () => ({
   title: 'biny 的博客',
   description: '记录学习过程与技术笔记。',
-  icon: '/favicon.ico',
+  icon: '/img/avatar.jpg?v=biny-icon-1',
   keywords: ['biny', '博客', '技术笔记'],
 })
 
@@ -273,12 +291,19 @@ const aggregateUrl = () => ({
 
 const aggregateTheme = () => ({
   config: {
-    site: { favicon: '/favicon.ico', faviconDark: '/favicon.ico' },
+    site: {
+      favicon: '/img/avatar.jpg?v=biny-icon-1',
+      faviconDark: '/img/avatar.jpg?v=biny-icon-1',
+    },
     hero: {
       title: {
         template: [
-          { type: 'h1', text: 'biny' },
-          { type: 'span', text: ' 的博客', class: 'ml-2' },
+          {
+            type: 'h1',
+            text: 'biny',
+            class: 'text-4xl font-semibold tracking-tight lg:text-5xl',
+          },
+          { type: 'span', text: ' 的博客', class: 'ml-2 text-2xl lg:text-3xl' },
         ],
       },
       description: '记录学习过程与技术笔记。',
@@ -301,12 +326,16 @@ const aggregateTheme = () => ({
       {
         name: '友链',
         links: [
-          { name: 'GitHub', href: 'https://github.com/Thinkya1', external: true },
+          {
+            name: 'GitHub',
+            href: 'https://github.com/Thinkya1',
+            external: true,
+          },
         ],
       },
     ],
     otherInfo: {
-      date: `© ${new Date().getFullYear()} biny`,
+      date: String(new Date().getFullYear()),
     },
   },
 })
@@ -319,6 +348,30 @@ const timelinePost = (post) => ({
   modified: post.modified,
   category: post.category,
 })
+
+const postPath = (post) =>
+  `/posts/${encodeURIComponent(post.category.slug)}/${encodeURIComponent(post.slug)}`
+
+const publicationLastYear = (posts) => ({
+  posts: posts
+    .filter(
+      (post) =>
+        new Date(post.created).getTime() >=
+        Date.now() - 365 * 24 * 60 * 60 * 1000,
+    )
+    .map(timelinePost),
+  notes: [],
+})
+
+const calendarDate = (value) => {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date(value))
+  return Object.fromEntries(parts.map(({ type, value }) => [type, value]))
+}
 
 const emptyPage = (size = 10, page = 1) => ({
   data: [],
@@ -338,7 +391,8 @@ const json = (data, init) =>
     },
   })
 
-const notFound = () => json({ message: 'Not Found', statusCode: 404 }, { status: 404 })
+const notFound = () =>
+  json({ message: 'Not Found', statusCode: 404 }, { status: 404 })
 
 export const handleGet = (segments, searchParams) => {
   const [head, ...rest] = segments
@@ -346,11 +400,12 @@ export const handleGet = (segments, searchParams) => {
   const param = (key) => searchParams.get(key) ?? undefined
   const numberParam = (key, fallback) => {
     const value = Number(param(key))
-    return Number.isFinite(value) && value > 0 ? value : fallback
+    return Number.isSafeInteger(value) && value > 0 ? value : fallback
   }
 
   switch (head) {
     case 'aggregate': {
+      if (rest.length > 1) return notFound()
       if (rest[0] === 'top') {
         const size = numberParam('size', 5)
         return json({
@@ -362,6 +417,7 @@ export const handleGet = (segments, searchParams) => {
             created: post.created,
             category: post.category,
             images: post.images,
+            allowComment: post.allowComment,
           })),
           says: [],
         })
@@ -370,34 +426,33 @@ export const handleGet = (segments, searchParams) => {
         const type = param('type')
         const year = Number(param('year')) || 0
         const inYear = (item) =>
-          !year || new Date(item.created).getFullYear() === year
+          !year || Number(calendarDate(item.created).year) === year
         const list = posts.filter(inYear)
         const timelinePosts =
-          type === '1' ? [] : list.map((post) => ({ ...timelinePost(post), url: `${ORIGIN}/posts/${post.category.slug}/${post.slug}` }))
+          type === '1'
+            ? []
+            : list.map((post) => ({
+                ...timelinePost(post),
+                url: `${ORIGIN}${postPath(post)}`,
+              }))
         const timelineNotes = type === '0' ? [] : []
         return json({ data: { posts: timelinePosts, notes: timelineNotes } })
       }
       if (rest[0] === 'last-year') {
-        const since = Date.now() - 365 * 24 * 60 * 60 * 1000
-        const recent = posts.filter((post) => new Date(post.created).getTime() >= since)
-        const source = recent.length ? recent : posts.slice(0, 20)
-        return json({
-          posts: source.map((post) => ({
-            id: post.id,
-            slug: post.slug,
-            title: post.title,
-            created: post.created,
-            category: post.category,
-          })),
-          notes: [],
-        })
+        return json(publicationLastYear(posts))
       }
       if (rest[0] === 'sitemap') {
         return json({
-          data: posts.map((post) => ({
-            url: `${ORIGIN}/posts/${post.category.slug}/${post.slug}`,
-            published_at: post.created,
-          })),
+          data: [
+            ...posts.map((post) => ({
+              url: `${ORIGIN}${postPath(post)}`,
+              published_at: post.modified || post.created,
+            })),
+            ...loadPages().map((page) => ({
+              url: `${ORIGIN}/${encodeURIComponent(page.slug)}`,
+              published_at: page.modified || page.created,
+            })),
+          ],
         })
       }
       if (rest[0] === 'feed') {
@@ -406,20 +461,43 @@ export const handleGet = (segments, searchParams) => {
           author: 'biny',
           description: aggregateSeo().description,
           url: ORIGIN,
-          data: posts.slice(0, 20).map((post) => ({
+          data: posts.map((post) => ({
             id: post.id,
             title: post.title,
             text: post.text,
-            link: `${ORIGIN}/posts/${post.category.slug}/${post.slug}`,
+            link: `${ORIGIN}${postPath(post)}`,
             created: post.created,
             modified: post.modified,
             images: post.images,
+            allowComment: post.allowComment,
           })),
         })
       }
       if (rest[0] === 'stat') {
-        return json({ posts: posts.length, notes: 0, says: 0, categories: categories.length })
+        return json({
+          posts: posts.length,
+          words: posts.reduce(
+            (total, post) =>
+              total +
+              (stripMarkdown(post.text).match(/\p{Script=Han}|[\p{L}\p{N}]+/gu)
+                ?.length || 0),
+            0,
+          ),
+          days: posts.length
+            ? Math.max(
+                1,
+                Math.floor(
+                  (Date.now() - new Date(posts.at(-1).created).getTime()) /
+                    86400000,
+                ) + 1,
+              )
+            : 0,
+          notes: 0,
+          says: 0,
+          categories: categories.length,
+        })
       }
+      if (rest.length) return notFound()
       // aggregate root
       return json({
         user: aggregateUser(),
@@ -438,12 +516,16 @@ export const handleGet = (segments, searchParams) => {
     }
 
     case 'posts': {
+      if (rest.length > 2) return notFound()
       // /posts/get-url/:slug  (category redirect)
       if (rest[0] === 'get-url') {
         const slug = rest[1]
         const post = posts.find((p) => p.slug === slug)
         if (!post) return notFound()
-        return json({ path: `/${post.category.slug}/${post.slug}` })
+        return json({ path: postPath(post).slice('/posts'.length) })
+      }
+      if (rest[0] === 'latest' && rest.length === 1) {
+        return posts.length ? json(toDetail(posts[0])) : notFound()
       }
       // /posts/:category/:slug (detail)
       if (rest.length >= 2) {
@@ -465,11 +547,23 @@ export const handleGet = (segments, searchParams) => {
       const size = numberParam('size', 10)
       let list = [...posts]
       const year = Number(param('year')) || 0
-      if (year) list = list.filter((p) => new Date(p.created).getFullYear() === year)
+      if (year)
+        list = list.filter((p) => Number(calendarDate(p.created).year) === year)
       const categoryFilter = param('category')
-      if (categoryFilter) list = list.filter((p) => p.category.slug === categoryFilter)
+      if (categoryFilter)
+        list = list.filter(
+          (p) =>
+            p.category.slug === categoryFilter ||
+            p.category.id === categoryFilter,
+        )
+      const tagFilter = param('tag')
+      if (tagFilter) list = list.filter((p) => p.tags.includes(tagFilter))
+      const sortBy = param('sortBy') === 'modified' ? 'modified' : 'created'
       const sortOrder = param('sortOrder')
-      if (sortOrder === '1') list.reverse()
+      const direction = sortOrder === '1' || sortOrder === 'asc' ? 1 : -1
+      list.sort(
+        (a, b) => direction * (new Date(a[sortBy]) - new Date(b[sortBy])),
+      )
       const start = (page - 1) * size
       return json({
         data: list.slice(start, start + size).map(toListItem),
@@ -478,17 +572,22 @@ export const handleGet = (segments, searchParams) => {
     }
 
     case 'categories': {
+      if (rest.length > 1) return notFound()
       if (rest.length >= 1) {
         const key = rest[0]
         // tag detail: /categories/:name?tag=1
-        if (param('tag')) {
+        if (param('tag') === '1' || param('tag') === 'true') {
           const tagged = posts.filter((post) => post.tags.includes(key))
           return json({ data: tagged.map(toListItem) })
         }
         // category detail by id or slug
         const category = categories.find((c) => c.slug === key || c.id === key)
         if (!category) return notFound()
-        return json({ data: posts.filter((p) => p.category.slug === category.slug).map(toListItem) })
+        return json({
+          data: posts
+            .filter((p) => p.category.slug === category.slug)
+            .map(toListItem),
+        })
       }
       const type = param('type')
       if (type === '1') {
@@ -506,6 +605,8 @@ export const handleGet = (segments, searchParams) => {
     }
 
     case 'pages': {
+      if (rest.length > 2 || (rest.length === 2 && rest[0] !== 'slug'))
+        return notFound()
       const pages = loadPages()
       if (rest[0] === 'slug' && rest[1]) {
         const page = pages.find((p) => p.slug === rest[1])
@@ -521,8 +622,10 @@ export const handleGet = (segments, searchParams) => {
     }
 
     case 'notes':
-      if (rest[0] === 'latest') return json({ data: null })
-      return json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
+      if (rest.length === 1 && rest[0] === 'latest') return json({ data: null })
+      return rest.length
+        ? notFound()
+        : json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
 
     case 'says':
     case 'projects':
@@ -530,47 +633,154 @@ export const handleGet = (segments, searchParams) => {
     case 'links':
     case 'recently':
     case 'shorthand':
-      if (rest[0] === 'all') return json({ data: [] })
-      if (head === 'links' && rest[0] === 'audit') return json({ can: false })
-      return json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
+      if (rest.length === 1 && rest[0] === 'all') return json({ data: [] })
+      if (head === 'links' && rest.length === 1 && rest[0] === 'audit')
+        return json({ can: false })
+      return rest.length
+        ? notFound()
+        : json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
 
     case 'comments':
-      return json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
+      if (!rest.length || (rest.length === 2 && rest[0] === 'ref')) {
+        return json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
+      }
+      return notFound()
 
     case 'activity':
-      if (rest[0] === 'recent') return json({})
-      if (rest[0] === 'rooms') return json({})
-      if (rest[0] === 'last-year') return json({ posts: [], notes: [] })
-      return json({})
+      if (rest.length === 1 && rest[0] === 'recent') return json({})
+      if (rest.length === 1 && rest[0] === 'rooms')
+        return json({
+          roomCount: {},
+          objects: { posts: [], notes: [], pages: [] },
+        })
+      if (rest.join('/') === 'last-year/publication')
+        return json(publicationLastYear(posts))
+      return notFound()
 
-    case 'search':
-      return json({ data: [] })
+    case 'search': {
+      const type = rest[0] || 'algolia'
+      if (
+        rest.length > 1 ||
+        !['algolia', 'post', 'page', 'note'].includes(type)
+      )
+        return notFound()
+      const tokens = (param('keyword') || '')
+        .normalize('NFKC')
+        .toLocaleLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+      const candidates = [
+        ...(type === 'algolia' || type === 'post'
+          ? posts.map((post) => ({
+              ...toListItem(post),
+              type: 'post',
+              text: post.text,
+            }))
+          : []),
+        ...(type === 'algolia' || type === 'page'
+          ? loadPages().map((entry) => ({ ...entry, type: 'page' }))
+          : []),
+      ]
+      // The search panel has no next-page control. Return all matches unless a
+      // caller explicitly requests pagination.
+      const size = numberParam('size', Math.max(1, candidates.length))
+      const page = numberParam('page', 1)
+      if (!tokens.length) return json(emptyPage(size, page))
+      const normalized = (value) =>
+        String(value || '')
+          .normalize('NFKC')
+          .toLocaleLowerCase()
+      const matches = candidates
+        .flatMap((entry) => {
+          const title = normalized(entry.title)
+          const tags = normalized(entry.tags?.join(' '))
+          const body = normalized(`${entry.summary || ''} ${entry.text}`)
+          if (
+            !tokens.every((token) => `${title} ${tags} ${body}`.includes(token))
+          )
+            return []
+          const score = tokens.reduce(
+            (score, token) =>
+              score +
+              (title.includes(token) ? 4 : 0) +
+              (tags.includes(token) ? 2 : 0),
+            0,
+          )
+          return [{ entry, score }]
+        })
+        .sort(
+          (a, b) =>
+            b.score - a.score ||
+            new Date(b.entry.created) - new Date(a.entry.created),
+        )
+      const start = (page - 1) * size
+      return json({
+        data: matches
+          .slice(start, start + size)
+          .map(({ entry }) => ({ ...entry, text: excerpt(entry.text) })),
+        pagination: pager(matches.length, size, page),
+      })
+    }
 
     case 'server-time':
-      return json({ t2: Date.now(), t3: Date.now() })
+      return rest.length ? notFound() : json({ t2: Date.now(), t3: Date.now() })
 
     case 'options':
-      if (rest[0] === 'url') return json({ data: aggregateUrl() })
-      return json({})
+      if (rest.length === 1 && rest[0] === 'url')
+        return json({ data: aggregateUrl() })
+      return notFound()
 
     case 'owner':
       // `check_logged` -> the layout expects `{ ok }`.
-      if (rest[0] === 'check_logged') return json({ ok: false })
-      if (rest[0] === 'allow-login') return json({})
-      return json({})
+      if (rest.length === 1 && rest[0] === 'check_logged')
+        return json({ ok: false })
+      if (rest.length === 1 && rest[0] === 'allow-login')
+        return json({ allow: false })
+      return notFound()
 
     case 'auth':
-      return json({})
+      if (rest.length === 1 && rest[0] === 'providers')
+        return json({ data: [] })
+      if (rest.length === 1 && ['get-session', 'session'].includes(rest[0]))
+        return json(null)
+      return notFound()
 
+    case 'subscribe':
+      if (rest.length === 1 && rest[0] === 'status')
+        return json({ enable: false, allowTypes: [] })
+      return notFound()
+
+    case 'fn':
     case 'serverless':
-      return json(null)
+      return rest.join('/') === 'shiro/status' ? json(null) : notFound()
 
     case 'like_this':
-      return json(0)
+      return rest.length ? notFound() : json(0)
 
     default:
-      return json(emptyPage(numberParam('size', 10), numberParam('page', 1)))
+      return notFound()
   }
+}
+
+export const handleRequest = (
+  method,
+  segments,
+  searchParams = new URLSearchParams(),
+) => {
+  if (method !== 'GET' && method !== 'HEAD') {
+    return json(
+      { message: 'This site serves repository content only.', statusCode: 405 },
+      {
+        status: 405,
+        headers: { Allow: 'GET, HEAD' },
+      },
+    )
+  }
+  const response = handleGet(segments, searchParams)
+  return method === 'HEAD'
+    ? new Response(null, { status: response.status, headers: response.headers })
+    : response
 }
 
 // ---------------------------------------------------------------------------
@@ -579,33 +789,62 @@ export const handleGet = (segments, searchParams) => {
 
 export const getRedirects = () => {
   const { posts } = loadAll()
-  const list = []
+  const redirects = new Map()
+  const add = (source, destination) => {
+    // Next matches redirect sources against the encoded request pathname.
+    // Encode each segment so nested Hexo paths keep their directory separators.
+    const encodedSource = source.split('/').map(encodeURIComponent).join('/')
+    redirects.set(encodedSource, {
+      source: encodedSource,
+      destination,
+      permanent: true,
+    })
+  }
   for (const post of posts) {
-    const date = new Date(post.created)
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
+    const { year, month, day } = calendarDate(post.created)
     const basename = post._rel.split('/').pop().replace(/\.md$/, '')
-    const destination = `/posts/${post.category.slug}/${post.slug}`
-    const sources = new Set([
-      `/${year}/${month}/${day}/${basename}`,
-      `/${year}/${month}/${day}/${basename}/`,
-      `/${year}/${month}/${day}/${post.slug}`,
-      `/${year}/${month}/${day}/${post.slug}/`,
+    const destination = postPath(post)
+    // Hexo's :title is its source-relative slug, including subdirectories.
+    // Keep the initial migration's basename aliases as well.
+    const titles = new Set([
+      post._rel.replace(/\.md$/, ''),
+      basename,
+      post.slug,
     ])
+    const sources = new Set(
+      [...titles].flatMap((title) => {
+        const source = `/${year}/${month}/${day}/${title}`
+        return [source, `${source}/`]
+      }),
+    )
     for (const source of sources) {
-      list.push({ source, destination, permanent: true })
+      add(source, destination)
+    }
+    for (const tag of post.tags) {
+      const destination = `/posts/tag/${encodeURIComponent(tag)}`
+      for (const name of new Set([tag, tag.replaceAll(/\s+/g, '-')])) {
+        add(`/tags/${name}`, destination)
+        add(`/tags/${name}/`, destination)
+      }
+    }
+    const categories = post._categories.length
+      ? post._categories
+      : [post.category.name]
+    for (let length = 1; length <= categories.length; length++) {
+      const prefix = categories
+        .slice(0, length)
+        .map((name) => name.replaceAll(/\s+/g, '-'))
+        .join('/')
+      const destination = `/posts/category/${encodeURIComponent(post.category.slug)}`
+      add(`/categories/${prefix}`, destination)
+      add(`/categories/${prefix}/`, destination)
     }
   }
-  list.push(
-    { source: '/archives', destination: '/posts', permanent: true },
-    { source: '/archives/', destination: '/posts', permanent: true },
-    { source: '/tags', destination: '/posts', permanent: true },
-    { source: '/tags/', destination: '/posts', permanent: true },
-    { source: '/categories', destination: '/posts', permanent: true },
-    { source: '/categories/', destination: '/posts', permanent: true },
-  )
-  return list
+  for (const source of ['/archives', '/tags', '/categories']) {
+    add(source, '/posts')
+    add(`${source}/`, '/posts')
+  }
+  return [...redirects.values()]
 }
 
 export const getContentDir = () => CONTENT_DIR

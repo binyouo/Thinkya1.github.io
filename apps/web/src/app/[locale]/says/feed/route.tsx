@@ -2,20 +2,15 @@ import type { AggregateRoot } from '@mx-space/api-client'
 import { simpleCamelcaseKeys } from '@mx-space/api-client'
 import RSS from 'rss'
 
-import { apiClient } from '~/lib/request'
+import { $fetch, apiClient } from '~/lib/request'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 86400 // 1 day
 
 export async function GET() {
   const [agg, says] = await Promise.all([
-    fetch(apiClient.aggregate.proxy.toString(true), {
-      next: {
-        revalidate: 86400,
-      },
-    }).then(
-      async (res) =>
-        simpleCamelcaseKeys(await res.json()) as Promise<AggregateRoot>,
+    $fetch<AggregateRoot>(apiClient.aggregate.proxy.toString(true)).then(
+      simpleCamelcaseKeys,
     ),
     apiClient.say.getAllPaginated(1, 20),
   ])

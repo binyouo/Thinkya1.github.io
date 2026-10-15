@@ -1,13 +1,12 @@
 import type { AggregateRoot } from '@mx-space/api-client'
 import { simpleCamelcaseKeys } from '@mx-space/api-client'
-import { $fetch } from 'ofetch'
 
 import { defaultThemeConfig } from '~/app.default.theme-config'
 import { appStaticConfig } from '~/app.static.config'
 import { attachServerFetch } from '~/lib/attach-fetch'
 import { deepMerge } from '~/lib/lodash'
 import { getQueryClient } from '~/lib/query-client.server'
-import { apiClient } from '~/lib/request'
+import { $fetch, apiClient } from '~/lib/request'
 
 const cacheTime = appStaticConfig.cache.enabled
   ? appStaticConfig.cache.ttl.aggregation

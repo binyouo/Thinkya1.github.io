@@ -6,6 +6,7 @@ import { useCallback } from 'react'
 import { isOwnerLogged } from '~/atoms/hooks/owner'
 import { useResolveAdminUrl } from '~/atoms/hooks/url'
 import { useViewport } from '~/atoms/hooks/viewport'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { useIsClient } from '~/hooks/common/use-is-client'
 import { useSingleAndDoubleClick } from '~/hooks/common/use-single-double-click'
 import { useRouter } from '~/i18n/navigation'
@@ -37,6 +38,10 @@ const TapableLogo = () => {
       router.push(Routes.Home)
     },
     () => {
+      if (!SITE_CAPABILITIES.authentication) {
+        router.push(Routes.Home)
+        return
+      }
       if (isOwnerLogged()) {
         location.href = resolveAdminUrl()
 
@@ -49,7 +54,11 @@ const TapableLogo = () => {
   )
 
   return (
-    <button onClick={fn}>
+    <button
+      onClick={
+        SITE_CAPABILITIES.authentication ? fn : () => router.push(Routes.Home)
+      }
+    >
       <SiteOwnerAvatar className="cursor-pointer" />
       <span className="sr-only">Owner Avatar</span>
     </button>

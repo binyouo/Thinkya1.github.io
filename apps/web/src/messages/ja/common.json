@@ -1,4 +1,6 @@
 {
+  "nav_about": "このサイトについて",
+  "search_keyboard_hint": "↑ ↓ 選択 · Enter 開く · Esc 閉じる",
   "nav_home": "ホーム",
   "nav_posts": "記事",
   "nav_notes": "手記",

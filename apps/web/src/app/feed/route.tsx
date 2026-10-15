@@ -28,7 +28,17 @@ interface RSSProps {
     text: string
     id: string
     images: Image[]
+    allowComment?: boolean
   }[]
+}
+
+const resolveFeedUrl = (reference: string | undefined, baseUrl: string) => {
+  if (!reference) return
+  try {
+    return new URL(reference, baseUrl).href
+  } catch {
+    return
+  }
 }
 
 export async function GET() {
@@ -69,9 +79,7 @@ export async function GET() {
     ]
   }
 
-  const imageUrl = agg.theme?.config?.site?.favicon.startsWith('/')
-    ? `${url}${agg.theme?.config?.site?.favicon}`
-    : agg.theme?.config?.site?.favicon
+  const imageUrl = resolveFeedUrl(agg.theme?.config?.site?.favicon, url)
 
   const feed = new RSS({
     title,
@@ -87,12 +95,13 @@ export async function GET() {
   })
 
   data.forEach((item) => {
+    const articleUrl = resolveFeedUrl(item.link, url) || item.link
     const render = () => {
       if (noRSS) {
         return ReactDOM.renderToString(
           <p>
             前往原站查看：
-            <a href={`${xss(item.link)}`}>{xss(item.link)}</a>
+            <a href={xss(articleUrl)}>{xss(articleUrl)}</a>
           </p>,
         )
       }
@@ -101,7 +110,7 @@ export async function GET() {
           <div>
             <blockquote>
               该渲染由 Shiro API 生成，可能存在排版问题，最佳体验请前往：
-              <a href={`${xss(item.link)}`}>{xss(item.link)}</a>
+              <a href={xss(articleUrl)}>{xss(articleUrl)}</a>
             </blockquote>
             {compiler(item.text, {
               overrides: {
@@ -110,16 +119,26 @@ export async function GET() {
                 Tabs: NotSupportRender,
                 Tab: NotSupportRender,
 
+                a: ({ href, children, ...props }) => (
+                  <a {...props} href={resolveFeedUrl(href, articleUrl)}>
+                    {children}
+                  </a>
+                ),
                 img: ({ src, alt, height, width }) => {
-                  if (src && new URL(src).hostname === CDN_HOST) {
+                  const imageSrc = resolveFeedUrl(src, articleUrl)
+                  if (imageSrc && new URL(imageSrc).hostname === CDN_HOST) {
                     return <span>此图片不支持在 RSS Render 中查看。</span>
                   }
 
-                  const meta = item.images?.find((image) => image.src === src)
+                  const meta = item.images?.find(
+                    (image) =>
+                      image.src === src ||
+                      resolveFeedUrl(image.src, articleUrl) === imageSrc,
+                  )
 
                   return (
                     <img
-                      src={src}
+                      src={imageSrc}
                       alt={alt}
                       height={height || meta?.height}
                       width={width || meta?.width}
@@ -185,20 +204,22 @@ export async function GET() {
                 container: ContainerRule,
               },
             })}
-            <p
-              style={{
-                textAlign: 'right',
-              }}
-            >
-              <a href={`${`${xss(item.link)}#comments`}`}>看完了？说点什么呢</a>
-            </p>
+            {item.allowComment === true && (
+              <p
+                style={{
+                  textAlign: 'right',
+                }}
+              >
+                <a href={`${xss(articleUrl)}#comments`}>看完了？说点什么呢</a>
+              </p>
+            )}
           </div>,
         )
       } catch {
         return ReactDOM.renderToString(
           <p>
             当前内容无法在 RSS 阅读器中正确渲染，请前往：
-            <a href={`${xss(item.link)}`}>{xss(item.link)}</a>
+            <a href={xss(articleUrl)}>{xss(articleUrl)}</a>
           </p>,
         )
       }
@@ -206,7 +227,7 @@ export async function GET() {
     feed.item({
       author,
       title: item.title,
-      url: item.link,
+      url: articleUrl,
       date: item.created!,
       description: render(),
     })

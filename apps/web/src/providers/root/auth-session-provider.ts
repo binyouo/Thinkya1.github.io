@@ -6,13 +6,15 @@ import { useEffect } from 'react'
 import { fetchAppUrl } from '~/atoms'
 import { setIsOwnerLogged } from '~/atoms/hooks/owner'
 import { setSessionReader } from '~/atoms/hooks/reader'
-import type { authClient } from '~/lib/authjs'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { apiClient } from '~/lib/request'
+import type { SessionReader } from '~/models/session'
 
-type AdapterUser = typeof authClient.$Infer.Session
+type AdapterUser = SessionReader & { role?: string }
 export const AuthSessionProvider: Component = ({ children }) => {
   const { data: session } = useQuery({
     queryKey: ['session'],
+    enabled: SITE_CAPABILITIES.authentication,
     refetchOnMount: 'always',
     queryFn: () =>
       apiClient.proxy.auth.session.get<AdapterUser>({
@@ -22,7 +24,7 @@ export const AuthSessionProvider: Component = ({ children }) => {
       }),
   })
   useEffect(() => {
-    if (!session) {
+    if (!SITE_CAPABILITIES.authentication || !session?.id) {
       setIsOwnerLogged(false)
       setSessionReader(null)
       return

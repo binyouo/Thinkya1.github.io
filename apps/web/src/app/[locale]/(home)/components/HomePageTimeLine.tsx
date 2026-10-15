@@ -134,7 +134,7 @@ export const HomePageTimeLine = () => {
   }, [yearData, inView, animationStarted])
 
   return (
-    <div className="mt-24 w-full" ref={inViewRef}>
+    <div className="paper-writing-timeline w-full" ref={inViewRef}>
       <m.div
         className="my-5 whitespace-pre-line text-balance text-center text-2xl font-medium"
         initial={{ opacity: 0, y: 10 }}

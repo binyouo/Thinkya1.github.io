@@ -1,4 +1,5 @@
 import { ClientOnly } from '~/components/common/ClientOnly'
+import { PaperBackdrop } from '~/components/common/PaperBackdrop'
 import { FABContainer } from '~/components/ui/fab'
 
 import { Content } from '../content/Content'
@@ -8,6 +9,7 @@ import { RootDataAttributeBinder } from './RootDataAttributeBinder'
 
 export const Root: Component = ({ children }) => (
   <>
+    <PaperBackdrop />
     <Header />
     <Content>{children}</Content>
 

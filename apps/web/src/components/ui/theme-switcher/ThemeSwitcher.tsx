@@ -2,11 +2,9 @@
 
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
-import { flushSync } from 'react-dom'
 import { tv } from 'tailwind-variants'
 
 import { useIsClient } from '~/hooks/common/use-is-client'
-import { transitionViewIfSupported } from '~/lib/dom'
 
 const styles = tv({
   base: 'rounded-inherit inline-flex h-[32px] w-[32px] items-center justify-center border-0 text-current',
@@ -106,43 +104,39 @@ const ThemeIndicator = () => {
 
 const ButtonGroup = () => {
   const t = useTranslations('common')
-  const { setTheme } = useTheme()
-
-  const buildThemeTransition = (theme: 'light' | 'dark' | 'system') => {
-    transitionViewIfSupported(() => {
-      // eslint-disable-next-line @eslint-react/dom/no-flush-sync
-      flushSync(() => setTheme(theme))
-    })
-  }
+  const { theme, setTheme } = useTheme()
 
   return (
     <div className="inline-flex rounded-full border border-zinc-200 p-[3px] dark:border-zinc-700">
       <button
         aria-label={t('aria_theme_light')}
+        aria-pressed={theme === 'light'}
         type="button"
         className={styles.base}
         onClick={() => {
-          buildThemeTransition('light')
+          setTheme('light')
         }}
       >
         <SunIcon />
       </button>
       <button
         aria-label={t('aria_theme_system')}
+        aria-pressed={theme === 'system'}
         className={styles.base}
         type="button"
         onClick={() => {
-          buildThemeTransition('system')
+          setTheme('system')
         }}
       >
         <SystemIcon />
       </button>
       <button
         aria-label={t('aria_theme_dark')}
+        aria-pressed={theme === 'dark'}
         className={styles.base}
         type="button"
         onClick={() => {
-          buildThemeTransition('dark')
+          setTheme('dark')
         }}
       >
         <DarkIcon />

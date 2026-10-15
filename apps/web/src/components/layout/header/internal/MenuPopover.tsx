@@ -13,7 +13,7 @@ import type { IHeaderMenu } from '../config'
 export const MenuPopover: Component<{
   subMenu: IHeaderMenu['subMenu']
 }> = memo(({ children, subMenu }) => {
-  if (!subMenu) return children
+  if (!subMenu?.length) return children
 
   return (
     <FloatPopover

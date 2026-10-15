@@ -106,7 +106,7 @@ export function routeBuilder<T extends Routes>(
     }
     case Routes.Post: {
       const p = params as PostParams
-      href += `${p.category}/${p.slug}`
+      href += `${encodeURIComponent(p.category)}/${encodeURIComponent(p.slug)}`
       break
     }
     case Routes.Posts: {
@@ -132,7 +132,7 @@ export function routeBuilder<T extends Routes>(
     }
     case Routes.Tag: {
       const p = params as Tag
-      href += `/${p.name}`
+      href += `/${encodeURIComponent(p.name)}`
       break
     }
     case Routes.Project: {

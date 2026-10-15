@@ -10,6 +10,7 @@ import { PeekLink } from '~/components/modules/peek/PeekLink'
 import { Divider } from '~/components/ui/divider'
 import { FloatPopover } from '~/components/ui/float-popover'
 import { NumberSmoothTransition } from '~/components/ui/number-transition/NumberSmoothTransition'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { TrackerAction } from '~/constants/tracker'
 import { usePageIsActive } from '~/hooks/common/use-is-active'
 import { apiClient } from '~/lib/request'
@@ -81,7 +82,10 @@ function ConnectionStatus({ isConnected }: { isConnected: boolean }) {
   )
 }
 
-export const GatewayInfo = () => {
+export const GatewayInfo = () =>
+  SITE_CAPABILITIES.livePresence ? <GatewayInfoContent /> : null
+
+const GatewayInfoContent = () => {
   const t = useTranslations('gateway')
   const isActive = usePageIsActive()
   const count = useOnlineCount()

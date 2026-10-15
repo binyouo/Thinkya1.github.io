@@ -6,6 +6,7 @@ import { CreativeCommonsIcon } from '~/components/icons/cc'
 import { DividerVertical } from '~/components/ui/divider'
 import { FloatPopover } from '~/components/ui/float-popover'
 import { NumberSmoothTransition } from '~/components/ui/number-transition/NumberSmoothTransition'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import {
   getMoodLabel,
   getWeatherLabel,
@@ -21,8 +22,8 @@ export const NoteMetaBar = () => (
   <>
     <NoteMetaWeather />
     <NoteMetaMood />
-    <NoteMetaReadCount />
-    <NoteMetaLikeCount />
+    {SITE_CAPABILITIES.readCounts && <NoteMetaReadCount />}
+    {SITE_CAPABILITIES.likes && <NoteMetaLikeCount />}
     <NoteMetaCC />
   </>
 )

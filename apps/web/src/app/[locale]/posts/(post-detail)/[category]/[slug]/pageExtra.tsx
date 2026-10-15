@@ -53,7 +53,7 @@ export const PostTitle = () => {
   const title = useCurrentPostDataSelector((data) => data?.title)!
 
   return (
-    <h1 className="mb-8 text-balance text-center text-4xl font-bold leading-tight">
+    <h1 className="paper-article-title text-balance text-center font-bold leading-tight">
       {title}
     </h1>
   )

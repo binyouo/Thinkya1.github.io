@@ -13,7 +13,12 @@ export const API_URL: string = (() => {
   if (isDev) return configured || 'http://localhost:2323/api/v2'
 
   if (isClientSide) {
-    return trim(env('NEXT_PUBLIC_CLIENT_API_URL')) || configured || '/api/v2'
+    const endpoint =
+      trim(env('NEXT_PUBLIC_CLIENT_API_URL')) || configured || '/api/v2'
+    // SDKs such as Better Auth require an absolute URL even in the browser.
+    return new URL(endpoint, window.location.origin)
+      .toString()
+      .replace(/\/$/, '')
   }
 
   if (configured) return configured

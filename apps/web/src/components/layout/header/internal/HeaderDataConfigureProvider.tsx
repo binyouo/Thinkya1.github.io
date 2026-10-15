@@ -47,6 +47,8 @@ export const HeaderDataConfigureProvider: Component = ({ children }) => {
       if (homeIndex !== -1) {
         nextMenuConfig[homeIndex].subMenu = []
         for (const page of pageMeta) {
+          if (nextMenuConfig.some((item) => item.path === `/${page.slug}`))
+            continue
           nextMenuConfig[homeIndex].subMenu!.push({
             path: `/${page.slug}`,
             title: page.title,

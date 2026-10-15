@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu'
 import { EllipsisHorizontalTextWithTooltip } from '~/components/ui/typography'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { useIsClient } from '~/hooks/common/use-is-client'
 import { authClient } from '~/lib/authjs'
 import { apiClient } from '~/lib/request'
@@ -47,7 +48,10 @@ const OwnerAvatar = () => {
     </div>
   )
 }
-export function UserAuth() {
+export const UserAuth = () =>
+  SITE_CAPABILITIES.authentication ? <UserAuthContent /> : null
+
+function UserAuthContent() {
   const t = useTranslations('common')
   const isOwner = useIsOwnerLogged()
   const isClient = useIsClient()

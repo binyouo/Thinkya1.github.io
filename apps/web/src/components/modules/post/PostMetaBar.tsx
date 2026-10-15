@@ -10,16 +10,19 @@ import { FloatPopover } from '~/components/ui/float-popover'
 import { useModalStack } from '~/components/ui/modal'
 import { NumberSmoothTransition } from '~/components/ui/number-transition/NumberSmoothTransition'
 import { RelativeTime } from '~/components/ui/relative-time'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { useIsClient } from '~/hooks/common/use-is-client'
+import { Link } from '~/i18n/navigation'
 import { clsxm } from '~/lib/helper'
 
 import { TagDetailModal } from './fab/PostTagsFAB'
 
 export const PostMetaBar: Component<{
+  compact?: boolean
   meta: Partial<
     Pick<PostModel, 'created' | 'modified' | 'category' | 'tags' | 'count'>
   >
-}> = ({ className, meta, children }) => {
+}> = ({ className, meta, children, compact }) => {
   const { present } = useModalStack()
   const isClient = useIsClient()
   return (
@@ -38,7 +41,7 @@ export const PostMetaBar: Component<{
             </span>
           </>
         )}
-        {meta.modified ? (
+        {!compact && meta.modified && meta.modified !== meta.created ? (
           isClient ? (
             <FloatPopover
               mobileAsSheet
@@ -59,42 +62,52 @@ export const PostMetaBar: Component<{
         <div className="flex min-w-0 items-center space-x-1">
           <FeHash className="translate-y-[0.5px]" />
           <span className="min-w-0 truncate">
-            <span>{meta.category?.name}</span>
+            <Link
+              href={`/posts/category/${encodeURIComponent(meta.category.slug)}`}
+              className="shiro-link--underline"
+            >
+              {meta.category.name}
+            </Link>
 
             {meta.tags?.length ? (
               <>
                 {' '}
                 /{' '}
-                {meta.tags.map((tag, index) => {
-                  const isLast = index === meta.tags!.length - 1
+                {(compact ? meta.tags.slice(0, 3) : meta.tags).map(
+                  (tag, index, tags) => {
+                    const isLast = index === tags.length - 1
 
-                  return (
-                    <Fragment key={tag}>
-                      <button
-                        className="shiro-link--underline"
-                        onClick={() =>
-                          present({
-                            content: () => <TagDetailModal name={tag} />,
-                            title: `Tag: ${tag}`,
-                          })
-                        }
-                        key={tag}
-                      >
-                        {tag}
-                      </button>
-                      {!isLast && <span>, </span>}
-                    </Fragment>
-                  )
-                })}
+                    return (
+                      <Fragment key={tag}>
+                        <button
+                          className="shiro-link--underline"
+                          onClick={() =>
+                            present({
+                              content: () => <TagDetailModal name={tag} />,
+                              title: `Tag: ${tag}`,
+                            })
+                          }
+                          key={tag}
+                        >
+                          {tag}
+                        </button>
+                        {!isLast && <span>, </span>}
+                      </Fragment>
+                    )
+                  },
+                )}
+                {compact && meta.tags.length > 3 && (
+                  <span className="ml-1 opacity-60">
+                    +{meta.tags.length - 3}
+                  </span>
+                )}
               </>
-            ) : (
-              ''
-            )}
+            ) : null}
           </span>
         </div>
       )}
 
-      {!!meta.count?.read && (
+      {SITE_CAPABILITIES.readCounts && !!meta.count?.read && (
         <div className="flex min-w-0 items-center space-x-1">
           <i className="i-mingcute-eye-2-line" />
           <span className="min-w-0 truncate">
@@ -102,7 +115,7 @@ export const PostMetaBar: Component<{
           </span>
         </div>
       )}
-      {!!meta.count?.like && (
+      {SITE_CAPABILITIES.likes && !!meta.count?.like && (
         <div className="flex min-w-0 items-center space-x-1">
           <ThumbsupIcon />
           <span className="min-w-0 truncate">

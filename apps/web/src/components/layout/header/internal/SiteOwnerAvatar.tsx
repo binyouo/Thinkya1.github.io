@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { useOwnerStatus } from '~/atoms/hooks/status'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { clsxm } from '~/lib/helper'
 import { useAggregationSelector } from '~/providers/root/aggregation-data-provider'
 
@@ -49,7 +50,7 @@ export const SiteOwnerAvatar: Component = ({ className }) => {
           className="ring-2 ring-slate-200 dark:ring-neutral-800"
         />
       </div>
-      {!isLiving && <OwnerStatus />}
+      {SITE_CAPABILITIES.livePresence && !isLiving && <OwnerStatus />}
       {isLiving && (
         <>
           <p className="absolute bottom-0 right-0 z-[1] rounded-md bg-red-400 p-1 font-[system-ui] text-[6px] text-white dark:bg-orange-700">

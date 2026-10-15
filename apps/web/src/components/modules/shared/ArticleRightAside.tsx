@@ -6,7 +6,6 @@ import * as React from 'react'
 import { useIsMobile } from '~/atoms/hooks/viewport'
 
 import { TocAside } from '../toc'
-import { ReadIndicator } from './ReadIndicator'
 
 export const ArticleRightAside: Component = ({ children }) => {
   const isMobile = useIsMobile()
@@ -18,18 +17,14 @@ export const ArticleRightAside: Component = ({ children }) => {
 const ArticleRightAsideImpl: FC<{
   children?: React.ReactNode
 }> = ({ children }) => (
-  <aside className="sticky top-[120px] mt-[120px] h-[calc(100vh-6rem-4.5rem-150px-120px)]">
+  <aside className="paper-reading-aside">
     <div className="relative h-full">
-      <TocAside
-        as="div"
-        className="static ml-4"
-        treeClassName="absolute h-full min-h-[120px] flex flex-col"
-        accessory={ReadIndicator}
-      />
+      <TocAside as="div" className="h-full ml-4" variant="rail">
+        {!!children &&
+          React.cloneElement(children as any, {
+            className: 'static m-0 mt-3 p-2 translate-y-0 opacity-100',
+          })}
+      </TocAside>
     </div>
-    {!!children &&
-      React.cloneElement(children as any, {
-        className: 'translate-y-[calc(100%+24px)]',
-      })}
   </aside>
 )

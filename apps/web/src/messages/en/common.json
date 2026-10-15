@@ -1,4 +1,6 @@
 {
+  "nav_about": "About",
+  "search_keyboard_hint": "↑ ↓ Select · Enter Open · Esc Close",
   "nav_home": "Home",
   "nav_posts": "Posts",
   "nav_notes": "Notes",

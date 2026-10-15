@@ -8,6 +8,7 @@ import { ThumbsupIcon } from '~/components/icons/thumbs-up'
 import { MotionButtonBase } from '~/components/ui/button'
 import { useModalStack } from '~/components/ui/modal'
 import { NumberSmoothTransition } from '~/components/ui/number-transition/NumberSmoothTransition'
+import { SITE_CAPABILITIES } from '~/constants/site'
 import { useForceUpdate } from '~/hooks/common/use-force-update'
 import { useIsClient } from '~/hooks/common/use-is-client'
 import { isLikedBefore, setLikeId } from '~/lib/cookie'
@@ -39,9 +40,9 @@ export const PostBottomBarAction: Component = () => {
   if (!isMobile) return null
   return (
     <div className="my-6 flex items-center justify-center space-x-8">
-      <LikeButton />
+      {SITE_CAPABILITIES.likes && <LikeButton />}
       <ShareButton />
-      <SubscribeButton />
+      {SITE_CAPABILITIES.emailSubscription && <SubscribeButton />}
       <AsideDonateButton />
     </div>
   )
@@ -50,9 +51,9 @@ export const PostBottomBarAction: Component = () => {
 export const PostActionAside: Component = ({ className }) => (
   <ArticleRightAside>
     <ActionAsideContainer className={className}>
-      <LikeButton />
+      {SITE_CAPABILITIES.likes && <LikeButton />}
       <ShareButton />
-      <SubscribeButton />
+      {SITE_CAPABILITIES.emailSubscription && <SubscribeButton />}
       <AsideDonateButton />
       <PostAsideCommentButton />
     </ActionAsideContainer>

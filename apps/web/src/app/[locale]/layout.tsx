@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { PublicEnvScript } from 'next-runtime-env'
-import { fetch } from 'ofetch'
 import type { PropsWithChildren } from 'react'
 
 import PKG from '~/../package.json'
@@ -19,7 +18,7 @@ import { TocAutoScroll } from '~/components/modules/toc/TocAutoScroll'
 import { routing } from '~/i18n/routing'
 import { PreRenderError } from '~/lib/error-factory'
 import { sansFont, serifFont } from '~/lib/fonts'
-import { apiClient } from '~/lib/request'
+import { $fetch, apiClient } from '~/lib/request'
 import { AggregationProvider } from '~/providers/root/aggregation-data-provider'
 import { AppFeatureProvider } from '~/providers/root/app-feature-provider'
 import { HydrateuserAuthProvider } from '~/providers/root/hydrate-user-auth-provider'
@@ -77,25 +76,20 @@ export const generateMetadata = async ({
     },
     description: seo.description,
     keywords: seo.keywords?.join(',') || '',
-    icons: [
-      {
-        url: config.site.favicon,
-        type: 'image/svg+xml',
-        sizes: 'any',
-      },
-      {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        url: config.site.favicon,
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        url: config.site.faviconDark || config.site.favicon,
-        media: '(prefers-color-scheme: dark)',
-      },
-    ],
+    icons: {
+      icon: [
+        { url: config.site.favicon },
+        ...(config.site.faviconDark &&
+        config.site.faviconDark !== config.site.favicon
+          ? [
+              {
+                url: config.site.faviconDark,
+                media: '(prefers-color-scheme: dark)',
+              },
+            ]
+          : []),
+      ],
+    },
 
     robots: {
       index: true,
@@ -124,7 +118,10 @@ export const generateMetadata = async ({
       },
     },
     twitter: {
-      creator: `@${user.socialIds?.twitter || user.socialIds?.x || '__oQuery'}`,
+      creator:
+        user.socialIds?.twitter || user.socialIds?.x
+          ? `@${user.socialIds.twitter || user.socialIds.x}`
+          : undefined,
       card: 'summary_large_image',
       title: seo.title,
       description: seo.description,
@@ -197,11 +194,10 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   headers.append('user-agent', 'Shiro')
 
-  const userAuth = await fetch(
+  const userAuth = await $fetch<{ ok: boolean }>(
     apiClient.proxy('owner')('check_logged').toString(true),
     { headers },
   )
-    .then((res) => res.json())
     .then((res) => !!res.ok)
     .catch(() => false)
 
@@ -218,18 +214,6 @@ export default async function LocaleLayout({ children, params }: Props) {
             {themeConfig.config?.color && (
               <AccentColorStyleInjector color={themeConfig.config.color} />
             )}
-            <link
-              rel="shortcut icon"
-              href={themeConfig.config.site.faviconDark}
-              type="image/x-icon"
-              media="(prefers-color-scheme: dark)"
-            />
-            <link
-              rel="shortcut icon"
-              href={themeConfig.config.site.favicon}
-              type="image/x-icon"
-              media="(prefers-color-scheme: light)"
-            />
             <ScriptInjectProvider />
           </head>
           <body
@@ -243,7 +227,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     aggregationData={data}
                     appConfig={themeConfig.config}
                   />
-                  <div id="root" data-theme>
+                  <div id="root">
                     <Root>{children}</Root>
                   </div>
                   <TocAutoScroll />

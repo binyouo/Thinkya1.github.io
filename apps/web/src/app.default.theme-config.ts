@@ -1,8 +1,8 @@
 export const defaultThemeConfig: AppThemeConfig = {
   config: {
     site: {
-      favicon: '/favicon.ico',
-      faviconDark: '/favicon.ico',
+      favicon: '/img/avatar.jpg?v=biny-icon-1',
+      faviconDark: '/img/avatar.jpg?v=biny-icon-1',
     },
     hero: {
       title: {

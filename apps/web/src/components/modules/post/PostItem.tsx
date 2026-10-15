@@ -1,115 +1,33 @@
 import type { PostListItem } from '@mx-space/api-client'
-import clsx from 'clsx'
 import { memo } from 'react'
 import RemoveMarkdown from 'remove-markdown'
 
-import { useIsOwnerLogged } from '~/atoms/hooks/owner'
-import { PostPinIcon } from '~/components/modules/post/PostPinIcon'
-import { MagneticHoverEffect } from '~/components/ui/effect/MagneticHoverEffect'
 import { Link } from '~/i18n/navigation'
+import { routeBuilder, Routes } from '~/lib/route-builder'
 
 import { PostMetaBar } from './PostMetaBar'
 
-export const PostLooseItem = memo<{ data: PostListItem }>(
-  function PostLooseItem({ data }) {
-    const text = data.text ?? ''
-    const displayText =
-      text.length > 300 ? `${RemoveMarkdown(text.slice(0, 300))}...` : text
-    const hasImage = data.images?.length > 0 && data.images[0].src
-    const categorySlug = data.category?.slug
-    const postLink = `/posts/${categorySlug}/${data.slug}`
+const PaperPostItem = ({ data }: { data: PostListItem }) => {
+  const excerpt = RemoveMarkdown(data.summary || data.text || '')
+    .replaceAll(/\s+/g, ' ')
+    .trim()
+  return (
+    <li className="paper-post">
+      <h2>
+        <Link
+          href={routeBuilder(Routes.Post, {
+            category: data.category.slug,
+            slug: data.slug,
+          })}
+        >
+          {data.title}
+        </Link>
+      </h2>
+      {excerpt && <p className="paper-post-excerpt">{excerpt.slice(0, 200)}</p>}
+      <PostMetaBar meta={data} compact className="post-meta-bar" />
+    </li>
+  )
+}
 
-    const isLogged = useIsOwnerLogged()
-    return (
-      <MagneticHoverEffect
-        as={Link}
-        href={postLink}
-        className="relative flex cursor-pointer! flex-col py-8 before:-inset-x-6 focus-visible:shadow-none!"
-      >
-        <h2 className="relative break-words text-2xl font-medium">
-          <div
-            className={clsx(
-              'flex items-baseline gap-2',
-              isLogged || data.pin ? 'w-[calc(100%-2rem)]' : 'w-full',
-            )}
-          >
-            <span>{data.title}</span>
-          </div>
-
-          <PostPinIcon pin={!!data.pin} id={data.id} />
-        </h2>
-        <div className="relative mt-8 space-y-2">
-          {!!data.summary && (
-            <p className="mb-4 break-all rounded-md px-4 py-2 text-sm leading-relaxed text-zinc-900 ring-1 ring-accent/10 dark:text-zinc-50">
-              摘要： {data.summary}
-            </p>
-          )}
-          <div className="relative overflow-hidden text-justify">
-            {hasImage && (
-              <div
-                className={clsx(
-                  'float-right mb-2 ml-3 size-[5.5rem] overflow-hidden rounded-md',
-                  'bg-cover bg-center bg-no-repeat',
-                )}
-                style={{ backgroundImage: `url(${hasImage})` }}
-              />
-            )}
-            <p className="break-all leading-loose text-zinc-800/90 dark:text-zinc-200/90">
-              {displayText}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-2 flex select-none flex-wrap items-center justify-end gap-4 text-base-content/60">
-          <PostMetaBar meta={data} />
-          <span className="flex shrink-0 select-none items-center space-x-1 text-right text-accent hover:text-accent [&>svg]:hover:ml-2">
-            <span>阅读全文</span>
-            <i className="i-mingcute-arrow-right-line text-lg transition-[margin]" />
-          </span>
-        </div>
-      </MagneticHoverEffect>
-    )
-  },
-)
-
-export const PostCompactItem = memo<{ data: PostListItem }>(
-  function PostCompactItem({ data }) {
-    const categorySlug = data.category?.slug
-    const postLink = `/posts/${categorySlug}/${data.slug}`
-
-    const isLogged = useIsOwnerLogged()
-    return (
-      <MagneticHoverEffect
-        as={Link}
-        href={postLink}
-        className="relative flex cursor-pointer! flex-col py-8 before:-inset-x-6 focus-visible:shadow-none!"
-      >
-        <h2 className="relative break-words text-2xl font-medium">
-          <div
-            className={clsx(
-              'flex items-baseline gap-2',
-              isLogged || data.pin ? 'w-[calc(100%-2rem)]' : 'w-full',
-            )}
-          >
-            <span>{data.title}</span>
-          </div>
-
-          <PostPinIcon pin={!!data.pin} id={data.id} />
-        </h2>
-        <div className="relative mt-4 space-y-2">
-          <div className="relative overflow-hidden text-justify">
-            {data.summary && (
-              <p className="mb-2 break-all leading-loose text-zinc-800/90 dark:text-zinc-200/90">
-                {data.summary}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="post-meta-bar flex select-none flex-wrap items-center justify-end gap-4 text-base-content/60">
-          <PostMetaBar meta={data} />
-        </div>
-      </MagneticHoverEffect>
-    )
-  },
-)
+export const PostLooseItem = memo(PaperPostItem)
+export const PostCompactItem = memo(PaperPostItem)

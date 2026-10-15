@@ -36,7 +36,7 @@ let nextConfig = {
   productionBrowserSourceMaps: false,
   output: 'standalone',
   outputFileTracingIncludes: {
-    '/api/v2/[...path]': ['./content/**/*'],
+    '/*': ['./content/**/*'],
   },
   assetPrefix: isProd ? env.ASSETPREFIX || undefined : undefined,
   typescript: {
@@ -49,7 +49,6 @@ let nextConfig = {
     serverMinification: true,
     webpackBuildWorker: true,
     globalNotFound: true,
-    turbopackImportTypeText: true,
 
     // optimizePackageImports: ['dayjs'],
   },

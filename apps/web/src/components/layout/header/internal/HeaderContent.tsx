@@ -1,13 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import {
-  AnimatePresence,
-  LayoutGroup,
-  m,
-  useMotionTemplate,
-  useMotionValue,
-} from 'motion/react'
+import { AnimatePresence, LayoutGroup, m } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import * as React from 'react'
 import { memo, useCallback, useMemo } from 'react'
@@ -77,43 +71,17 @@ const ForDesktop: Component<{
   const { config: headerMenuConfig } = useHeaderConfig()
   const pathname = usePathname()
 
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const radius = useMotionValue(0)
-  const handleMouseMove = React.useCallback(
-    ({ clientX, clientY, currentTarget }: React.MouseEvent) => {
-      const bounds = currentTarget.getBoundingClientRect()
-      mouseX.set(clientX - bounds.left)
-      mouseY.set(clientY - bounds.top)
-      radius.set(Math.hypot(bounds.width, bounds.height) / 2.5)
-    },
-    [mouseX, mouseY, radius],
-  )
-
-  const background = useMotionTemplate`radial-gradient(${radius}px circle at ${mouseX}px ${mouseY}px, var(--spotlight-color) 0%, transparent 65%)`
-
   return (
     <m.nav
       layout="size"
-      onMouseMove={handleMouseMove}
       className={clsxm(
-        'relative',
-        'rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90',
-        'shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md',
-        'dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10',
-        'group [--spotlight-color:oklch(from_var(--color-accent)_l_c_h_/_0.12)]',
+        'paper-nav relative',
         'pointer-events-auto duration-200',
         shouldHideNavBg && 'bg-none! shadow-none! ring-transparent!',
         className,
       )}
     >
-      {/* Spotlight overlay */}
-      <m.div
-        className="pointer-events-none absolute -inset-px rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background }}
-        aria-hidden="true"
-      />
-      <div className="flex px-4 font-medium text-zinc-800 dark:text-zinc-200">
+      <div className="flex p-1 font-medium">
         {headerMenuConfig.map((section) => {
           const subItemActive =
             section.subMenu?.findIndex(
@@ -216,7 +184,7 @@ function AnimatedItem({
       <As
         href={href}
         className={clsxm(
-          'relative block whitespace-nowrap px-4 py-2 transition duration-200',
+          'relative block whitespace-nowrap px-3 py-1.5 transition-colors duration-200',
           isActive ? 'text-accent' : 'hover:text-accent/80',
           isActive ? 'active' : '',
           className,
@@ -228,8 +196,7 @@ function AnimatedItem({
         {isActive && (
           <m.span
             className={clsx(
-              'absolute inset-x-1 -bottom-px h-px',
-              'bg-gradient-to-r from-accent/0 via-accent/70 to-accent/0',
+              'pointer-events-none absolute inset-0 rounded-sm border border-current/10',
             )}
             layoutId="active-nav-item"
           />

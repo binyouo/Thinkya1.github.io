@@ -32,7 +32,13 @@ const loadFeatures = () =>
   import('./framer-lazy-feature').then((res) => res.default)
 
 const baseContexts: JSX.Element[] = [
-  <ThemeProvider key="themeProvider" />,
+  <ThemeProvider
+    key="themeProvider"
+    attribute="data-theme"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  />,
   <JotaiStoreProvider key="jotaiStoreProvider" />,
 
   <LazyMotion features={loadFeatures} strict key="framer" />,

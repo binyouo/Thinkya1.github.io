@@ -16,8 +16,9 @@ export const GET = async () => {
   const { data } = await queryClient.fetchQuery({
     queryKey: ['sitemap'],
     queryFn: async () => {
-      const path = apiClient.aggregate.proxy.sitemap.toString(true)
-      return fetch(path).then((res) => res.json())
+      return apiClient.aggregate.proxy.sitemap.get<{
+        data: { url: string; published_at?: string }[]
+      }>()
     },
   })
 

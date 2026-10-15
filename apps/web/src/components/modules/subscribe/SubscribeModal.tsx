@@ -103,11 +103,11 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
   const query = useSubscribeStatusQuery()
 
   const handleSubList: React.EventHandler<any> = async (e) => {
+    preventDefault(e)
     if (!canSub) {
       toast.error(t('not_enabled'))
       return
     }
-    preventDefault(e)
     const { email, types } = state
     await apiClient.subscribe.subscribe(
       email,
@@ -136,7 +136,7 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
       />
       <div className="mb-2 flex gap-10">
         {Object.keys(state.types)
-          .filter((type) => query.data?.allowTypes.includes(type as any))
+          .filter((type) => query.data?.allowTypes?.includes(type as any))
           .map((name) => (
             <fieldset
               className="children:cursor-pointer inline-flex items-center text-sm"

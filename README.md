@@ -2,10 +2,18 @@
 
 个人博客，基于 [Shiro](https://github.com/Innei/Shiro) 前端 + 仓库内 Markdown 内容。
 
-Shiro 原本要求一个运行中的 [Mix Space Core](https://github.com/mx-space/core) 后端。
-这里把数据层换成了仓库里的 Markdown：`apps/web/src/app/api/v2` 提供一个只读的
-Mix Space 兼容接口，直接读取 `content/posts`，因此写作流程仍然只是提交 Markdown，
-部署也不需要数据库或独立服务器。
+Shiro 是基于 Next.js 的博客前端，原版从 [Mix Space Core](https://github.com/mx-space/core)
+获取内容。Hexo 则在构建时把 Markdown 生成为静态网站，两者的数据和部署方式不同。
+
+本站目前没有独立服务器，继续使用 Markdown + Git 写作并部署到 Vercel。
+`apps/web/src/app/api/v2` 提供只读的 Mix Space 兼容接口，读取
+`apps/web/content/posts` 和 `apps/web/content/pages`。服务端渲染直接调用本地内容层，
+浏览器通过同源 `/api/v2` 获取数据，因此当前部署不依赖 Core 或数据库。
+
+已接入文章列表与详情、分类和标签筛选、搜索、文章时间线、独立页面、RSS、站点地图和旧链接重定向。
+评论、账号登录、点赞、阅读计数、邮件订阅和实时在线状态尚未接入持久化服务；日记、
+说说、动态、友链和项目页也没有对应内容源。要启用这些功能，需要接入 Core 等后端服务、
+准备其数据库并完成内容迁移。迁移范围和验证记录见 [迁移状态](./docs/shiro-migration-status.md)。
 
 ## 结构
 
@@ -23,8 +31,11 @@ patches/                  pnpm patch（修正依赖里 Next 无法解析的 CSS�
 ## 写作
 
 在 `apps/web/content/posts` 下新建 Markdown，front matter 支持 `title`、`date`、`updated`、
-`description`、`categories`、`tags`。分类取第一个值，文章地址为
-`/posts/{分类 slug}/{文件名}`，中文分类直接使用中文。
+`description`、`categories`、`tags`、`slug`、`abbrlink`。分类取第一个值，文章地址为
+`/posts/{分类 slug}/{文章 slug}`；文章 slug 依次取 `slug`、`abbrlink` 或文件名，中文分类直接使用中文。
+
+独立页面放在 `apps/web/content/pages`，默认以文件名作为页面地址，如 `about.md` 对应 `/about`。
+Obsidian 可直接打开 `apps/web/content`。生产环境的内容随部署更新，发布文章后需要触发一次新部署。
 
 图片放在 `apps/web/public` 下，用绝对路径引用，例如
 `![](/images/biny-memory/arch-overview.png)`。
@@ -36,12 +47,15 @@ patches/                  pnpm patch（修正依赖里 Next 无法解析的 CSS�
 ```bash
 pnpm install
 pnpm dev            # http://localhost:2323
+pnpm --filter @shiro/web test
+pnpm build
 ```
 
 ## 部署
 
-部署到 Vercel，Root Directory 设为 `apps/web`，其余用默认的 Next.js 检测即可。
-站点自带 `/api/v2`，不需要额外的 API 服务。
+部署到 Vercel，Root Directory 设为 `apps/web`，框架选择 Next.js。
+`next.config.mjs` 会把 Markdown 纳入服务端部署产物。站点自带 `/api/v2`，当前只读博客不需要额外的 API 服务。
+`NEXT_PUBLIC_SITE_URL` 用于 RSS、站点地图和文章 canonical URL，应设为站点的正式地址；默认是 `https://binzi.top`。
 
 ## 许可
 

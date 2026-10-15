@@ -11,6 +11,7 @@ import {
 } from 'react'
 
 import { useIsImmersiveReadingEnabled } from '~/atoms/hooks/reading'
+import { MAIN_CONTENT_ID } from '~/constants/dom-id'
 import { DOMCustomEvents } from '~/constants/event'
 import { Spring } from '~/constants/spring'
 import { useForceUpdate } from '~/hooks/common/use-force-update'
@@ -18,11 +19,13 @@ import { clsxm } from '~/lib/helper'
 import { throttle } from '~/lib/lodash'
 import { useWrappedElement } from '~/providers/shared/WrappedElementProvider'
 
+import { ReadingRail } from './ReadingRail'
 import { useTocHeadingStrategy } from './TocHeadingStrategy'
 import { TocTree } from './TocTree'
 
 export type TocAsideProps = {
   treeClassName?: string
+  variant?: 'tree' | 'rail'
 }
 
 export interface TocSharedProps {
@@ -39,6 +42,7 @@ export const TocAside = ({
   children,
   treeClassName,
   accessory,
+  variant = 'tree',
   as: As = 'aside',
 }: TocAsideProps &
   TocSharedProps &
@@ -59,7 +63,7 @@ export const TocAside = ({
     return () => {
       document.removeEventListener(DOMCustomEvents.RefreshToc, handler)
     }
-  }, [])
+  }, [forceUpdate])
 
   useImperativeHandle(ref, () => ({
     getContainer: () => containerRef.current,
@@ -73,8 +77,29 @@ export const TocAside = ({
     if (!$article) {
       return []
     }
-    return queryHeadings($article)
+    return queryHeadings(document.getElementById(MAIN_CONTENT_ID) || $article)
   }, [$article, updated, queryHeadings])
+
+  useEffect(() => {
+    if (!$article) return
+    let headings = $headings
+    const refresh = () => {
+      const root = document.getElementById(MAIN_CONTENT_ID) || $article
+      const next = queryHeadings(root)
+      if (
+        next.length === headings.length &&
+        next.every((el, index) => el === headings[index])
+      )
+        return
+      headings = next
+      forceUpdate()
+    }
+    refresh()
+    const observer = new MutationObserver(refresh)
+    // The markdown root itself can be replaced when responsive wrappers change.
+    observer.observe(document.body, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [$article, $headings, queryHeadings, forceUpdate])
 
   useEffect(() => {
     const setMaxWidth = throttle(() => {
@@ -98,20 +123,25 @@ export const TocAside = ({
     <m.aside
       className={clsxm('st-toc z-[3]', 'relative font-sans', className)}
       animate={{
-        opacity: isImmersive ? 0.2 : 1,
+        opacity: variant === 'rail' ? 1 : isImmersive ? 0.2 : 1,
       }}
       transition={Spring.presets.smooth}
       style={{
-        pointerEvents: isImmersive ? 'none' : 'auto',
+        pointerEvents:
+          variant === 'rail' ? 'auto' : isImmersive ? 'none' : 'auto',
       }}
     >
-      <TocTree
-        $headings={$headings}
-        containerRef={containerRef}
-        className={clsxm('absolute max-h-[75vh]', treeClassName)}
-        accessory={accessory}
-      />
-      {children}
+      {variant === 'rail' ? (
+        <ReadingRail $headings={$headings} accessory={children} />
+      ) : (
+        <TocTree
+          $headings={$headings}
+          containerRef={containerRef}
+          className={clsxm('absolute max-h-[75vh]', treeClassName)}
+          accessory={accessory}
+        />
+      )}
+      {variant !== 'rail' && children}
     </m.aside>
   )
 }
