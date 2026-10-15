@@ -1,0 +1,130 @@
+{
+  "/images/ai-agent-concepts/agent-loop.svg": {
+    "title": "一次 Agent 任务怎样推进",
+    "width": 760,
+    "height": 660,
+    "light": "/diagrams/ai-agent-concepts-agent-loop.light.svg",
+    "dark": "/diagrams/ai-agent-concepts-agent-loop.dark.svg",
+    "source": "/diagrams/ai-agent-concepts-agent-loop.excalidraw"
+  },
+  "/images/ai-agent-concepts/prompt-cache.svg": {
+    "title": "Prompt Cache 复用计算，信息仍在",
+    "width": 760,
+    "height": 480,
+    "light": "/diagrams/ai-agent-concepts-prompt-cache.light.svg",
+    "dark": "/diagrams/ai-agent-concepts-prompt-cache.dark.svg",
+    "source": "/diagrams/ai-agent-concepts-prompt-cache.excalidraw"
+  },
+  "/images/ai-agent-concepts/rag-pipeline.svg": {
+    "title": "RAG：资料准备与查询回答",
+    "width": 760,
+    "height": 1035,
+    "light": "/diagrams/ai-agent-concepts-rag-pipeline.light.svg",
+    "dark": "/diagrams/ai-agent-concepts-rag-pipeline.dark.svg",
+    "source": "/diagrams/ai-agent-concepts-rag-pipeline.excalidraw"
+  },
+  "/images/ai-agent-concepts/tool-call.svg": {
+    "title": "工具调用：请求、执行、反馈",
+    "width": 760,
+    "height": 615,
+    "light": "/diagrams/ai-agent-concepts-tool-call.light.svg",
+    "dark": "/diagrams/ai-agent-concepts-tool-call.dark.svg",
+    "source": "/diagrams/ai-agent-concepts-tool-call.excalidraw"
+  },
+  "/images/biny-memory/arch-overview.png": {
+    "title": "Biny 记忆系统：按用途分层，在上下文里汇合",
+    "width": 1180,
+    "height": 1070,
+    "light": "/diagrams/biny-memory-arch-overview.light.svg",
+    "dark": "/diagrams/biny-memory-arch-overview.dark.svg",
+    "source": "/diagrams/biny-memory-arch-overview.excalidraw"
+  },
+  "/images/biny-memory/fact-lifecycle.png": {
+    "title": "事实记忆：提取、召回与后台整理",
+    "width": 1120,
+    "height": 1090,
+    "light": "/diagrams/biny-memory-fact-lifecycle.light.svg",
+    "dark": "/diagrams/biny-memory-fact-lifecycle.dark.svg",
+    "source": "/diagrams/biny-memory-fact-lifecycle.excalidraw"
+  },
+  "/images/biny-memory/fact-recall.svg": {
+    "title": "一条事实如何回到当前回合",
+    "width": 760,
+    "height": 1066,
+    "light": "/diagrams/biny-memory-fact-recall.light.svg",
+    "dark": "/diagrams/biny-memory-fact-recall.dark.svg",
+    "source": "/diagrams/biny-memory-fact-recall.excalidraw"
+  },
+  "/images/biny-memory/short-term-layers.svg": {
+    "title": "短期工作记忆的四层",
+    "width": 760,
+    "height": 624,
+    "light": "/diagrams/biny-memory-short-term-layers.light.svg",
+    "dark": "/diagrams/biny-memory-short-term-layers.dark.svg",
+    "source": "/diagrams/biny-memory-short-term-layers.excalidraw"
+  },
+  "/images/biny-memory/sleep-consistency.svg": {
+    "title": "模型判断期间数据已经变了，怎么办",
+    "width": 760,
+    "height": 782,
+    "light": "/diagrams/biny-memory-sleep-consistency.light.svg",
+    "dark": "/diagrams/biny-memory-sleep-consistency.dark.svg",
+    "source": "/diagrams/biny-memory-sleep-consistency.excalidraw"
+  },
+  "/images/biny-memory/sleep-phases.svg": {
+    "title": "Sleep 的四个阶段",
+    "width": 760,
+    "height": 710,
+    "light": "/diagrams/biny-memory-sleep-phases.light.svg",
+    "dark": "/diagrams/biny-memory-sleep-phases.dark.svg",
+    "source": "/diagrams/biny-memory-sleep-phases.excalidraw"
+  },
+  "/images/biny-tool-system/execution-coordinator.svg": {
+    "title": "调用不同，执行约束共用",
+    "width": 760,
+    "height": 928,
+    "light": "/diagrams/biny-tool-system-execution-coordinator.light.svg",
+    "dark": "/diagrams/biny-tool-system-execution-coordinator.dark.svg",
+    "source": "/diagrams/biny-tool-system-execution-coordinator.excalidraw"
+  },
+  "/images/biny-tool-system/file-editing.svg": {
+    "title": "定位与提交，是两层问题",
+    "width": 760,
+    "height": 768,
+    "light": "/diagrams/biny-tool-system-file-editing.light.svg",
+    "dark": "/diagrams/biny-tool-system-file-editing.dark.svg",
+    "source": "/diagrams/biny-tool-system-file-editing.excalidraw"
+  },
+  "/images/biny-tool-system/tool-discovery.svg": {
+    "title": "工具如何按需进入模型上下文",
+    "width": 760,
+    "height": 800,
+    "light": "/diagrams/biny-tool-system-tool-discovery.light.svg",
+    "dark": "/diagrams/biny-tool-system-tool-discovery.dark.svg",
+    "source": "/diagrams/biny-tool-system-tool-discovery.excalidraw"
+  },
+  "/images/biny-tool-system/unknown-outcome.svg": {
+    "title": "断线以后，为什么不能直接重试",
+    "width": 760,
+    "height": 765,
+    "light": "/diagrams/biny-tool-system-unknown-outcome.light.svg",
+    "dark": "/diagrams/biny-tool-system-unknown-outcome.dark.svg",
+    "source": "/diagrams/biny-tool-system-unknown-outcome.excalidraw"
+  },
+  "/images/kimi-code-edit/code-mode-patch.svg": {
+    "title": "Code Mode 负责工具编排，Patch 描述文件修改",
+    "width": 1000,
+    "height": 780,
+    "light": "/diagrams/kimi-code-edit-code-mode-patch.light.svg",
+    "dark": "/diagrams/kimi-code-edit-code-mode-patch.dark.svg",
+    "source": "/diagrams/kimi-code-edit-code-mode-patch.excalidraw"
+  },
+  "/images/kimi-code-edit/editing-flow.svg": {
+    "title": "三种 Agent：修改描述 → 目标定位 → 文件写入",
+    "width": 1120,
+    "height": 810,
+    "light": "/diagrams/kimi-code-edit-editing-flow.light.svg",
+    "dark": "/diagrams/kimi-code-edit-editing-flow.dark.svg",
+    "source": "/diagrams/kimi-code-edit-editing-flow.excalidraw"
+  }
+}

@@ -1,0 +1,1845 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "blogImage": "/images/kimi-code-edit/editing-flow.svg",
+  "title": "三种 Agent：修改描述 → 目标定位 → 文件写入",
+  "elements": [
+    {
+      "id": "kimi-code-edit-editing-flow-0",
+      "type": "text",
+      "x": 35,
+      "y": 25,
+      "width": 602.308,
+      "height": 37.800000000000004,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 30036002,
+      "version": 1,
+      "versionNonce": 30036002,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "三种 Agent：修改描述 → 目标定位 → 文件写入",
+      "originalText": "三种 Agent：修改描述 → 目标定位 → 文件写入",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 25.2
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-1",
+      "type": "rectangle",
+      "x": 350,
+      "y": 95,
+      "width": 420,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-1-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 202294394,
+      "version": 1,
+      "versionNonce": 202294394,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-2",
+      "type": "text",
+      "x": 450.0,
+      "y": 112.65,
+      "width": 220.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-1-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 116550882,
+      "version": 1,
+      "versionNonce": 116550882,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "模型生成文件修改意图",
+      "originalText": "模型生成文件修改意图",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-3",
+      "type": "arrow",
+      "x": 560,
+      "y": 160,
+      "width": 365,
+      "height": 67,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 12397187,
+      "version": 1,
+      "versionNonce": 12397187,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          -365,
+          35
+        ],
+        [
+          -365,
+          67
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-4",
+      "type": "rectangle",
+      "x": 35,
+      "y": 230,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-4-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 218513865,
+      "version": 1,
+      "versionNonce": 218513865,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-5",
+      "type": "text",
+      "x": 163.287,
+      "y": 247.65,
+      "width": 63.426,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-4-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 210701944,
+      "version": 1,
+      "versionNonce": 210701944,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "Codex",
+      "originalText": "Codex",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-6",
+      "type": "arrow",
+      "x": 195,
+      "y": 295,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 81990459,
+      "version": 1,
+      "versionNonce": 81990459,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-7",
+      "type": "rectangle",
+      "x": 35,
+      "y": 340,
+      "width": 320,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-7-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 4904417,
+      "version": 1,
+      "versionNonce": 4904417,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-8",
+      "type": "text",
+      "x": 138.93,
+      "y": 364.0,
+      "width": 112.14,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-7-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 58412206,
+      "version": 1,
+      "versionNonce": 58412206,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "apply_patch",
+      "originalText": "apply_patch",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-9",
+      "type": "arrow",
+      "x": 195,
+      "y": 415,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 227106436,
+      "version": 1,
+      "versionNonce": 227106436,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-10",
+      "type": "rectangle",
+      "x": 35,
+      "y": 460,
+      "width": 320,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-10-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 190950545,
+      "version": 1,
+      "versionNonce": 190950545,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-11",
+      "type": "text",
+      "x": 84.78999999999999,
+      "y": 484.0,
+      "width": 220.42000000000002,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-10-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 180905652,
+      "version": 1,
+      "versionNonce": 180905652,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "Patch 解析与上下文定位",
+      "originalText": "Patch 解析与上下文定位",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-12",
+      "type": "arrow",
+      "x": 195,
+      "y": 535,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 68924656,
+      "version": 1,
+      "versionNonce": 68924656,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-13",
+      "type": "rectangle",
+      "x": 35,
+      "y": 580,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-13-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 30697351,
+      "version": 1,
+      "versionNonce": 30697351,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-14",
+      "type": "text",
+      "x": 95.0,
+      "y": 599.0,
+      "width": 200.0,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-13-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 247561755,
+      "version": 1,
+      "versionNonce": 247561755,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "生成更新后的文件内容",
+      "originalText": "生成更新后的文件内容",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-15",
+      "type": "arrow",
+      "x": 195,
+      "y": 645,
+      "width": 365,
+      "height": 72,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 247168057,
+      "version": 1,
+      "versionNonce": 247168057,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          365,
+          35
+        ],
+        [
+          365,
+          72
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-16",
+      "type": "arrow",
+      "x": 560,
+      "y": 160,
+      "width": 0,
+      "height": 67,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 72582761,
+      "version": 1,
+      "versionNonce": 72582761,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          0,
+          67
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-17",
+      "type": "rectangle",
+      "x": 400,
+      "y": 230,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-17-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 78072489,
+      "version": 1,
+      "versionNonce": 78072489,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-18",
+      "type": "text",
+      "x": 494.198,
+      "y": 247.65,
+      "width": 131.604,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-17-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 232083462,
+      "version": 1,
+      "versionNonce": 232083462,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "Claude Code",
+      "originalText": "Claude Code",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-19",
+      "type": "arrow",
+      "x": 560,
+      "y": 295,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 205064201,
+      "version": 1,
+      "versionNonce": 205064201,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-20",
+      "type": "rectangle",
+      "x": 400,
+      "y": 340,
+      "width": 320,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-20-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 56703385,
+      "version": 1,
+      "versionNonce": 56703385,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-21",
+      "type": "text",
+      "x": 445.77,
+      "y": 364.0,
+      "width": 228.46,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-20-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 144162380,
+      "version": 1,
+      "versionNonce": 144162380,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "old_string → new_string",
+      "originalText": "old_string → new_string",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-22",
+      "type": "arrow",
+      "x": 560,
+      "y": 415,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 227585219,
+      "version": 1,
+      "versionNonce": 227585219,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-23",
+      "type": "rectangle",
+      "x": 400,
+      "y": 460,
+      "width": 320,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-23-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 43162033,
+      "version": 1,
+      "versionNonce": 43162033,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-24",
+      "type": "text",
+      "x": 500.0,
+      "y": 484.0,
+      "width": 120.0,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-23-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 77678338,
+      "version": 1,
+      "versionNonce": 77678338,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "唯一精确匹配",
+      "originalText": "唯一精确匹配",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-25",
+      "type": "arrow",
+      "x": 560,
+      "y": 535,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 89543014,
+      "version": 1,
+      "versionNonce": 89543014,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-26",
+      "type": "rectangle",
+      "x": 400,
+      "y": 580,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-26-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 266673184,
+      "version": 1,
+      "versionNonce": 266673184,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-27",
+      "type": "text",
+      "x": 460.0,
+      "y": 599.0,
+      "width": 200.0,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-26-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 223413432,
+      "version": 1,
+      "versionNonce": 223413432,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "生成更新后的文件内容",
+      "originalText": "生成更新后的文件内容",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-28",
+      "type": "arrow",
+      "x": 560,
+      "y": 645,
+      "width": 0,
+      "height": 72,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 5279481,
+      "version": 1,
+      "versionNonce": 5279481,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-29",
+      "type": "arrow",
+      "x": 560,
+      "y": 160,
+      "width": 365,
+      "height": 67,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 134715953,
+      "version": 1,
+      "versionNonce": 134715953,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          365,
+          35
+        ],
+        [
+          365,
+          67
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-30",
+      "type": "rectangle",
+      "x": 765,
+      "y": 230,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-30-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 183004750,
+      "version": 1,
+      "versionNonce": 183004750,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-31",
+      "type": "text",
+      "x": 873.245,
+      "y": 247.65,
+      "width": 103.51,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-30-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 199061399,
+      "version": 1,
+      "versionNonce": 199061399,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "Kimi Code",
+      "originalText": "Kimi Code",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-32",
+      "type": "arrow",
+      "x": 925,
+      "y": 295,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 111880038,
+      "version": 1,
+      "versionNonce": 111880038,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-33",
+      "type": "rectangle",
+      "x": 765,
+      "y": 340,
+      "width": 320,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-33-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 261261840,
+      "version": 1,
+      "versionNonce": 261261840,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-34",
+      "type": "text",
+      "x": 810.77,
+      "y": 364.0,
+      "width": 228.46,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-33-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 121483688,
+      "version": 1,
+      "versionNonce": 121483688,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "old_string → new_string",
+      "originalText": "old_string → new_string",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-35",
+      "type": "arrow",
+      "x": 925,
+      "y": 415,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 92151922,
+      "version": 1,
+      "versionNonce": 92151922,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-36",
+      "type": "rectangle",
+      "x": 765,
+      "y": 460,
+      "width": 320,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-36-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 231313139,
+      "version": 1,
+      "versionNonce": 231313139,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-37",
+      "type": "text",
+      "x": 865.0,
+      "y": 484.0,
+      "width": 120.0,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-36-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 167363601,
+      "version": 1,
+      "versionNonce": 167363601,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "唯一精确匹配",
+      "originalText": "唯一精确匹配",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-38",
+      "type": "arrow",
+      "x": 925,
+      "y": 535,
+      "width": 0,
+      "height": 42,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 176736777,
+      "version": 1,
+      "versionNonce": 176736777,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          42
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-39",
+      "type": "rectangle",
+      "x": 765,
+      "y": 580,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-39-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 72654866,
+      "version": 1,
+      "versionNonce": 72654866,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-40",
+      "type": "text",
+      "x": 825.0,
+      "y": 599.0,
+      "width": 200.0,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-39-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 158319784,
+      "version": 1,
+      "versionNonce": 158319784,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "生成更新后的文件内容",
+      "originalText": "生成更新后的文件内容",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-41",
+      "type": "arrow",
+      "x": 925,
+      "y": 645,
+      "width": 365,
+      "height": 72,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 158867366,
+      "version": 1,
+      "versionNonce": 158867366,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          -365,
+          35
+        ],
+        [
+          -365,
+          72
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-42",
+      "type": "rectangle",
+      "x": 280,
+      "y": 720,
+      "width": 560,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-42-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 12039816,
+      "version": 1,
+      "versionNonce": 12039816,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      }
+    },
+    {
+      "id": "kimi-code-edit-editing-flow-43",
+      "type": "text",
+      "x": 428.0,
+      "y": 737.65,
+      "width": 264.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "kimi-code-edit-editing-flow-42-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 231240288,
+      "version": 1,
+      "versionNonce": 231240288,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "各自的文件系统执行与写入",
+      "originalText": "各自的文件系统执行与写入",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#fffdf7",
+    "gridSize": null
+  },
+  "files": {},
+  "canvas": {
+    "width": 1120,
+    "height": 810
+  }
+}

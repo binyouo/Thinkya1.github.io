@@ -1,0 +1,103 @@
+.article-diagram {
+  margin: 28px 0;
+}
+.article-diagram-preview {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--paper-line);
+  border-radius: 8px;
+  background: transparent;
+  cursor: zoom-in;
+}
+.article-diagram-preview:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.article-diagram-preview img {
+  width: 100%;
+  height: auto;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+.article-diagram-preview .article-diagram-dark {
+  display: none;
+}
+[data-theme='dark'] .article-diagram-preview .article-diagram-light {
+  display: none;
+}
+[data-theme='dark'] .article-diagram-preview .article-diagram-dark {
+  display: block;
+}
+.article-diagram figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--paper-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+}
+.article-diagram figcaption a {
+  color: var(--paper-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-diagram-viewer .PhotoView-Slider__toolbarIcon {
+  display: none;
+}
+.article-diagram-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  color: #ece9e4;
+  font-size: 13px;
+}
+.article-diagram-toolbar button {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.article-diagram-toolbar button:hover,
+.article-diagram-toolbar button:focus-visible {
+  background: #ffffff26;
+  outline: 1px solid #b5b4b0;
+}
+.article-diagram-toolbar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.article-diagram-viewer-title {
+  max-width: 40vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+@media (max-width: 767px) {
+  .article-diagram-viewer-title {
+    display: none;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .article-diagram-preview .article-diagram-light {
+    display: none;
+  }
+  :root:not([data-theme]) .article-diagram-preview .article-diagram-dark {
+    display: block;
+  }
+}
+@media print {
+  .article-diagram-preview .article-diagram-light {
+    display: block !important;
+  }
+  .article-diagram-preview .article-diagram-dark,
+  .article-diagram figcaption a {
+    display: none !important;
+  }
+}

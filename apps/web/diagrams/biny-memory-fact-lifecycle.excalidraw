@@ -1,0 +1,2106 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "blogImage": "/images/biny-memory/fact-lifecycle.png",
+  "title": "事实记忆：提取、召回与后台整理",
+  "elements": [
+    {
+      "id": "biny-memory-fact-lifecycle-0",
+      "type": "text",
+      "x": 35,
+      "y": 25,
+      "width": 420.0,
+      "height": 37.800000000000004,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 83459720,
+      "version": 1,
+      "versionNonce": 83459720,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "事实记忆：提取、召回与后台整理",
+      "originalText": "事实记忆：提取、召回与后台整理",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 25.2
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-1",
+      "type": "rectangle",
+      "x": 40,
+      "y": 95,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-1-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 87198501,
+      "version": 1,
+      "versionNonce": 87198501,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-2",
+      "type": "text",
+      "x": 86.0,
+      "y": 112.65,
+      "width": 198.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-1-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 159328203,
+      "version": 1,
+      "versionNonce": 159328203,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "用户消息与对话历史",
+      "originalText": "用户消息与对话历史",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-3",
+      "type": "arrow",
+      "x": 185,
+      "y": 160,
+      "width": 0,
+      "height": 37,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 69275994,
+      "version": 1,
+      "versionNonce": 69275994,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          37
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-4",
+      "type": "rectangle",
+      "x": 40,
+      "y": 200,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-4-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 223754859,
+      "version": 1,
+      "versionNonce": 223754859,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-5",
+      "type": "text",
+      "x": 119.0,
+      "y": 217.65,
+      "width": 132.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-4-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 22511078,
+      "version": 1,
+      "versionNonce": 22511078,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "记忆提取门控",
+      "originalText": "记忆提取门控",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-6",
+      "type": "arrow",
+      "x": 185,
+      "y": 265,
+      "width": 0,
+      "height": 72,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 151276521,
+      "version": 1,
+      "versionNonce": 151276521,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          33
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-7",
+      "type": "text",
+      "x": 149.0,
+      "y": 292,
+      "width": 72.0,
+      "height": 24.3,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 212179073,
+      "version": 1,
+      "versionNonce": 212179073,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": true
+      },
+      "text": "长期价值",
+      "originalText": "长期价值",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 16.2
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-8",
+      "type": "rectangle",
+      "x": 40,
+      "y": 340,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-8-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 245292030,
+      "version": 1,
+      "versionNonce": 245292030,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-9",
+      "type": "text",
+      "x": 108.0,
+      "y": 357.65,
+      "width": 154.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-8-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 133475049,
+      "version": 1,
+      "versionNonce": 133475049,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "小模型抽取事实",
+      "originalText": "小模型抽取事实",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-10",
+      "type": "arrow",
+      "x": 330,
+      "y": 232,
+      "width": 195,
+      "height": 105,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 101693803,
+      "version": 1,
+      "versionNonce": 101693803,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          195,
+          0
+        ],
+        [
+          195,
+          105
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-11",
+      "type": "text",
+      "x": 489.0,
+      "y": 298,
+      "width": 72.0,
+      "height": 24.3,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 184753047,
+      "version": 1,
+      "versionNonce": 184753047,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": true
+      },
+      "text": "临时信息",
+      "originalText": "临时信息",
+      "fontSize": 18,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 16.2
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-12",
+      "type": "rectangle",
+      "x": 380,
+      "y": 340,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-12-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 258613010,
+      "version": 1,
+      "versionNonce": 258613010,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-13",
+      "type": "text",
+      "x": 448.0,
+      "y": 357.65,
+      "width": 154.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-12-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 141145809,
+      "version": 1,
+      "versionNonce": 141145809,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "不写入长期记忆",
+      "originalText": "不写入长期记忆",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-14",
+      "type": "arrow",
+      "x": 185,
+      "y": 405,
+      "width": 0,
+      "height": 52,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 135923531,
+      "version": 1,
+      "versionNonce": 135923531,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          52
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-15",
+      "type": "rectangle",
+      "x": 40,
+      "y": 460,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-15-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 21421828,
+      "version": 1,
+      "versionNonce": 21421828,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-16",
+      "type": "text",
+      "x": 98.012,
+      "y": 477.65,
+      "width": 173.976,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-15-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 137736044,
+      "version": 1,
+      "versionNonce": 137736044,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "SQLite memories",
+      "originalText": "SQLite memories",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-17",
+      "type": "arrow",
+      "x": 330,
+      "y": 492,
+      "width": 48,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 161023825,
+      "version": 1,
+      "versionNonce": 161023825,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          48,
+          0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-18",
+      "type": "rectangle",
+      "x": 380,
+      "y": 460,
+      "width": 310,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-18-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 162932465,
+      "version": 1,
+      "versionNonce": 162932465,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-19",
+      "type": "text",
+      "x": 417.28999999999996,
+      "y": 479.0,
+      "width": 235.42000000000002,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-18-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 76651645,
+      "version": 1,
+      "versionNonce": 76651645,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "本地 e5-small Embedding",
+      "originalText": "本地 e5-small Embedding",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-20",
+      "type": "arrow",
+      "x": 690,
+      "y": 492,
+      "width": 68,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 60714303,
+      "version": 1,
+      "versionNonce": 60714303,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          68,
+          0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-21",
+      "type": "rectangle",
+      "x": 760,
+      "y": 460,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-21-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 163562918,
+      "version": 1,
+      "versionNonce": 163562918,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-22",
+      "type": "text",
+      "x": 832.22,
+      "y": 479.0,
+      "width": 175.56,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-21-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 265638927,
+      "version": 1,
+      "versionNonce": 265638927,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "sqlite-vec 向量索引",
+      "originalText": "sqlite-vec 向量索引",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-23",
+      "type": "rectangle",
+      "x": 760,
+      "y": 95,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-23-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 57999504,
+      "version": 1,
+      "versionNonce": 57999504,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-24",
+      "type": "text",
+      "x": 843.0,
+      "y": 112.65,
+      "width": 154.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-23-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 8607822,
+      "version": 1,
+      "versionNonce": 8607822,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "下一轮用户提问",
+      "originalText": "下一轮用户提问",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-25",
+      "type": "arrow",
+      "x": 920,
+      "y": 160,
+      "width": 0,
+      "height": 37,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 252263337,
+      "version": 1,
+      "versionNonce": 252263337,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          37
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-26",
+      "type": "rectangle",
+      "x": 760,
+      "y": 200,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-26-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 102632575,
+      "version": 1,
+      "versionNonce": 102632575,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-27",
+      "type": "text",
+      "x": 832.0,
+      "y": 217.65,
+      "width": 176.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-26-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 45391495,
+      "version": 1,
+      "versionNonce": 45391495,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "查询改写与向量化",
+      "originalText": "查询改写与向量化",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-28",
+      "type": "arrow",
+      "x": 920,
+      "y": 265,
+      "width": 0,
+      "height": 192,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 133380083,
+      "version": 1,
+      "versionNonce": 133380083,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-29",
+      "type": "arrow",
+      "x": 920,
+      "y": 525,
+      "width": 0,
+      "height": 72,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 71669676,
+      "version": 1,
+      "versionNonce": 71669676,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-30",
+      "type": "rectangle",
+      "x": 760,
+      "y": 600,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#2b8a3e",
+      "backgroundColor": "#ebfbee",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-30-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 192354620,
+      "version": 1,
+      "versionNonce": 192354620,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "green"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-31",
+      "type": "text",
+      "x": 827.699,
+      "y": 617.65,
+      "width": 184.602,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-30-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 253301445,
+      "version": 1,
+      "versionNonce": 253301445,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "相似度 Top-K 检索",
+      "originalText": "相似度 Top-K 检索",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-32",
+      "type": "arrow",
+      "x": 920,
+      "y": 665,
+      "width": 0,
+      "height": 72,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 175490833,
+      "version": 1,
+      "versionNonce": 175490833,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          72
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-33",
+      "type": "rectangle",
+      "x": 760,
+      "y": 740,
+      "width": 320,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-33-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 39841534,
+      "version": 1,
+      "versionNonce": 39841534,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-34",
+      "type": "text",
+      "x": 822.92,
+      "y": 759.0,
+      "width": 194.16,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-33-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 147406054,
+      "version": 1,
+      "versionNonce": 147406054,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "相关记忆注入 Prompt",
+      "originalText": "相关记忆注入 Prompt",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-35",
+      "type": "arrow",
+      "x": 185,
+      "y": 525,
+      "width": 0,
+      "height": 62,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 228001880,
+      "version": 1,
+      "versionNonce": 228001880,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          62
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-36",
+      "type": "rectangle",
+      "x": 40,
+      "y": 590,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#b27300",
+      "backgroundColor": "#fff9db",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-36-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 233608744,
+      "version": 1,
+      "versionNonce": 233608744,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "gold"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-37",
+      "type": "text",
+      "x": 97.13199999999999,
+      "y": 607.65,
+      "width": 175.73600000000002,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-36-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 84415621,
+      "version": 1,
+      "versionNonce": 84415621,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "03:00 Sleep 巩固",
+      "originalText": "03:00 Sleep 巩固",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-38",
+      "type": "arrow",
+      "x": 185,
+      "y": 655,
+      "width": 0,
+      "height": 32,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 95691888,
+      "version": 1,
+      "versionNonce": 95691888,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          32
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-39",
+      "type": "rectangle",
+      "x": 40,
+      "y": 690,
+      "width": 290,
+      "height": 90,
+      "angle": 0,
+      "strokeColor": "#b27300",
+      "backgroundColor": "#fff9db",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-39-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 186780935,
+      "version": 1,
+      "versionNonce": 186780935,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "gold"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-40",
+      "type": "text",
+      "x": 104.0,
+      "y": 708.0,
+      "width": 162.0,
+      "height": 54.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-39-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 213188086,
+      "version": 1,
+      "versionNonce": 213188086,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "去重 / 过期 / 聚类\nLLM 合并",
+      "originalText": "去重 / 过期 / 聚类\nLLM 合并",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-41",
+      "type": "arrow",
+      "x": 40,
+      "y": 735,
+      "width": 20,
+      "height": 245,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 47380130,
+      "version": 1,
+      "versionNonce": 47380130,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -20,
+          0
+        ],
+        [
+          -20,
+          -245
+        ],
+        [
+          -3,
+          -245
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-42",
+      "type": "arrow",
+      "x": 185,
+      "y": 780,
+      "width": 0,
+      "height": 37,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 44090589,
+      "version": 1,
+      "versionNonce": 44090589,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          37
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-43",
+      "type": "rectangle",
+      "x": 40,
+      "y": 820,
+      "width": 290,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-43-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 180408622,
+      "version": 1,
+      "versionNonce": 180408622,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-44",
+      "type": "text",
+      "x": 85.64,
+      "y": 839.0,
+      "width": 198.72,
+      "height": 27.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-43-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 181589278,
+      "version": 1,
+      "versionNonce": 181589278,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "memory_archive 归档",
+      "originalText": "memory_archive 归档",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-45",
+      "type": "rectangle",
+      "x": 380,
+      "y": 820,
+      "width": 310,
+      "height": 65,
+      "angle": 0,
+      "strokeColor": "#7048e8",
+      "backgroundColor": "#f3f0ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-45-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 63920816,
+      "version": 1,
+      "versionNonce": 63920816,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "purple"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-46",
+      "type": "text",
+      "x": 432.84000000000003,
+      "y": 825.5,
+      "width": 204.32,
+      "height": 54.0,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-45-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 59292489,
+      "version": 1,
+      "versionNonce": 59292489,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "Markdown / USER.md\n日志",
+      "originalText": "Markdown / USER.md\n日志",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 18.0
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-47",
+      "type": "arrow",
+      "x": 920,
+      "y": 805,
+      "width": 300,
+      "height": 162,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 157368177,
+      "version": 1,
+      "versionNonce": 157368177,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          137
+        ],
+        [
+          -300,
+          137
+        ],
+        [
+          -300,
+          162
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-48",
+      "type": "arrow",
+      "x": 535,
+      "y": 885,
+      "width": 85,
+      "height": 82,
+      "angle": 0,
+      "strokeColor": "#868e96",
+      "backgroundColor": "#f8f9fa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 42501110,
+      "version": 1,
+      "versionNonce": 42501110,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral"
+      },
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          57
+        ],
+        [
+          85,
+          57
+        ],
+        [
+          85,
+          82
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-49",
+      "type": "rectangle",
+      "x": 460,
+      "y": 970,
+      "width": 320,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "#e7f5ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-49-group"
+      ],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 147502183,
+      "version": 1,
+      "versionNonce": 147502183,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "blue"
+      }
+    },
+    {
+      "id": "biny-memory-fact-lifecycle-50",
+      "type": "text",
+      "x": 565.0,
+      "y": 990.15,
+      "width": 110.0,
+      "height": 29.700000000000003,
+      "angle": 0,
+      "strokeColor": "#343a40",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "strokeStyle": "solid",
+      "roughness": 1.15,
+      "opacity": 100,
+      "groupIds": [
+        "biny-memory-fact-lifecycle-49-group"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 100838093,
+      "version": 1,
+      "versionNonce": 100838093,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1,
+      "link": null,
+      "locked": false,
+      "customData": {
+        "tone": "neutral",
+        "muted": false
+      },
+      "text": "主模型推理",
+      "originalText": "主模型推理",
+      "fontSize": 22,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "lineHeight": 1.35,
+      "baseline": 19.8
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#fffdf7",
+    "gridSize": null
+  },
+  "files": {},
+  "canvas": {
+    "width": 1120,
+    "height": 1090
+  }
+}

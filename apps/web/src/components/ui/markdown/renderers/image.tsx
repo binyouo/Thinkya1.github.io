@@ -15,6 +15,7 @@ import {
   WrappedElementProvider,
 } from '~/providers/shared/WrappedElementProvider'
 
+import { articleDiagrams, DiagramFigure } from '../../diagram/DiagramFigure'
 import { Divider } from '../../divider/Divider'
 import { FixedZoomedImage } from '../../image/ZoomedImage'
 import { Video } from './video'
@@ -29,6 +30,10 @@ export const MarkdownImage = (props: { src: string; alt?: string }) => {
 
   const ext = src.split('.').pop()!
   const mediaInfo = useMarkdownImageRecord(src)
+
+  if (articleDiagrams[src]) {
+    return <DiagramFigure src={src} alt={alt} />
+  }
 
   if (isVideoExt(ext)) {
     const figcaption = alt?.replace(/^[¡!]/, '')
