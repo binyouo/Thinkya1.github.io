@@ -43,7 +43,13 @@ export const Hero = () => {
         </span>
       </h1>
       <p className="paper-hero-heading">
-        在代码里探索，<em>在文字里记录。</em>
+        <span>
+          在代码里探索，<em>在文字里记录。</em>
+        </span>
+        <span className="paper-hero-topic">
+          <span aria-hidden="true">✦</span>
+          <span className="paper-hero-topic-label">AI Agents</span>
+        </span>
       </p>
       <p className="paper-hero-description">{hero.description}</p>
       <div className="paper-hero-footnote">
