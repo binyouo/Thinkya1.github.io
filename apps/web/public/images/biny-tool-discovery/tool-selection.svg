@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="800" viewBox="0 0 760 800" role="img" aria-labelledby="title desc"><title id="title">工具怎样进入主模型的上下文</title><desc id="desc">完整工具目录在回合开始前由辅助模型预选，与基础工具、历史工具合并后交给主模型；能力不足时由 ToolSearch 精确查找或语义选择，核对注册表后补充到下一模型步骤。</desc><defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto-start-reverse"><path d="M0 0 L8 4.5 L0 9" fill="none" stroke="#8b9ca5" stroke-width="1.4"/></marker></defs><style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#343a40}</style><rect width="760" height="800" fill="#ffffff"/><text x="32.00" y="54.00" font-size="30" fill="#343a40" text-anchor="start">工具怎样进入主模型的上下文</text>
+<rect x="32" y="92" width="696" height="96" rx="10" fill="#e7f5ff" stroke="#1971c2" stroke-width="1.6"/>
+<text x="380.00" y="134.00" font-size="25" fill="#343a40" text-anchor="middle">完整工具目录 · ToolRegistry</text>
+<text x="380.00" y="168.00" font-size="19" fill="#343a40" text-anchor="middle">内置 / MCP / Plugin / Skill / Subagent</text>
+<path d="M380 188 L380 222" fill="none" stroke="#868e96" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="32" y="222" width="696" height="104" rx="10" fill="#ebfbee" stroke="#2b8a3e" stroke-width="1.6"/>
+<text x="728.00" y="214.00" font-size="16" fill="#656b72" text-anchor="end">回合开始前</text>
+<text x="380.00" y="272.00" font-size="25" fill="#343a40" text-anchor="middle">辅助模型预选相关工具</text>
+<text x="380.00" y="304.00" font-size="19" fill="#343a40" text-anchor="middle">只给名称与简短描述，不给完整 Schema</text>
+<path d="M380 326 L380 360" fill="none" stroke="#868e96" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="32" y="360" width="696" height="96" rx="10" fill="#f3f0ff" stroke="#7048e8" stroke-width="1.6"/>
+<text x="380.00" y="402.00" font-size="25" fill="#343a40" text-anchor="middle">本轮交给主模型的工具集</text>
+<text x="380.00" y="436.00" font-size="19" fill="#343a40" text-anchor="middle">基础工具 + 预选结果 + 历史已选 + 运行时入口</text>
+<path d="M380 456 L380 490" fill="none" stroke="#868e96" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="32" y="490" width="696" height="84" rx="10" fill="#f5f4ef" stroke="#868e96" stroke-width="1.6"/>
+<text x="380.00" y="526.00" font-size="25" fill="#343a40" text-anchor="middle">主模型执行任务</text>
+<text x="380.00" y="556.00" font-size="19" fill="#343a40" text-anchor="middle">工具足够时直接调用</text>
+<path d="M196 574 L196 612" fill="none" stroke="#868e96" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="214.00" y="600.00" font-size="17" fill="#656b72" text-anchor="start">工具不够</text>
+<rect x="32" y="612" width="330" height="110" rx="10" fill="#fff9db" stroke="#ad7200" stroke-width="1.6"/>
+<text x="728.00" y="604.00" font-size="16" fill="#656b72" text-anchor="end">执行中</text>
+<text x="197.00" y="654.00" font-size="24" fill="#343a40" text-anchor="middle">ToolSearch</text>
+<text x="197.00" y="686.00" font-size="18" fill="#343a40" text-anchor="middle">完整工具名：本地精确命中</text>
+<text x="197.00" y="716.00" font-size="18" fill="#343a40" text-anchor="middle">描述不清：辅助模型语义选择</text>
+<rect x="398" y="612" width="330" height="110" rx="10" fill="#f3f0ff" stroke="#7048e8" stroke-width="1.6"/>
+<text x="563.00" y="654.00" font-size="24" fill="#343a40" text-anchor="middle">核对注册表</text>
+<text x="563.00" y="686.00" font-size="18" fill="#343a40" text-anchor="middle">只放行仍然注册的工具</text>
+<text x="563.00" y="716.00" font-size="18" fill="#343a40" text-anchor="middle">补充到下一模型步骤</text>
+<path d="M362 667 L396 667" fill="none" stroke="#868e96" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M563 612 L563 578" fill="none" stroke="#868e96" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="380.00" y="772.00" font-size="17" fill="#656b72" text-anchor="middle">预选是预测，ToolSearch 是补救；两条路径都要回到注册表核对。</text></svg>

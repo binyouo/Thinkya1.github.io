@@ -79,6 +79,22 @@
     "dark": "/diagrams/biny-memory-sleep-phases.dark.svg",
     "source": "/diagrams/biny-memory-sleep-phases.excalidraw"
   },
+  "/images/biny-tool-discovery/tool-selection.svg": {
+    "title": "工具怎样进入主模型的上下文",
+    "width": 760,
+    "height": 800,
+    "light": "/diagrams/biny-tool-discovery-selection.light.svg",
+    "dark": "/diagrams/biny-tool-discovery-selection.dark.svg",
+    "source": "/diagrams/biny-tool-discovery-selection.excalidraw"
+  },
+  "/images/biny-tool-discovery/two-stage-search.svg": {
+    "title": "先本地检索，再让模型判断",
+    "width": 760,
+    "height": 790,
+    "light": "/diagrams/biny-tool-discovery-two-stage.light.svg",
+    "dark": "/diagrams/biny-tool-discovery-two-stage.dark.svg",
+    "source": "/diagrams/biny-tool-discovery-two-stage.excalidraw"
+  },
   "/images/biny-tool-system/execution-coordinator.svg": {
     "title": "调用不同，执行约束共用",
     "width": 760,
