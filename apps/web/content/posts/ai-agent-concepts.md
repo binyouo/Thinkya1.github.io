@@ -1,6 +1,7 @@
 ---
 title: Ai Agent概念扫盲
 date: 2026-10-12 21:40:00
+updated: 2026-10-15 14:25:41
 categories:
   - AI
 tags:
@@ -62,13 +63,13 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Token](/2026/10/12/ai-agent-model-basics/)：** 模型处理文本时使用的单位，不固定等于一个汉字、单词或字符。Tokenizer 负责文本与 Token 编号之间的转换，Input Tokens 和 Output Tokens 分别描述输入、输出的计量。
 
-**[Context Window](/2026/10/12/ai-agent-model-basics/)：** 上下文窗口，一次模型调用可容纳的上下文范围。容量大不代表其中的信息都能被有效利用；输入、输出和推理预算怎样计算，应看对应接口。
+**[Context Window](/2026/10/12/ai-agent-model-basics/)：** 上下文窗口，一次模型调用可容纳的上下文范围。容量决定可容纳的信息量，实际利用效果还受内容、位置和任务影响；各接口分别规定输入、输出与推理预算。
 
 **[Inference / Reasoning](/2026/10/12/ai-agent-model-basics/)：** Inference 指运行已训练的模型来计算输出；Reasoning 更强调分析和逻辑推导。两者都可能译成「推理」，但普通回答也会执行 Inference，不一定涉及复杂 Reasoning。
 
 **[Prefill / Decode](/2026/10/12/ai-agent-model-basics/)：** Prefill 处理已有输入，Decode 逐步生成后续 Token。长输入和长输出带来的耗时可能发生在不同阶段；Streaming 则把内容或事件逐段返回，提供更早的反馈。
 
-**[Temperature / Top p / Top k](/2026/10/12/ai-agent-model-basics/)：** 控制生成采样的参数，影响候选 Token 的分布和选择范围。低 Temperature 不保证答案正确；生成采样的 Top k 与检索返回数量 Top K，属于不同环节。
+**[Temperature / Top p / Top k](/2026/10/12/ai-agent-model-basics/)：** 控制生成采样的参数，影响候选 Token 的分布和选择范围。较低 Temperature 让采样更集中；生成采样的 Top k 与检索返回数量 Top K，属于不同环节。
 
 **[Fine-tuning](/2026/10/12/ai-agent-model-basics/)：** 微调，通过训练调整模型参数来适应任务或数据。SFT、偏好优化等涉及训练方法，LoRA 是参数高效适配的一种方法。读 Skill、查 RAG、保存记忆通常属于运行时信息组织，没有直接更新模型权重。
 
@@ -76,7 +77,7 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Prompt](/2026/10/12/ai-agent-context-memory/)：** 当前任务的指令与输入，有些语境也泛指整份模型输入。例如「只根据这份文档回答，资料没有提到的内容标为未知」。Prompt Engineering 关注怎样把目标、例子、约束和输出要求写清楚。
 
-**[Context](/2026/10/12/ai-agent-context-memory/)：** 上下文，本次模型调用实际可用的信息，可能包括用户问题、历史、工具定义、工具结果、检索资料和记忆。信息保存在系统里，不代表这次一定交给了模型。
+**[Context](/2026/10/12/ai-agent-context-memory/)：** 上下文，本次模型调用实际可用的信息，可能包括用户问题、历史、工具定义、工具结果、检索资料和记忆。系统通过选择、检索和预算控制，决定哪些已保存信息进入当前输入。
 
 **[History](/2026/10/12/ai-agent-context-memory/)：** 历史交互记录，例如过去的用户消息、模型回答和工具结果。界面显示的历史可以比本次模型输入更多，系统通常需要选择、裁剪或压缩后再发送。
 
@@ -84,7 +85,7 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Context Engineering](/2026/10/12/ai-agent-context-memory/)：** 上下文工程，管理什么信息、在什么时候、以什么形式进入模型。例如把完整日志放到文件里，先提供失败摘要和读取入口，让模型需要时再查细节。
 
-**[Compaction](/2026/10/12/ai-agent-context-memory/)：** 上下文压缩，把较长历史整理成继续工作所需的材料。应保留目标、约束、进度、决定和验证结果。它可能丢失细节，摘要也不能替代已经变化的文件和真实业务状态。
+**[Compaction](/2026/10/12/ai-agent-context-memory/)：** 上下文压缩，把较长历史整理成继续工作所需的材料。应保留目标、约束、进度、决定和验证结果。关键结论保留来源，继续执行时结合当前文件和业务状态复核。
 
 ## 检索与 RAG
 
@@ -92,7 +93,7 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Chunking](/2026/10/12/ai-agent-rag/)：** 分块，把资料切成适合检索和放入上下文的片段。块太小可能丢掉条件，块太大可能混入无关内容。例如「500 元」应尽量保留城市、日期和适用范围。
 
-**[Embedding](/2026/10/12/ai-agent-rag/)：** 嵌入，把文本、图片等内容转成数值表示，供检索等任务比较。语义向量可以帮助找到字面不同但含义接近的内容，不过向量相似不证明它能回答问题。
+**[Embedding](/2026/10/12/ai-agent-rag/)：** 嵌入，把文本、图片等内容转成数值表示，供检索等任务比较。语义向量帮助找到字面不同但含义接近的候选，再结合问题判断候选是否提供所需依据。
 
 **[BM25](/2026/10/12/ai-agent-rag/)：** 常见的关键词相关性评分方法，利用词项匹配、词频和文档长度等信号。错误码、文件编号、函数名等精确术语，往往需要这类匹配能力。
 
@@ -106,13 +107,13 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[Grounding / Citation](/2026/10/12/ai-agent-rag/)：** Grounding 要求具体说法由证据支持，Citation 标明来源。链接存在之后，还要确认来源支持对应说法，包含当前日期和适用条件。证据不足时可以明确无法确认，这叫 Abstention。
 
-**[GraphRAG](/2026/10/12/ai-agent-rag/)：** 利用图结构辅助检索与生成的一类方法。知识图谱组织实体及其关系；微软 GraphRAG 是一个具体实现，还涉及社区报告等索引。使用图数据库，不自动等于实现了该系统。
+**[GraphRAG](/2026/10/12/ai-agent-rag/)：** 利用图结构辅助检索与生成的一类方法。知识图谱组织实体及其关系；微软 GraphRAG 是一个具体实现，还涉及社区报告等索引。图数据库是存储选择，完整系统还包括建图、索引和查询流程。
 
-**[Agentic RAG](/2026/10/12/ai-agent-rag/)：** 让 Agent 参与决定是否检索、查哪里、怎样改写问题、是否继续，以及证据是否足够。查到旧制度后继续寻找新版本，是一个简单例子。Self-RAG、Corrective RAG 则有各自的研究机制，不能仅凭名称视为同一种方法。
+**[Agentic RAG](/2026/10/12/ai-agent-rag/)：** 让 Agent 参与决定是否检索、查哪里、怎样改写问题、是否继续，以及证据是否足够。查到旧制度后继续寻找新版本，是一个简单例子。Self-RAG 侧重学习检索与反思，Corrective RAG 侧重检索质量评价和纠正。
 
 ## 运行与状态
 
-**[Agent Loop](/2026/10/12/ai-agent-loop-runtime/)：** Agent 的控制循环，准备上下文、调用模型、执行工具、取得观察，再决定继续、等待或结束。一次模型生成结束，不代表整个任务已经完成。
+**[Agent Loop](/2026/10/12/ai-agent-loop-runtime/)：** Agent 的控制循环，准备上下文、调用模型、执行工具、取得观察，再决定继续、等待或结束。一次生成后，循环还可能继续执行工具或发起下一次模型调用。
 
 **[ReAct](/2026/10/12/ai-agent-loop-runtime/)：** Reasoning 与 Acting，强调判断和行动交替推进。比如原先怀疑网络故障，读日志后发现数据库权限错误，随后调整排查方向。它与前端 UI 库 React 是不同概念。
 
@@ -126,11 +127,11 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 **[State](/2026/10/12/ai-agent-loop-runtime/)：** 状态，记录任务或系统现在处于什么阶段，例如运行中、等待输入、失败或完成。判断某类事实时，以对应的 Source of Truth，也就是权威记录为准；工单是否存在，应核对工单系统。
 
-**[Persistence / Checkpoint](/2026/10/12/ai-agent-loop-runtime/)：** Persistence 是持久化，让进程退出后数据仍可读取；Checkpoint 是保存从某个边界恢复所需的状态。保存聊天历史不等于保存了完整工具进度，也不保证能从任意一行代码继续。
+**[Persistence / Checkpoint](/2026/10/12/ai-agent-loop-runtime/)：** Persistence 是持久化，让进程退出后数据仍可读取；Checkpoint 是保存从某个边界恢复所需的状态。工具进度与副作用状态需要额外保存，恢复从系统定义的检查点继续。
 
-**[Resume / Reconnect](/2026/10/12/ai-agent-loop-runtime/)：** Resume 从可恢复边界继续工作，Reconnect 恢复通信连接。界面重新连接成功，不代表后台任务重新执行，也不代表恢复机制完整。
+**[Resume / Reconnect](/2026/10/12/ai-agent-loop-runtime/)：** Resume 从可恢复边界继续工作，Reconnect 恢复通信连接。界面重连后先读取后台任务状态，再决定是否需要恢复执行。
 
-**[Retry / Idempotency](/2026/10/12/ai-agent-loop-runtime/)：** Retry 是重试，Idempotency 是幂等性，在约定范围内重复同一请求，其预期业务效果与执行一次相同。超时不证明操作未成功；响应丢失后可以先核对真实状态，再决定是否重试。
+**[Retry / Idempotency](/2026/10/12/ai-agent-loop-runtime/)：** Retry 是重试，Idempotency 是幂等性，在约定范围内重复同一请求，其预期业务效果与执行一次相同。超时时远端可能已完成操作；响应丢失后先核对真实状态，再决定是否重试。
 
 ## 协作与界面
 
@@ -142,9 +143,9 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 ## 缓存与观测
 
-**[Cache Hit](/2026/10/12/ai-agent-cache-observability/)：** 缓存命中，找到满足复用条件的计算状态或结果。它可能命中输入前缀计算、完整答案、工具结果或工具目录，必须先说明缓存对象。命中率高不自动证明整个任务更快。
+**[Cache Hit](/2026/10/12/ai-agent-cache-observability/)：** 缓存命中，找到满足复用条件的计算状态或结果。缓存对象包括输入前缀计算、完整答案、工具结果和工具目录，收益取决于被复用环节在总耗时中的占比。
 
-**[KV Cache](/2026/10/12/ai-agent-cache-observability/)：** 保存注意力计算中的 Key、Value 表示，让自回归模型生成后续 Token 时复用已有计算。这里的 KV 是模型中间表示，不是保存用户偏好的长期记忆数据库。
+**[KV Cache](/2026/10/12/ai-agent-cache-observability/)：** 保存注意力计算中的 Key、Value 表示，让自回归模型生成后续 Token 时复用已有计算。这里的 KV 属于模型中间状态，用户偏好等长期信息由记忆存储管理。
 
 **[Prompt Cache / Response Cache](/2026/10/12/ai-agent-cache-observability/)：** Prompt Cache 通常复用符合条件的稳定输入前缀计算，模型仍生成新输出；Response Cache 复用完整回答。前缀命中缓存后，里面的信息仍计入逻辑上下文，不会扩大上下文窗口。
 
@@ -154,9 +155,9 @@ description: 按术语逐项解释 Skill、MCP、ACP、Code Mode、RAG、Memory�
 
 ## 安全与评测
 
-**[Sandbox / Approval](/2026/10/12/ai-agent-safety-evaluation/)：** Sandbox 限制代码能接触的资源；Approval 确认这次具体动作是否获准。Authentication 确认身份，Authorization 确认可执行范围。这几层需要配合，连接工具或读到 Skill 不会自动授予额外权限。
+**[Sandbox / Approval](/2026/10/12/ai-agent-safety-evaluation/)：** Sandbox 限制代码能接触的资源；Approval 确认这次具体动作是否获准。Authentication 确认身份，Authorization 确认可执行范围。执行器结合这些机制，检查具体操作的资源范围和权限。
 
-**[Prompt Injection](/2026/10/12/ai-agent-safety-evaluation/)：** 提示注入，用输入或外部资料中的指令诱导 Agent 偏离任务或越权。例如网页要求读取密钥，这仍是网页内容，不能自行变成用户授权。Trust Boundary，信任边界，规定不同来源的信息具有怎样的权威。
+**[Prompt Injection](/2026/10/12/ai-agent-safety-evaluation/)：** 提示注入，用输入或外部资料中的指令诱导 Agent 偏离任务或越权。例如网页诱导读取密钥，执行器应按原任务与权限规则处理这段外部内容。Trust Boundary，信任边界，规定不同来源的信息具有怎样的权威。
 
 **[Test / Eval / Verifier](/2026/10/12/ai-agent-safety-evaluation/)：** Test 检查系统行为，Eval 评估一组任务上的表现，Verifier 检查当前结果是否达到验收要求。Agent 说「创建成功」之后，应核对目标对象是否正确存在；测试通过也要说明覆盖了哪些行为。
 

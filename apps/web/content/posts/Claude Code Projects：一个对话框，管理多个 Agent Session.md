@@ -1,6 +1,7 @@
 ---
 title: Claude Code Projects：一个对话框，管理多个 Agent Session
 date: 2026-10-10 12:00
+updated: 2026-10-15 14:25:41
 categories:
   - Agent
   - AI
@@ -65,7 +66,7 @@ Coordinator 可以创建新的 Thread，也可以把后续任务交给已有 Thr
 
 这是我觉得比较值得研究的地方。
 
-虽然用户始终在一个 Project 对话框里交流，但这并不代表所有 Session 的上下文都被塞进同一个模型窗口。
+用户在同一个 Project 对话框里交流，底层各个 Session 分别管理自己的上下文。
 
 这里至少可以区分两个层次的上下文。
 
@@ -79,19 +80,15 @@ Coordinator 可以创建新的 Thread，也可以把后续任务交给已有 Thr
 
 Coordinator 本身依然有上下文窗口限制。如果用户持续几个月都在同一个 Project 里对话，消息和任务信息也会不断积累。
 
-Anthropic 公开介绍确认，Project 中的 Thread 会共同写入并读取共享 Memory，帮助后续工作沿用项目细节和决策。官方介绍没有披露 Coordinator 每轮具体加载多少历史消息、采用什么裁剪策略。因此，“结合近期消息、近期 Thread 信息与 Project Memory 来组织上下文”更适合作为一种基于产品描述的理解，而不是已公开确认的实现细节。
+Anthropic 公开介绍了 Thread 之间的共享 Memory，用来沿用项目细节和决策。对类似系统，我会考虑结合近期消息、Thread 摘要与 Project Memory 组织 Coordinator 的输入，控制每轮加载量。
 
-即使有共享 Memory，也不代表彻底解决了上下文问题。较早的需求、设计决策或任务约束，如果没有被正确记录下来，仍然可能在后续执行中丢失。
-
-因此，**它解决的主要是上下文的隔离和管理，而不是让模型拥有无限上下文。**
+共享 Memory 需要保留关键需求、设计决策和任务约束，让后续 Thread 能取回继续工作所需的信息。这里的核心是**隔离执行上下文，并维护可复用的项目记忆。**
 
 ## 四、我的理解
 
 我认为 Claude Code Projects 的核心设计可以概括为：
 
 **Project 负责长期交互与协调，Session 负责具体执行，Memory 负责跨 Session 保留重要信息。**
-
-这几个概念不应该混在一起。
 
 用户看到的是一个统一且持续存在的项目对话框，而底层实际上由多个具有独立生命周期的 Session 组成。
 

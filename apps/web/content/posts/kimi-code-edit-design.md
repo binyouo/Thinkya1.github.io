@@ -1,7 +1,7 @@
 ---
 title: "用了 Kimi Code 后，我又重新看了一遍 Coding Agent 的 Edit 设计"
 date: 2026-10-10 05:24:48
-updated: 2026-10-10 05:31:18
+updated: 2026-10-15 14:25:41
 categories:
   - AI
 tags:
@@ -22,7 +22,7 @@ Codex 主要采用 `apply_patch`，让模型通过 Patch 描述文件修改；�
 
 我个人感觉，这可能和模型能力的提升有关。模型越来越擅长编写代码和处理复杂的工具调用，Harness 也开始让模型承担更多的编排工作。
 
-当然，Code Mode 和 Patch 并不是互相替代的关系，一个负责工具编排，一个负责文件编辑。
+Code Mode 负责工具编排，Patch 负责文件编辑，两者可以组合使用。
 
 之前设计 Biny-Agent 的 Edit 时，我其实就思考过这些方案。借着这次使用 Kimi Code，重新翻了一遍源码，也顺便整理一下目前几个 Coding Agent 的设计区别。
 
@@ -54,25 +54,21 @@ Codex 的 `apply_patch` 是一种结构化文件编辑协议。
 
 这种设计能够减少模型生成 Patch 时因为格式问题导致的失败，但也引入了另一个问题：当文件中存在相似代码时，需要确保上下文能够准确定位目标。
 
-这里的“上下文匹配”并不等于字符串替换工具的“唯一匹配”。`seek_sequence` 会从指定位置开始寻找符合条件的序列并返回首次命中，因此重复代码下的定位更依赖充分的上下文。它也不是通过 AST 理解代码语义后再重构。
+`seek_sequence` 从指定位置开始查找文本序列，并返回首次命中。因此遇到重复代码时，Patch 需要提供充分的上下文来定位目标。
 
 **Patch 的主要优势是表达能力，而不仅仅是节省 Token。**
 
-但同一次 Patch 能描述多个文件修改，不代表这些修改天然构成一个原子事务。
+跨文件 Patch 的失败恢复和回滚由执行层处理，协议本身负责描述修改。
 
 ### Codex 的另一个变化：Code Mode
 
-本次核对的 Codex 模型配置中，`gpt-6-astra` 和 `gpt-6.1-sol` 都设置了 `tool_mode: code_mode_only`，并保留 `apply_patch_tool_type: freeform`。这说明 Astra 与 Sol 都采用了这套工具编排方式；仅凭当前配置，还不能确定 Code Mode 最早引入的版本或发布时间。
-
-这里说的是 **Codex 为模型配置的工具交互方式**，不能直接推导为这些模型在所有产品或 API 场景下都只能使用 Code Mode。
+文末所链接的 Codex 模型配置中，`gpt-6-astra` 和 `gpt-6.1-sol` 都设置了 `tool_mode: code_mode_only`，同时保留 `apply_patch_tool_type: freeform`：由 Code Mode 编排工具，再用 Patch 表达文件修改。
 
 Code Mode 允许模型通过 JavaScript 组织工具调用，例如先搜索多个文件，再根据结果决定修改哪些内容，而不是所有步骤都由独立的顶层工具调用串联。
 
 它的价值在于，模型可以用代码组织顺序调用、组合独立请求，并处理工具返回结果。能并行的读取可以一起发起，而依赖读取结果的编辑仍然需要按顺序执行。
 
-这意味着，Codex 正在把更多工具编排交给模型，但底层的文件修改协议仍然可以使用 Patch。JavaScript 编排本身不提供跨文件回滚，也不会让字符串替换自动变成 Patch。
-
-我觉得这是值得观察的方向，不过目前还不能简单认为 Code Mode 一定更快，或者一定是模型能力提升后才采用的设计。它仍然需要考虑执行开销、权限和错误处理。
+这种分工让模型承担更多动态编排，执行层继续管理文件提交、权限和错误恢复。评估效率时，可以比较减少的模型往返次数与新增的脚本执行成本。
 
 ![Code Mode 和 Patch 的关系](/images/kimi-code-edit/code-mode-patch.svg)
 
@@ -98,13 +94,13 @@ Claude Code 的标准 `Edit` 采用 `old_string` 和 `new_string`。
 
 这点我觉得挺合理。
 
-文件其他部分发生变化，不代表当前要修改的代码也已经失效。相比单纯通过整个文件版本判断，这能减少部分无意义的失败。
+文件其他部分发生变化时，目标片段仍可能保持有效。按目标文本判断，可以减少整文件版本变化造成的编辑拒绝。
 
-“编辑前一定要 Read”也需要加上条件。官方文档区分了模型：Opus 4.6、Haiku 4.5 及更早模型仍要求先读；较新模型在 Read 工具可用、读取无需额外权限提示时，可以编辑尚未读取的文件。`Read` 拒绝规则仍优先生效。这些是 Claude Code 的公开工具行为，不能据此推断其内部锁或磁盘提交实现。
+“编辑前一定要 Read”也需要加上条件。官方文档区分了模型：Opus 4.6、Haiku 4.5 及更早模型仍要求先读；较新模型在 Read 工具可用、读取无需额外权限提示时，可以编辑尚未读取的文件。`Read` 拒绝规则仍优先生效。
 
 ## 3. Kimi Code：实现很直接
 
-这次查看的是 Kimi Code TypeScript 仓库的 `419aced0` 提交，Edit 实现比较直接。
+文末链接的 Kimi Code TypeScript 实现比较直接。
 
 核心链路是：
 
@@ -112,11 +108,7 @@ Claude Code 的标准 `Edit` 采用 `old_string` 和 `new_string`。
 
 执行时先读取整个文件，再通过字符串匹配得到更新后的内容，最后写回文件。
 
-所以这里需要区分：
-
-**模型只输出修改的片段，不代表磁盘只写入被修改的几个字节。**
-
-Kimi 的实现本质上仍然是全文件读取、内存替换、全文件写回。
+**模型输出局部修改，执行器完成全文件读取、内存替换和写回。**
 
 对于普通代码文件，这种方式我认为没有太大问题。文件读写本身通常远没有模型推理与多轮工具调用昂贵。
 
@@ -128,13 +120,11 @@ Kimi 的实现本质上仍然是全文件读取、内存替换、全文件写回
 
 从模型接口来看，我觉得 Kimi Code 的 Edit 确实很优雅：简单、直观，工具定义也不复杂。
 
-但它在文件版本校验和提交安全方面，仍然有值得进一步核对的地方。在这个提交的 `FileEditService` 中，可以直接看到 `readText → editor.apply → writeText`；这一层没有传入上次 Read 的版本标识，也没有显式比较文件快照。这个观察的范围是该服务，不能直接当作所有宿主文件系统和执行层都没有保护的证明。
-
-旧文本能够匹配，只能说明目标片段当前仍然存在。它不保证周围代码的语义没有变化，也不保证匹配后到写入前没有其他进程修改文件。工具接口简单，不代表底层的并发问题可以忽略。
+在链接的 `FileEditService` 中，链路是 `readText → editor.apply → writeText`，这一层没有传入上次 Read 的版本标识或显式比较文件快照。实现类似工具时，还需要考虑周围代码变化，以及匹配到写回之间的并发修改。
 
 ![三种 Agent 的文件编辑链路](/images/kimi-code-edit/editing-flow.svg)
 
-图中最后一层是概念上的归纳，不表示三种 Agent 使用相同的文件写入实现。
+图中按修改描述、目标定位和文件写入三个阶段比较各自链路。
 
 ## 4. 三种设计怎么选？
 
@@ -167,7 +157,7 @@ Biny 的 Edit 设计其实在之前就考虑过这些问题。
 
 我现在反而不太想继续给 Edit 增加更多功能。
 
-三套协议并不意味着一定比一套好，增加的匹配规则、执行分支和边界处理，都需要额外维护。
+三套协议增加了匹配规则、执行分支和异常处理的维护成本。
 
 相比继续讨论哪种协议最先进，我更想通过真实任务对比它们的首次成功率、Token 消耗、重试次数与错误修改率。
 
@@ -185,7 +175,7 @@ Biny 的 Edit 设计其实在之前就考虑过这些问题。
 
 随着模型能力提升，我觉得 Harness 的一个方向可能是：**让模型承担更多动态编排，让程序继续负责确定性的执行与安全约束。**
 
-但这也只是我目前的观察。Code Mode 是否真的比传统工具调用更有效率，Patch 是否比 String Replace 更适合复杂任务，仍然需要实验验证。
+下一步可以用同一批任务比较工具往返、首次编辑成功率和总耗时，判断不同编排方式与编辑协议各自适合什么场景。
 
 对 Biny 来说，我现在更倾向于先把现有方案测清楚，而不是继续增加新的编辑协议。
 
@@ -203,5 +193,3 @@ Biny 的 Edit 设计其实在之前就考虑过这些问题。
 - [Codex — Code Mode 执行入口](https://github.com/openai/codex/blob/4bc83aa5f7ebfec8492bb5747affe0fc8433fcad/codex-rs/core/src/tools/code_mode/execute_spec.rs)
 - [Codex — Patch 上下文匹配](https://github.com/openai/codex/blob/4bc83aa5f7ebfec8492bb5747affe0fc8433fcad/codex-rs/apply-patch/src/seek_sequence.rs)
 - [Kimi Code — FileEditService](https://github.com/MoonshotAI/kimi-code/blob/419aced0e97fa04b75f8f71b089e1667f6de6d0a/packages/agent-core-v2/src/app/edit/fileEditService.ts)
-
-源码与文档核对于 2026 年 10 月 10 日：Codex `4bc83aa5`，Kimi Code `419aced0`；Claude Code 依据当日官方工具参考。使用速度属于个人体验，本文未进行统一性能基准测试。

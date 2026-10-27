@@ -1,7 +1,7 @@
 ---
 title: "RRF 排序融合，混合检索如何统一 BM25 和向量搜索"
 date: 2026-07-09 01:04:11
-updated: 2026-10-12 21:40:00
+updated: 2026-10-15 14:25:41
 categories:
   - "AI"
 tags:
@@ -140,7 +140,7 @@ for document_id, score in fused_results:
 
 ## 在 LangChain 里使用 EnsembleRetriever
 
-下面保留的是旧版 LangChain API 示例，用于理解组合方式，不表示当前版本安装后可直接运行。实际项目应按所用版本核对包名和导入路径；上面的独立 Python 实现不依赖 LangChain。
+下面用旧版 LangChain API 展示组合方式，包名和导入路径需与所用版本匹配。上面的独立 Python 实现可单独运行。
 
 如果用 LangChain 搭混合检索，RRF 也经常不是自己手写，而是通过 `EnsembleRetriever` 这类组件完成。
 
@@ -240,7 +240,7 @@ $$
 
 ## RRF 的边界
 
-RRF 简单、鲁棒，但它并不会判断一篇文档是否真的回答了问题。
+RRF 融合各路排名，文档能否回答问题还需要相关性判断。
 
 如果关键词检索和向量检索都召回了错误内容，RRF 只会把这些错误结果重新排序。它也会丢掉原始分数中的置信度信息。某一路的第一名只比第二名高一点，和高出一大截，在 RRF 里没有区别。
 

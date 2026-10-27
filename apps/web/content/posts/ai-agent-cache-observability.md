@@ -1,6 +1,7 @@
 ---
 title: Ai Agent概念扫盲：Cache Hit、KV Cache、Prompt Cache 与性能
 date: 2026-10-12 21:33:00
+updated: 2026-10-15 14:25:41
 categories:
   - AI
 tags:
@@ -24,7 +25,7 @@ Agent 面板显示「缓存命中」，你却还是等了很久。
 
 **Cache 是为复用与性能保存的计算状态或结果。Cache Hit 是命中，Cache Miss 是未找到可用缓存。**
 
-「有缓存」还不够，至少需要说明缓存对象。
+按缓存对象，可以分成下面几类。
 
 | 类型 | 缓存什么 | 简单例子 |
 | --- | --- | --- |
@@ -37,27 +38,27 @@ Agent 面板显示「缓存命中」，你却还是等了很久。
 | Semantic Cache | 对语义近似请求复用结果 | 类似问题匹配已有答案 |
 | Tool Catalog Cache | 工具名称、描述、Schema 等目录 | 不重新获取工具列表 |
 
-这些缓存可以同时存在，但命中其中一种不证明其他环节也命中。
+这些缓存可以同时存在，各自记录命中情况和节省的开销。
 
-## KV Cache，不是用户记忆数据库
+## KV Cache，复用注意力计算状态
 
 **KV Cache 保存的是注意力计算中的 Key 和 Value 表示。** 自回归模型生成后续 Token 时，可以复用先前 Token 的部分计算。
 
-这里的 Key、Value 是模型计算里的表示，不是「用户名 → 用户偏好」那种键值存储。KV Cache 也不能直接替代长期记忆。
+这里的 Key、Value 是模型计算里的表示，服务于生成过程。用户偏好等长期信息则保存在应用的记忆存储中。
 
-具体原理可以看 [Hugging Face 的缓存说明](https://huggingface.co/docs/transformers/cache_explanation)。缓存状态需要资源，长度与模型结构等也会影响内存需求，不能把计算复用理解为完全没有开销。
+具体原理可以看 [Hugging Face 的缓存说明](https://huggingface.co/docs/transformers/cache_explanation)。缓存状态占用内存，所需空间受序列长度与模型结构等因素影响。
 
 ## Prompt Cache，重复计算减少，信息还在
 
-**Prompt Cache 通常复用符合条件的稳定输入前缀。** 具体条件、最小长度、有效时间、计费和统计依提供方定义，不能跨产品直接套用。
+**Prompt Cache 通常复用符合条件的稳定输入前缀。** 各提供方分别规定命中条件、最小长度、有效时间和计费方式。
 
-假设有 8,000 Token 稳定前缀，本次追加 2,000 Token，前缀满足复用条件。这是解释概念的例子。
+例如，有 8,000 Token 稳定前缀，本次追加 2,000 Token，前缀满足复用条件。
 
 ![缓存复用 8,000 Token 前缀计算，逻辑输入仍约 10,000 Token，输出重新生成](/images/ai-agent-concepts/prompt-cache.svg)
 
 模型本次逻辑输入仍约有 10,000 Token。复用的是计算，并没有把前缀内容从上下文容量中删除；模型通常还要生成新输出，也可能继续调用工具。
 
-如果缓存直接返回完整旧答案，那是 Response Cache 的场景。[Claude 的 Prompt caching 文档](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)说明了其具体规则，本篇不把这些规则推广成通用保证。
+如果缓存直接返回完整旧答案，那是 Response Cache 的场景。[Claude 的 Prompt caching 文档](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)说明了该接口的命中与计费规则。
 
 ## Key、TTL、Eviction、Invalidation
 
@@ -69,15 +70,15 @@ Agent 面板显示「缓存命中」，你却还是等了很久。
 
 **Hit Rate** 是命中比例，但统计口径必须说明。按请求计，按 Token 计，只统计可缓存请求，得到的百分比都可能不同。
 
-工具目录命中，只说明复用目录信息，不证明服务仍可达、Schema 仍最新或权限仍有效。
+工具目录缓存复用名称和定义，实际调用时再检查连接、Schema 版本和权限。
 
 ## Semantic Cache，相似请求要考虑业务差异
 
 「今年北京住宿标准」和「去年北京住宿标准」语义很像，答案却可能不同。「我的余额」不能因为文字相同就跨用户复用。
 
-语义缓存要判断哪些差异允许复用，哪些条件必须严格匹配。相似度阈值也不能直接当答案正确概率。
+语义缓存先按用户、日期和数据版本等业务条件限定范围，再判断语义是否足够接近。阈值需要通过实际请求校准。
 
-动态工具定义可能改变输入前缀，但影响依具体接口设计而定。不能只凭「增加了工具」就断言一定完全破坏缓存，也不能认为目录缓存能保证模型前缀命中。
+动态工具定义会影响输入前缀的组织，缓存效果要结合接口的前缀匹配规则观察。工具目录缓存与模型前缀缓存分别统计。
 
 ## Observability，知道哪里发生了什么
 
@@ -94,7 +95,7 @@ Agent 面板显示「缓存命中」，你却还是等了很久。
 
 Trace 可以跨进程，Span 可以嵌套；详细定义见 [OpenTelemetry 的信号说明](https://opentelemetry.io/docs/concepts/signals/)。
 
-日志帮助解释故障，检查点和恢复机制才帮助继续执行。只有详细日志，不会自动获得可靠恢复能力。
+日志用于解释故障；检查点保存恢复位置，执行状态和副作用记录用于决定怎样继续。
 
 ## Latency、TTFT、TPOT，起点终点要说清
 
@@ -102,7 +103,7 @@ Trace 可以跨进程，Span 可以嵌套；详细定义见 [OpenTelemetry 的�
 
 首字一秒出现，但后面还要查十个外部服务，任务仍可能很慢。
 
-**Throughput** 是单位时间处理的请求、Token 或任务数量；**Concurrency** 是同一时间范围内处理中的任务数量。吞吐增加不保证每个请求的延迟下降。
+**Throughput** 是单位时间处理的请求、Token 或任务数量；**Concurrency** 是同一时间范围内处理中的任务数量。吞吐与单请求延迟分别衡量系统容量和等待时间，需要一起观察。
 
 **p50、p95、p99** 是延迟分位数。p95 为 10 秒，通常表示约 95% 的观测值不超过该时间，需要同时说明统计窗口和样本范围。
 

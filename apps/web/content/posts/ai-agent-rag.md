@@ -1,6 +1,7 @@
 ---
 title: Ai Agent概念扫盲：一篇串起 RAG、Embedding、BM25、RRF 与重排
 date: 2026-10-12 21:35:00
+updated: 2026-10-15 14:25:41
 categories:
   - AI
 tags:
@@ -75,7 +76,7 @@ PDF 可能包含双栏、表格、脚注和扫描件。**OCR** 识别图片中�
 「住宿费上限」 → [0.12, -0.48, 0.73, ...]
 ```
 
-每一维通常不能直接解释成「住宿」或「金额」。检索主要比较整体表示之间的关系。
+语义信息分布在多个维度中，检索主要比较整体表示之间的关系。
 
 **Dense Vector，稠密向量**，通常大多数分量非零；**Sparse Vector，稀疏向量**，大多数分量为零；**Dimension** 是分量数量；**Norm** 是向量长度；**Normalization** 按规则归一化。
 
@@ -133,7 +134,7 @@ HNSW 的图表达近邻关系，知识图谱的图表达实体关系，两个「
 
 **Top K** 取排名前 K 的结果；**Threshold** 按分数阈值筛选。关键词取前 30，向量取前 30，重排后取前 5，最后进入上下文 3 块，这些 K 可以不同。
 
-分数能否当置信度、阈值怎样设，需要用可回答与不可回答的问题验证。相似度 0.8 不能自动解释为「80% 正确」。
+相似度描述表示之间的接近程度。要将分数用于置信度或拒答阈值，需要用可回答与不可回答的问题进行校准。
 
 ## Hybrid Search、Fusion、RRF
 
@@ -165,7 +166,7 @@ RRF(d) = 各路 1 / (k + 该文档在该路的排名) 之和
 
 如果前五块全是同一段住宿标准的副本，应该补充适用日期、地区和例外条件，而不是把五份重复内容全部送给模型。
 
-这一步可能再次丢掉信息。检索系统找到了正确文档，不代表最终 Context 中仍保留了那条关键限制。
+装配后再检查最终 Context 是否保留关键限制，尤其是日期、地区和例外条件。
 
 ## Grounding、Citation、Abstention
 
@@ -181,7 +182,7 @@ RRF(d) = 各路 1 / (k + 该文档在该路的排名) 之和
 
 例如「财务部—发布—报销制度」。**Entity Resolution** 判断不同名字是否指同一个对象；**Ontology / Schema** 定义类型与关系规则；**Graph Traversal** 沿关系查找；**Community** 是联系较紧密的一组节点。
 
-广义 **GraphRAG** 是利用图结构辅助检索生成的一类方法。微软 GraphRAG 则是具体系统，涉及实体关系和社区报告等索引。使用图数据库，不等于实现了微软 GraphRAG。
+广义 **GraphRAG** 是利用图结构辅助检索生成的一类方法。微软 GraphRAG 则是具体系统，涉及实体关系和社区报告等索引。图数据库承担存储，完整的 GraphRAG 流程还包括建图、社区整理和查询。
 
 微软的 **Local Search** 结合实体相关图信息与原文；**Global Search** 利用社区报告处理整体性问题；**DRIFT** 结合社区信息与后续查询扩展。具体方式见 [官方查询概览](https://microsoft.github.io/graphrag/query/overview/)。
 
@@ -193,9 +194,9 @@ RRF(d) = 各路 1 / (k + 该文档在该路的排名) 之和
 
 **Corrective RAG** 围绕检索质量评价和纠正组织流程，相关原论文包含检索评价、知识处理与外部搜索等机制，见 [CRAG 论文](https://arxiv.org/abs/2401.15884)。
 
-**Self-RAG** 原论文包含训练和反思 Token 等设计。给普通提示词加上「检查一下资料」，不能直接称为完整实现 Self-RAG。见 [Self-RAG 原始论文](https://arxiv.org/abs/2310.11511)。
+**Self-RAG** 通过训练与反思 Token，让模型学习何时检索以及怎样评价生成内容。见 [Self-RAG 原始论文](https://arxiv.org/abs/2310.11511)。
 
-名字里的 Agentic、Corrective、Self 描述关注方向，不保证质量更好。新增调用可能增加延迟，新增评价模型也可能判断错误。
+选型时比较检索质量、答案正确率和额外延迟，并检查评价模型能否稳定识别错误候选。
 
 ## ColBERT、Late Interaction 和其他方向
 
@@ -223,7 +224,7 @@ ANN Recall 衡量近邻找回，相关性 Recall 衡量回答依据找回，两�
 
 回答层的 **Answer Correctness** 看正确性，**Faithfulness** 看是否忠实于给定材料，**Answer Relevance** 看是否回答问题，**Context Precision / Recall** 看上下文相关程度和覆盖，**Citation Accuracy** 看引用是否支持声明。
 
-忠实于错误旧制度的回答仍然可能错。同名指标在不同框架中实现也可能不同，例如 [Ragas 的 Context Precision](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/)考虑了排名等因素，不能直接等同于普通 Precision@K。
+评价时同时检查材料是否有效、回答是否忠实。使用框架指标时也要看具体公式，例如 [Ragas 的 Context Precision](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/)还考虑候选排名。
 
 ## 回答错了，沿这张表找原因
 

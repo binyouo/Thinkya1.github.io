@@ -1,6 +1,7 @@
 ---
 title: Ai Agent概念扫盲：Tool、Skill、MCP、ACP 与 Code Mode
 date: 2026-10-12 21:38:00
+updated: 2026-10-15 14:25:41
 categories:
   - AI
 tags:
@@ -29,7 +30,7 @@ Tool、Skill、MCP、Code Mode 就在解决这些不同问题。理解它们最�
 
 **Tool Call 是一次具体调用请求。Function Calling 是让模型按结构化格式选择函数并生成参数的机制。** 有的 API 把 Function Calling 和 Tool Calling 近似使用；具体接口还可能有托管搜索等工具类型。
 
-下面只是抽象格式，不是某家 API 的完整请求。
+一次工具调用可以抽象为下面的结构：
 
 ```json
 {
@@ -43,7 +44,7 @@ Tool、Skill、MCP、Code Mode 就在解决这些不同问题。理解它们最�
 
 ![模型表达调用，宿主检查和执行，结果回到模型](/images/ai-agent-concepts/tool-call.svg)
 
-比如读文件成功，只说明拿到了内容；运行测试成功，还要看退出状态和测试结论；用户要求的 Bug 是否解决，又是下一层判断。
+读文件取得代码，运行测试获得退出状态和测试结论，再根据验收条件判断 Bug 是否修复。这些反馈逐步支撑任务完成。
 
 ## 工具调用周围的一圈词
 
@@ -60,7 +61,7 @@ Tool、Skill、MCP、Code Mode 就在解决这些不同问题。理解它们最�
 | Tool Router | 选择工具或执行路径 | 把代码查询路由到语言服务 |
 | Middleware | 统一处理横切逻辑 | 校验、权限、日志、超时 |
 
-工具在 Registry 中存在，不代表模型已经看到了它的完整定义；看到了定义，也不代表当前用户有权执行。目录、模型输入和权限是三层。
+Registry 管理工具目录，上下文装配决定向模型提供哪些定义，执行器检查当前用户的操作权限。
 
 ## JSON、Schema 和 Structured Output
 
@@ -78,7 +79,7 @@ Tool、Skill、MCP、Code Mode 就在解决这些不同问题。理解它们最�
 
 符合 Schema 只解决结构层问题。「问题在第 20 行」可以格式完全正确，但第 20 行可能根本没有问题。
 
-**Serialization / Deserialization，序列化与反序列化**，是对象与可传输表示之间的转换。**JSON-RPC** 则规定方法、请求 ID、结果和错误怎样交换；**OpenAPI** 描述 HTTP API 的路径和请求响应结构。它们不能仅因为都能使用 JSON 就看成同一种东西。
+**Serialization / Deserialization，序列化与反序列化**，是对象与可传输表示之间的转换。**JSON-RPC** 则规定方法、请求 ID、结果和错误怎样交换；**OpenAPI** 描述 HTTP API 的路径和请求响应结构。
 
 ## Skill，方法和资源怎样复用
 
@@ -86,7 +87,7 @@ Tool、Skill、MCP、Code Mode 就在解决这些不同问题。理解它们最�
 
 代码审查 Skill 可以规定，先明确改动目标，再沿调用链找影响，运行必要检查，最后提供问题与证据。
 
-它提供的是工作方法。读取代码要靠文件或仓库工具，运行脚本要靠执行环境。即使 Skill 写着「使用数据库工具」，也不能自动产生数据库访问权限。
+它提供的是工作方法。读取代码要靠文件或仓库工具，运行脚本要靠执行环境。Skill 使用数据库工具时，仍由执行环境提供连接并检查访问权限。
 
 **Prompt** 是当前任务的指令和输入；Skill 把反复使用的方法放进可维护的包。**Command** 提供显式触发入口；**Hook** 在特定生命周期事件触发逻辑；**Plugin / Extension** 是安装和分发附加能力的包；**Connector / Adapter** 负责外部服务连接或接口适配。
 
@@ -102,13 +103,13 @@ Tool、Skill、MCP、Code Mode 就在解决这些不同问题。理解它们最�
 
 例如应用连着一百个工具，当前只需要「查代码」。可以先找到相关工具，再把完整参数结构交给模型。
 
-这里延迟加载的可能是文档、Schema、模块、连接或进程。Schema 尚未进入模型上下文时，服务器可能早就连接好了。工具目录缓存命中，也不能证明某次调用一定能成功。
+延迟加载可以作用于文档、Schema、模块、连接或进程。例如服务器先连接，相关 Schema 等模型需要时再进入上下文；真正调用时再检查连接与工具状态。
 
 ## MCP，连接应用与外部能力
 
 **MCP，全称 Model Context Protocol，统一应用接入外部能力的方式。**
 
-**Host** 是承载 AI 交互的应用；**Client** 是 Host 中与 Server 通信的协议组件；**Server** 暴露能力。它们是软件角色，不能直接推断进程数量。参见 [MCP 官方架构说明](https://modelcontextprotocol.io/docs/learn/architecture)。
+**Host** 是承载 AI 交互的应用；**Client** 是 Host 中与 Server 通信的协议组件；**Server** 暴露能力。这些角色可按部署方式组合在同一进程或分布在不同进程。参见 [MCP 官方架构说明](https://modelcontextprotocol.io/docs/learn/architecture)。
 
 Server 可以提供三类核心内容。
 
