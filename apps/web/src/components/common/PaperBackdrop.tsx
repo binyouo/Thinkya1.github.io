@@ -2,28 +2,20 @@
 
 import { useAtom, useAtomValue } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
-import type { CSSProperties } from 'react'
+
+import { usePathname } from '~/i18n/navigation'
+
+import { DitheredPaperBackdrop } from './DitheredPaperBackdrop'
 
 const enabledAtom = atomWithStorage('paper-background-effects', true)
 
 export const PaperBackdrop = () => {
   const enabled = useAtomValue(enabledAtom)
+  const pathname = usePathname()
   if (!enabled) return null
   return (
     <div className="paper-backdrop" aria-hidden="true">
-      {Array.from({ length: 32 }, (_, index) => (
-        <span
-          key={index}
-          style={
-            {
-              left: `${(index * 31 + 7) % 100}%`,
-              top: `${(index * 47 + 9) % 100}%`,
-              '--paper-delay': `${-(index % 13)}s`,
-              '--paper-turn': `${index * 29}deg`,
-            } as CSSProperties
-          }
-        />
-      ))}
+      <DitheredPaperBackdrop quiet={pathname !== '/'} />
     </div>
   )
 }
