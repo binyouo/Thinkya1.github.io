@@ -22,7 +22,7 @@ tags:
 用户输入 → 构建提示词 → 调模型 → 模型输出 → 展示结果
 ```
 
-核心工作在于”构建提示词”** 。提示词写得好，结果就好。一次调用，一次输出，没有来回。
+核心工作在于**构建提示词**。提示词写得好，结果就好。一次调用，一次输出，没有来回。
 
 适用场景：翻译、摘要、问答、代码补全——凡是”一问一答”能搞定的事。
 
@@ -91,7 +91,7 @@ tags:
 
 一个 Turn 的定义非常精确： **一次模型调用 + 这次调用触发的所有工具执行。**
 
-每个 Turn 由一对 `turn_start` 和 `turn_end` 事件包裹。关键点： **一个 Turn 只有一次模型调用。** 模型返回了 toolUse → 执行那批工具 → 发送 turn\_end → 这个 Turn 就结束了。把工具结果喂回去再调模型，那是 **下一个 Turn** 。
+每个 Turn 由一对 `turn_start` 和 `turn_end` 事件包裹。关键点： **一个 Turn 只有一次模型调用。** 模型返回了 toolUse → 执行那批工具 → 发送 `turn_end` → 这个 Turn 就结束了。把工具结果喂回去再调模型，那是 **下一个 Turn** 。
 
 看代码就更清楚了。内层循环每一圈的结构（后面会详讲）：
 
@@ -109,7 +109,7 @@ while (hasMoreToolCalls || ...) {
 }
 ```
 
-**一圈内层循环 = 一个 Turn = 一次 turn\_start → 一次模型调用 → 工具执行 → 一次 turn\_end。**
+**一圈内层循环 = 一个 Turn = 一次 `turn_start` → 一次模型调用 → 工具执行 → 一次 `turn_end`。**
 
 如果模型在一个 Turn 中一口气要求了 3 个工具（read + grep + find），那这 3 个工具都在同一个 Turn 里执行——因为它们都是同一次模型调用的产物。但执行完毕后把结果喂回去再调模型的那一刻，就已经进入下一个 Turn 了。
 
@@ -137,7 +137,7 @@ Trace（一次完整运行）
 │   agent_end
 ```
 
-> 注意：首轮 Turn 的 `turn_start` 是在 `runAgentLoop()` 入口就发出的，然后 `runLoop()` 内用 `firstTurn` 标志跳过首圈的 turn\_start，避免重复。
+> 注意：首轮 Turn 的 `turn_start` 是在 `runAgentLoop()` 入口就发出的，然后 `runLoop()` 内用 `firstTurn` 标志跳过首圈的 `turn_start`，避免重复。
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-label="Trace 与 Turn 的嵌套结构" data-src="https://dg-ai-notes.pages.dev/assets/260702-ch03-trace-turn-nesting.svg"><defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#57534e"></polygon></marker><marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#b5523a"></polygon></marker></defs><rect width="960" height="560" fill="#faf7f2"></rect><rect x="380" y="20" width="200" height="28" rx="4" fill="#faf7f2" stroke="#b5523a" stroke-width="1"></rect><text x="480" y="38" fill="#b5523a" font-size="11" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">agent_start</text> <line x1="480" y1="48" x2="480" y2="76" stroke="#57534e" stroke-width="1" marker-end="url(#arrow)"></line><rect x="40" y="80" width="880" height="380" rx="8" fill="rgba(28,25,23,0.03)" stroke="#1c1917" stroke-width="1.2"></rect><text x="60" y="108" fill="#1c1917" font-size="11" font-family="'Geist Mono', monospace" letter-spacing="0.14em">TRACE</text> <text x="60" y="124" fill="#57534e" font-size="10" font-family="'Geist', sans-serif">一次完整运行</text> <g><rect x="68" y="140" width="272" height="300" rx="6" fill="#ffffff" stroke="rgba(28,25,23,0.20)" stroke-width="1"></rect><rect x="68" y="140" width="272" height="32" rx="6" fill="rgba(28,25,23,0.05)"></rect><text x="84" y="160" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif">Turn 1</text> <rect x="280" y="148" width="52" height="16" rx="2" fill="rgba(181,82,58,0.10)" stroke="rgba(181,82,58,0.50)" stroke-width="0.8"></rect><text x="306" y="160" fill="#b5523a" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">toolUse</text> <text x="84" y="194" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.10em">turn_start</text> <rect x="88" y="208" width="232" height="56" rx="4" fill="#ffffff" stroke="#1c1917" stroke-width="1"></rect><text x="204" y="228" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">调用模型</text> <text x="204" y="248" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">streamSimple(model, ctx)</text> <line x1="204" y1="264" x2="204" y2="284" stroke="#57534e" stroke-width="1" marker-end="url(#arrow)"></line><rect x="88" y="288" width="232" height="56" rx="4" fill="rgba(181,82,58,0.06)" stroke="#b5523a" stroke-width="1"></rect><text x="204" y="308" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">执行工具（一批）</text> <text x="204" y="328" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">read + grep + find</text> <text x="84" y="380" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.10em">turn_end</text> <line x1="84" y1="384" x2="324" y2="384" stroke="rgba(28,25,23,0.10)" stroke-width="0.8"></line><text x="84" y="402" fill="#a8a29e" font-size="9" font-family="'Geist', sans-serif">stopReason = toolUse</text> <text x="84" y="418" fill="#a8a29e" font-size="9" font-family="'Geist', sans-serif">→ 把工具结果喂回去</text> </g><g><rect x="344" y="140" width="272" height="300" rx="6" fill="#ffffff" stroke="rgba(28,25,23,0.20)" stroke-width="1"></rect><rect x="344" y="140" width="272" height="32" rx="6" fill="rgba(28,25,23,0.05)"></rect><text x="360" y="160" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif">Turn 2</text> <rect x="556" y="148" width="52" height="16" rx="2" fill="rgba(181,82,58,0.10)" stroke="rgba(181,82,58,0.50)" stroke-width="0.8"></rect><text x="582" y="160" fill="#b5523a" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">toolUse</text> <text x="360" y="194" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.10em">turn_start</text> <rect x="364" y="208" width="232" height="56" rx="4" fill="#ffffff" stroke="#1c1917" stroke-width="1"></rect><text x="480" y="228" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">再次调用模型</text> <text x="480" y="248" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">消息中带上工具结果</text> <line x1="480" y1="264" x2="480" y2="284" stroke="#57534e" stroke-width="1" marker-end="url(#arrow)"></line><rect x="364" y="288" width="232" height="56" rx="4" fill="rgba(181,82,58,0.06)" stroke="#b5523a" stroke-width="1"></rect><text x="480" y="308" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">执行工具（一批）</text> <text x="480" y="328" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">edit</text> <text x="360" y="380" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.10em">turn_end</text> <line x1="360" y1="384" x2="600" y2="384" stroke="rgba(28,25,23,0.10)" stroke-width="0.8"></line><text x="360" y="402" fill="#a8a29e" font-size="9" font-family="'Geist', sans-serif">stopReason = toolUse</text> </g><g><rect x="620" y="140" width="272" height="300" rx="6" fill="#ffffff" stroke="rgba(28,25,23,0.20)" stroke-width="1"></rect><rect x="620" y="140" width="272" height="32" rx="6" fill="rgba(28,25,23,0.05)"></rect><text x="636" y="160" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif">Turn 3</text> <rect x="836" y="148" width="44" height="16" rx="2" fill="rgba(28,25,23,0.05)" stroke="rgba(28,25,23,0.30)" stroke-width="0.8"></rect><text x="858" y="160" fill="#57534e" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">stop</text> <text x="636" y="194" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.10em">turn_start</text> <rect x="640" y="208" width="232" height="56" rx="4" fill="rgba(181,82,58,0.06)" stroke="#b5523a" stroke-width="1.2"></rect><text x="756" y="228" fill="#1c1917" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">调用模型</text> <text x="756" y="248" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">看到工具结果，给出解释</text> <line x1="756" y1="264" x2="756" y2="284" stroke="#57534e" stroke-width="1" stroke-dasharray="4,3"></line><rect x="640" y="288" width="232" height="56" rx="4" fill="rgba(28,25,23,0.02)" stroke="rgba(28,25,23,0.20)" stroke-width="1" stroke-dasharray="4,3"></rect><text x="756" y="308" fill="#a8a29e" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">（无工具调用）</text> <text x="756" y="328" fill="#a8a29e" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">toolCalls 为空</text> <text x="636" y="380" fill="#57534e" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.10em">turn_end</text> <line x1="636" y1="384" x2="876" y2="384" stroke="rgba(28,25,23,0.10)" stroke-width="0.8"></line><text x="636" y="402" fill="#a8a29e" font-size="9" font-family="'Geist', sans-serif">stopReason = stop</text> <text x="636" y="418" fill="#a8a29e" font-size="9" font-family="'Geist', sans-serif">→ 循环准备退出</text> </g><path d="M 340 290 L 344 290" stroke="#57534e" stroke-width="1" fill="none"></path><path d="M 616 290 L 620 290" stroke="#57534e" stroke-width="1" fill="none"></path><line x1="480" y1="460" x2="480" y2="488" stroke="#57534e" stroke-width="1" marker-end="url(#arrow)"></line><rect x="380" y="492" width="200" height="28" rx="4" fill="#faf7f2" stroke="#b5523a" stroke-width="1"></rect><text x="480" y="510" fill="#b5523a" font-size="11" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">agent_end</text> <line x1="40" y1="534" x2="920" y2="534" stroke="rgba(28,25,23,0.10)" stroke-width="0.8"></line><text x="40" y="550" fill="#57534e" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text> <rect x="100" y="544" width="10" height="8" fill="rgba(181,82,58,0.06)" stroke="#b5523a" stroke-width="0.8"></rect><text x="116" y="551" fill="#57534e" font-size="8" font-family="'Geist', sans-serif">焦点：模型/工具环节</text> <rect x="240" y="544" width="10" height="8" fill="rgba(28,25,23,0.05)" stroke="rgba(28,25,23,0.30)" stroke-width="0.8"></rect><text x="256" y="551" fill="#57534e" font-size="8" font-family="'Geist', sans-serif">事件边界</text> <text x="340" y="551" fill="#a8a29e" font-size="8" font-family="'Geist', sans-serif" font-style="italic">一个 Turn = 一次模型调用 + 其触发的所有工具执行</text></svg>
 
@@ -151,7 +151,7 @@ Trace 与 Turn 的嵌套结构
 
 你输入了”帮我读一下 src/main.ts”并按下回车。从这一刻起发生了什么？让我们站在高处看一遍全过程，同时把”循环怎么转起来的”和”循环什么时候停”一并讲清楚。 **不必纠结每个细节** ——后面会逐段拆解源码。
 
-> 途中你会遇到四个反复出现的”实体”：你的输入变成 **消息（Message）** ；Loop 调用\*\*模型（Model） **来思考；模型要求的操作用** 工具（Tool） **完成；每一步通过** 事件（Event）\*\*通知外部。驱动这四者反复运转的机制就是本章主角—— **Agent Loop** 。
+> 途中你会遇到四个反复出现的“实体”：你的输入变成**消息（Message）**；Loop 调用**模型（Model）**来思考；模型要求的操作用**工具（Tool）**完成；每一步通过**事件（Event）**通知外部。驱动这四者反复运转的机制就是本章主角——**Agent Loop**。
 
 ### 流程全景
 
@@ -333,7 +333,7 @@ Pi 的 coding-agent 是一个 **交互式编程助手** ——用户在终端里
 | --- | --- | --- |
 | 用户在 Agent 工作期间又输入了新指令 | **steering 消息注入** ：紧急消息可以在 Turn 之间插队 | 内层循环开头 |
 | 系统在 Agent 完成后想追加后续任务（如”顺便跑个测试”） | **外层 followUp 循环** ：内层停了但外层可以重启内层 | 外层 while(true) |
-| 不同复杂度的任务想用不同档次的模型 | **prepareNextTurn 钩子** ：每个 Turn 结束时可切换模型/上下文 | turn\_end 之后 |
+| 不同复杂度的任务想用不同档次的模型 | **prepareNextTurn 钩子** ：每个 Turn 结束时可切换模型/上下文 | `turn_end` 之后 |
 | 上下文窗口快满了需要触发压缩 | **shouldStopAfterTurn 钩子** ：外部判断是否该停 | prepareNextTurn 之后 |
 
 **关键认知** ：这些叠加设计都是 coding-agent 的 **功能选择** ，不是 Agent 的通用法则。如果你做的是一个”一问一答带工具”的简单 Agent，上面这张表全是多余的——你只需要最简 Loop。
@@ -450,7 +450,7 @@ while (hasMoreToolCalls) {
 // 结束 → emit agent_end
 ```
 
-这就是最简 Loop——调模型、执行工具、turn\_end，循环往复。内层循环的退出条件 `hasMoreToolCalls` 由 `toolCalls 数组长度 > 0 && !terminate` 驱动（§三讲过）。 **这段是所有 Agent 都需要的内核。**
+这就是最简 Loop——调模型、执行工具、`turn_end`，循环往复。内层循环的退出条件 `hasMoreToolCalls` 由 `toolCalls 数组长度 > 0 && !terminate` 驱动（§三讲过）。 **这段是所有 Agent 都需要的内核。**
 
 #### 叠加：coding-agent 加了两层外壳
 
@@ -639,7 +639,7 @@ Turn 3: 命中 [system + tools] → 命中 [messages §1+§2] → 写入 [messag
 
 还有个容易误解的点： **tools 不是被塞到 messages 末尾** 。Anthropic API 协议里 `tools` 是独立的顶层字段（位置在 messages 之前），这个协议设计本身就考虑了 cache——稳定的 tools 在前、变动的 messages 在后，prefix 越长越省。
 
-OpenAI 体系走的是另一条路（ [openai-completions.ts:554](https://github.com/earendil-works/pi/blob/main/packages/ai/src/api/openai-completions.ts#L554) ）： `prompt_cache_key: sessionId` ，OpenAI 后端按 session 自动匹配前缀。DeepSeek、Qwen 等通过 `cacheControlFormat: "anthropic"` 兼容字段，也能复用 Anthropic 风格的 cache\_control 标记（ [L593](https://github.com/earendil-works/pi/blob/main/packages/ai/src/api/openai-completions.ts#L593) 的 `applyAnthropicCacheControl` ）。
+OpenAI 体系走的是另一条路（ [openai-completions.ts:554](https://github.com/earendil-works/pi/blob/main/packages/ai/src/api/openai-completions.ts#L554) ）： `prompt_cache_key: sessionId` ，OpenAI 后端按 session 自动匹配前缀。DeepSeek、Qwen 等通过 `cacheControlFormat: "anthropic"` 兼容字段，也能复用 Anthropic 风格的 `cache_control` 标记（ [L593](https://github.com/earendil-works/pi/blob/main/packages/ai/src/api/openai-completions.ts#L593) 的 `applyAnthropicCacheControl` ）。
 
 #### 阶段 D：流式处理响应 —— 原地替换的妙用
 
@@ -681,7 +681,7 @@ for await (const event of response) {
 
 流式响应原地替换的时间线
 
-**配图说明** ：四个时间点的 context.messages\[last\] 演变——start 时空壳、text\_delta 时文字在长、toolcall\_delta 时工具调用出现、done 时最终完整消息替换。每一步同步展示 UI 显示状态。
+**配图说明** ：四个时间点的 context.messages\[last\] 演变——start 时空壳、`text_delta` 时文字在长、`toolcall_delta` 时工具调用出现、done 时最终完整消息替换。每一步同步展示 UI 显示状态。
 
 数据在流式响应期间， `context.messages[last]` 的演变：
 
@@ -708,7 +708,7 @@ if (message.stopReason === "error" || message.stopReason === "aborted") {
 }
 ```
 
-`error` 和 `aborted` 是”硬停止”——立即发 turn\_end + agent\_end，直接 return。连工具都不执行，连 followUp 都不检查。这是一种 **快速失败** （fail fast）策略：既然模型调用本身就失败了（网络异常或用户中止），继续跑没有任何意义。
+`error` 和 `aborted` 是”硬停止”——立即发 `turn_end` + agent\_end，直接 return。连工具都不执行，连 followUp 都不检查。这是一种 **快速失败** （fail fast）策略：既然模型调用本身就失败了（网络异常或用户中止），继续跑没有任何意义。
 
 而 `stop` 、 `toolUse` 、 `length` 这三种，代码继续往下走——进入工具执行逻辑。区别在于： `stop` 和 `length` 时， `toolCalls` 数组为空，所以工具执行步骤什么也不干。
 
@@ -768,7 +768,7 @@ return executeToolCallsParallel(...);         // 并行
 
 ---
 
-### 4.7 【内核+叠加 · 步骤E~F】turn\_end + 钩子 + 再次检查 steering
+### 4.7 【内核+叠加 · 步骤E~F】`turn_end` + 钩子 + 再次检查 steering
 
 Turn 的核心工作做完了（调模型 + 执行工具），接下来是收尾。收尾分四步，其中前两步是内核，后两步是 coding-agent 叠加的扩展点：
 
@@ -795,7 +795,7 @@ if (await config.shouldStopAfterTurn?.({...})) {
 pendingMessages = (await config.getSteeringMessages?.()) || [];
 ```
 
-**`prepareNextTurn`** —— 这是个容易被忽略但很强大的扩展点。它在每个 turn\_end 之后、下一轮开始前被调用，允许外部 **动态切换下一轮的配置** 。具体例子：
+**`prepareNextTurn`** —— 这是个容易被忽略但很强大的扩展点。它在每个 `turn_end` 之后、下一轮开始前被调用，允许外部 **动态切换下一轮的配置** 。具体例子：
 
 ```plaintext
 场景：按任务复杂度切换模型

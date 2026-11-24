@@ -1,7 +1,7 @@
 ---
 title: "我是怎么设计 Biny Agent 的记忆系统"
 date: 2026-10-14 19:30:00
-updated: 2026-10-17 17:13:00
+updated: 2026-10-28 12:00:00
 description: "从上下文容量、信息有效性与读写成本出发，完整展开 Biny Agent 记忆系统的分层、压缩、事实提取、存储、召回、Sleep 整理，以及文件、Crystal 和 Activity 的设计取舍。"
 categories:
   - AI
@@ -874,3 +874,11 @@ Activity 扩展了记忆的来源，也提高了误判与保存成本。它的�
 ---
 
 **项目地址：** [Biny Agent](https://github.com/binyouo/Biny-Agent)
+
+**实现索引：**
+
+- [事实存储与向量索引（MemoryStorage）](https://github.com/binyouo/Biny-Agent/blob/main/src/agent/context/memoryStorage.ts)
+- [对话提取与事实结构化（MemoryExtraction）](https://github.com/binyouo/Biny-Agent/blob/main/src/agent/context/memoryExtraction.ts)
+- [Sleep 维护与全局服务（MemoryMaintenance & Owner）](https://github.com/binyouo/Biny-Agent/blob/main/src/runtime/memory/owner.ts)
+- [上下文格式化与来源装配（MemoryFormat）](https://github.com/binyouo/Biny-Agent/blob/main/src/agent/context/memoryFormat.ts)
+- [Activity 活动流转与事实管线（MemoryPipeline）](https://github.com/binyouo/Biny-Agent/blob/main/src/activity/memoryPipeline.ts)
